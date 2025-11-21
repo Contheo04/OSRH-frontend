@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <meta name="description" content="OSRH secure login portal" />
+    <title>OSRH - Login</title>
+    <link rel="stylesheet" href="globals.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="dark-mode-login">
+      <div class="container" aria-hidden="true"></div>
+      <div class="div" aria-hidden="true"></div>
+      <div class="container-2">
+        <section class="container-3">
+          <header class="container-4">
+            <img class="img" src="img/container.svg" alt="OSRH Logo" />
+            <h1 class="heading"><span class="text-wrapper">OSRH</span></h1>
+            <p class="paragraph"><span class="text-wrapper-2">Login</span></p>
+          </header>
+          <form class="form" method="post" action="/login" novalidate>
+            <div class="container-5">
+              <div class="primitive-label"><label class="text-wrapper-3" for="input-1">Username</label></div>
+              <div class="container-6">
+                <input
+                  class="input"
+                  placeholder="Enter your username"
+                  type="text"
+                  id="input-1"
+                  name="username"
+                  autocomplete="username"
+                  required
+                  aria-required="true"
+                />
+                <div class="icon" aria-hidden="true">
+                  <img class="vector" src="img/vector-3.svg" alt="" />
+                  <img class="vector-2" src="img/vector.svg" alt="" />
+                </div>
+              </div>
+            </div>
+            <div class="container-5">
+              <div class="primitive-label"><label class="text-wrapper-3" for="input-2">Password</label></div>
+              <div class="container-6">
+                <input
+                  class="input"
+                  placeholder="Enter your password"
+                  type="password"
+                  id="input-2"
+                  name="password"
+                  autocomplete="current-password"
+                  required
+                  aria-required="true"
+                />
+                <div class="icon" aria-hidden="true">
+                  <img class="vector-3" src="img/image.svg" alt="" />
+                  <img class="vector-4" src="img/vector-2.svg" alt="" />
+                </div>
+              </div>
+            </div>
+            <button class="button" type="submit"><span class="text-wrapper-5">Log In</span></button>
+            <nav class="container-7">
+              <button class="button-2" type="button"><span class="text-wrapper-6">Forgot password?</span></button>
+              <button class="button-3" type="button"><span class="text-wrapper-6">Create an account</span></button>
+            </nav>
+          </form>
+        </section>
+        <footer class="paragraph-2"><p class="p">Secure authentication powered by OSRH</p></footer>
+      </div>
+    </main>
+  </body>
+</html>
