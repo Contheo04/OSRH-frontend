@@ -23,6 +23,12 @@
 				"Uid" => $sqlUser,
 				"PWD" => $sqlPass
 			);
+
+		if(isset($_SESSION["serverName"])){
+			header("Location: index.html");
+			exit();
+		}
+
 		} else {
 			session_unset();
 			session_destroy();
@@ -31,7 +37,7 @@
 		}
 	}
 ?>
-<body>
+<!-- <body>
 	<table cellSpacing=0 cellPadding=5 width="100%" border=0>
 	<tr>
 		<td vAlign=top width=170><img height=91 alt=UCY src="images/ucy.jpg" width=94>
@@ -52,7 +58,7 @@
     <input type="submit" name="Query 3">
 	</form>
 
-	<hr>
+	<hr> -->
 	<?php
 		if(isset($_POST['disconnect'])) { 
 			echo "Clossing session and redirecting to start page"; 
