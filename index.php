@@ -1,6 +1,21 @@
+<?php
+	session_start();
+  require_once "db_connection.php";
+
+  $tsql = "SELECT DB_NAME AS CurrentDB";
+  $getDBNAme = sqlsrv_query($conn, $tsql);
+
+  if($getDBNAme !== false){
+    $row = sqlsrv_fetch_array($getDBNAme, SQLSRV_FETCH_ASSOC);
+    echo "<p style='color:blue;'>Connected to <strong>" . $row['CurrentDB'] . "</strong></p>";
+
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    
     <!--test-->>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="utf-8" />
@@ -20,7 +35,7 @@
             <h1 class="heading"><span class="text-wrapper">OSRH</span></h1>
             <p class="paragraph"><span class="text-wrapper-2">Login</span></p>
           </header>
-          <form class="form" method="post" action="/login" novalidate>
+          <form class="form" method="post" action="login.php" novalidate>
             <div class="container-5">
               <div class="primitive-label"><label class="text-wrapper-3" for="input-1">Username</label></div>
               <div class="container-6">
