@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OSRH – User Profile</title>
+
+    <link rel="stylesheet" href="../globals.css" />
+    <link rel="stylesheet" href="users.css" />
+</head>
+
+<body>
+    <div class="background-glow glow-left"></div>
+    <div class="background-glow glow-right"></div>
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="../dashboard/img/logo.svg" class="sidebar-logo" />
+            <div class="sidebar-title">OSRH</div>
+            <div class="sidebar-sub">Admin Portal</div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <div class="nav-item" onclick="window.location.href='../dashboard/dashboard.html'">Dashboard</div>
+            <div class="nav-item active" onclick="window.location.href='users.html'">Users</div>
+            <div class="nav-item" onclick="window.location.href='../drivers/drivers.html'">Drivers</div>
+            <div class="nav-item" onclick="window.location.href='../vehicles/vehicles.html'">Vehicles</div>
+            <div class="nav-item" onclick="window.location.href='../trips/trips.html'">Trips</div>
+            <div class="nav-item" onclick="window.location.href='../payments/payments.html'">Payments</div>
+            <div class="nav-item" onclick="window.location.href='../reports/reports.html'">Reports</div>
+            <div class="nav-item" onclick="window.location.href='../gdpr/gdpr.html'">GDPR</div>
+
+            <!-- BLUE LINE SEPARATOR -->
+            <div style="border-top:1px solid rgba(0,150,255,0.35); margin:18px 0;"></div>
+
+            <!-- USER SIMULATION SECTION -->
+            <div class="nav-item section-label" onclick="window.location.href='../simulation/simulation.html'">
+                User Simulation
+            </div>
+        </nav>
+    </aside>
+
+    <main class="content">
+        <header class="topbar">
+            <h1 class="page-title">User Profile</h1>
+
+            <div class="profile-box">
+                <button class="logout-btn" onclick="window.location.href='../login/index.html'">Logout</button>
+                <div class="profile-info">
+                    <div class="profile-name">Admin User</div>
+                    <div class="profile-email">admin@osrh.com</div>
+                </div>
+                <div class="profile-circle">AU</div>
+            </div>
+        </header>
+
+        <!-- Basic Information -->
+        <section class="panel">
+            <h2 class="section-title">Basic Information</h2>
+
+            <div class="user-info-grid">
+                <div class="info-item"><strong>User ID:</strong> 23</div>
+                <div class="info-item"><strong>Name:</strong> John Doe</div>
+                <div class="info-item"><strong>Username:</strong> jdoe</div>
+                <div class="info-item"><strong>Email:</strong> jdoe@example.com</div>
+                <div class="info-item"><strong>Phone:</strong> +357 99887766</div>
+                <div class="info-item"><strong>Gender:</strong> M</div>
+                <div class="info-item"><strong>Birth Date:</strong> 1998-06-22</div>
+                <div class="info-item"><strong>Address:</strong> Limassol, Cyprus</div>
+            </div>
+        </section>
+
+        <!-- Account Information -->
+        <section class="panel">
+            <h2 class="section-title">Account Details</h2>
+
+            <div class="user-info-grid">
+                <div class="info-item"><strong>Type:</strong> Driver</div>
+                <div class="info-item"><strong>Status:</strong> Active</div>
+                <div class="info-item"><strong>Rating:</strong> 4.8</div>
+            </div>
+        </section>
+
+        <!-- Related Data (Dynamic Placeholder for PHP) -->
+        <section class="panel">
+            <h2 class="section-title">Related User Data</h2>
+
+            <p>This section will dynamically show related information based on the user type.</p>
+
+            <ul class="related-list">
+                <li>If user is a <strong>Driver</strong>: show Driver Documents, Assigned Vehicle, Trip History.</li>
+                <li>If user is a <strong>Simple User</strong>: show Trip History, Feedback Written.</li>
+                <li>If user is an <strong>Operator</strong>: show Reviewed Docs, Inspections Performed.</li>
+            </ul>
+        </section>
+
+        <!-- Action Buttons -->
+        <section class="panel action-panel">
+            <button class="action-btn" onclick="window.location.href='user_edit.html'">Edit User</button>
+            <button class="delete-btn">GDPR Delete</button>
+            <button class="back-btn" onclick="window.location.href='users.html'">Back to Users</button>
+        </section>
+
+    </main>
+</body>
+
+</html>

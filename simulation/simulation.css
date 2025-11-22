@@ -1,0 +1,163 @@
+body {
+    background: #0d0d0d;
+    color: #fff;
+    font-family: "Arimo", sans-serif;
+    overflow-x: hidden;
+    display: flex;
+}
+
+.background-glow {
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    filter: blur(140px);
+    opacity: 0.4;
+    z-index: -1;
+}
+
+.glow-left {
+    left: -200px;
+    top: 150px;
+    background: #0066ff33;
+}
+
+.glow-right {
+    right: -250px;
+    top: 300px;
+    background: #ff006633;
+}
+
+.sidebar {
+    width: 240px;
+    height: 100vh;
+    background: #ffffff0d;
+    border-right: 1px solid #ffffff15;
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.sidebar-logo {
+    width: 60px;
+    margin-bottom: 10px;
+}
+
+.sidebar-title {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.sidebar-sub {
+    font-size: 12px;
+    opacity: 0.6;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.nav-item {
+    padding: 12px 14px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 15px;
+    opacity: 0.8;
+    transition: 0.2s;
+}
+
+.nav-item:hover {
+    background: #ffffff12;
+}
+
+.nav-item.active {
+    background: linear-gradient(90deg, #00b8db, #155dfc);
+    opacity: 1;
+}
+
+.sim-divider {
+    border-top: 1px solid rgba(0, 150, 255, 0.35);
+    margin: 18px 0;
+}
+
+.section-label {
+    font-size: 14px;
+    opacity: 0.7;
+    padding-left: 4px;
+}
+
+.content {
+    flex: 1;
+    padding: 32px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.page-title {
+    font-size: 26px;
+}
+
+.profile-box {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.profile-circle {
+    width: 40px;
+    height: 40px;
+    background: #1a1a1a;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.panel {
+    background: #ffffff0d;
+    border: 1px solid #ffffff14;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 32px;
+    box-shadow: 0 15px 40px #00000040;
+}
+
+.section-title {
+    font-size: 22px;
+    margin-bottom: 16px;
+}
+
+.sim-option {
+    padding: 14px 20px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.sim-option:hover {
+    background: rgba(0, 150, 255, 0.25);
+    border-color: rgba(0, 150, 255, 0.4);
+}
+
+.sim-footer {
+    text-align: center;
+    opacity: 0.5;
+    padding-top: 10px;
+    font-size: 13px;
+}

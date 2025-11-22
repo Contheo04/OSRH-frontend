@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OSRH – Drivers</title>
+
+    <link rel="stylesheet" href="../globals.css" />
+    <link rel="stylesheet" href="drivers.css" />
+</head>
+
+<body>
+    <div class="background-glow glow-left"></div>
+    <div class="background-glow glow-right"></div>
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="../dashboard/img/logo.svg" class="sidebar-logo" />
+            <div class="sidebar-title">OSRH</div>
+            <div class="sidebar-sub">Admin Portal</div>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <!-- ADMIN SECTION -->
+            <div class="nav-item" onclick="window.location.href='../dashboard/dashboard.html'">Dashboard</div>
+            <div class="nav-item" onclick="window.location.href='../users/users.html'">Users</div>
+            <div class="nav-item active">Drivers</div>
+            <div class="nav-item" onclick="window.location.href='../vehicles/vehicles.html'">Vehicles</div>
+            <div class="nav-item" onclick="window.location.href='../trips/trips.html'">Trips</div>
+            <div class="nav-item" onclick="window.location.href='../payments/payments.html'">Payments</div>
+            <div class="nav-item" onclick="window.location.href='../reports/reports.html'">Reports</div>
+            <div class="nav-item" onclick="window.location.href='../gdpr/gdpr.html'">GDPR</div>
+
+            <!-- BLUE LINE SEPARATOR -->
+            <div style="border-top:1px solid rgba(0,150,255,0.35); margin:18px 0;"></div>
+
+            <!-- USER SIMULATION SECTION -->
+            <div class="nav-item section-label" onclick="window.location.href='../simulation/simulation.html'">
+                User Simulation
+            </div>
+
+        </nav>
+    </aside>
+
+    <main class="content">
+        <header class="topbar">
+            <h1 class="page-title">Drivers</h1>
+
+            <div class="profile-box">
+                <button class="logout-btn" onclick="window.location.href='../login/index.html'">Logout</button>
+                <div class="profile-info">
+                    <div class="profile-name">Admin User</div>
+                    <div class="profile-email">admin@osrh.com</div>
+                </div>
+                <div class="profile-circle">AU</div>
+            </div>
+        </header>
+
+        <section class="panel search-panel">
+            <input type="text" class="search-input" placeholder="Search drivers..." />
+
+            <select class="filter-select">
+                <option value="">Driver Status</option>
+                <option>Active</option>
+                <option>Pending</option>
+                <option>Blocked</option>
+            </select>
+
+            <select class="filter-select">
+                <option value="">Document Status</option>
+                <option>Complete</option>
+                <option>Missing</option>
+                <option>Rejected</option>
+                <option>Expired</option>
+            </select>
+
+            <select class="filter-select">
+                <option value="">Vehicle Assigned</option>
+                <option>Assigned</option>
+                <option>Unassigned</option>
+            </select>
+        </section>
+
+        <section class="panel table-panel">
+            <table class="drivers-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th style="text-align:right;">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>23</td>
+                        <td>Michael Ioannou</td>
+                        <td>mioannou</td>
+                        <td>michael@example.com</td>
+                        <td>Approved</td>
+                        <td class="actions">
+                            <button class="action-btn">View</button>
+                            <button class="action-btn"
+                                onclick="window.location.href='documents.html'">Documents</button>
+                            <button class="delete-btn">Disable</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>34</td>
+                        <td>Peter Andreou</td>
+                        <td>pandreou</td>
+                        <td>peter@example.com</td>
+                        <td>Pending</td>
+                        <td class="actions">
+                            <button class="action-btn">View</button>
+                            <button class="action-btn"
+                                onclick="window.location.href='documents.html'">Documents</button>
+                            <button class="delete-btn">Disable</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>41</td>
+                        <td>Jimmy Nikolaou</td>
+                        <td>jniko</td>
+                        <td>jimmy@example.com</td>
+                        <td>Blocked</td>
+                        <td class="actions">
+                            <button class="action-btn">View</button>
+                            <button class="action-btn"
+                                onclick="window.location.href='documents.html'">Documents</button>
+                            <button class="delete-btn">Disable</button>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </section>
+    </main>
+</body>
+
+</html>
