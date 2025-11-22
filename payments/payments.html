@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OSRH – Payments</title>
+
+    <link rel="stylesheet" href="../globals.css" />
+    <link rel="stylesheet" href="payments.css" />
+</head>
+
+<body>
+    <div class="background-glow glow-left"></div>
+    <div class="background-glow glow-right"></div>
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="../dashboard/img/logo.svg" class="sidebar-logo">
+            <div class="sidebar-title">OSRH</div>
+            <div class="sidebar-sub">Admin Portal</div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <div class="nav-item" onclick="window.location.href='../dashboard/dashboard.html'">Dashboard</div>
+            <div class="nav-item" onclick="window.location.href='../users/users.html'">Users</div>
+            <div class="nav-item" onclick="window.location.href='../drivers/drivers.html'">Drivers</div>
+            <div class="nav-item" onclick="window.location.href='../vehicles/vehicles.html'">Vehicles</div>
+            <div class="nav-item" onclick="window.location.href='../trips/trips.html'">Trips</div>
+            <div class="nav-item active">Payments</div>
+            <div class="nav-item" onclick="window.location.href='../reports/reports.html'">Reports</div>
+            <div class="nav-item" onclick="window.location.href='../gdpr/gdpr.html'">GDPR</div>
+        </nav>
+    </aside>
+
+    <main class="content">
+        <header class="topbar">
+            <h1 class="page-title">Payments</h1>
+
+            <div class="profile-box">
+                <div class="profile-info">
+                    <div class="profile-name">Admin User</div>
+                    <div class="profile-email">admin@osrh.com</div>
+                </div>
+                <div class="profile-circle">AU</div>
+            </div>
+        </header>
+
+        <section class="panel search-panel">
+            <input type="text" class="search-input" placeholder="Search by User, Trip ID, or Method…">
+
+            <select class="filter-select">
+                <option value="">Payment Method</option>
+                <option>Card</option>
+                <option>Cash</option>
+                <option>Wallet</option>
+            </select>
+
+            <select class="filter-select">
+                <option value="">Status</option>
+                <option>Completed</option>
+                <option>Pending</option>
+                <option>Failed</option>
+            </select>
+        </section>
+
+        <section class="panel table-panel">
+            <table class="payments-table">
+                <thead>
+                    <tr>
+                        <th>Payment ID</th>
+                        <th>Total Trip</th>
+                        <th>User</th>
+                        <th>Method</th>
+                        <th>Timestamp</th>
+                        <th>Total Price (€)</th>
+                        <th style="text-align:right;">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>9001</td>
+                        <td>TT-102</td>
+                        <td>jdoe</td>
+                        <td>Card</td>
+                        <td>2024-02-15 14:33</td>
+                        <td>23.40</td>
+                        <td class="actions">
+                            <button class="action-btn">View</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>9002</td>
+                        <td>TT-106</td>
+                        <td>mgeorgiou</td>
+                        <td>Wallet</td>
+                        <td>2024-02-17 08:12</td>
+                        <td>11.90</td>
+                        <td class="actions">
+                            <button class="action-btn">View</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>9003</td>
+                        <td>TT-110</td>
+                        <td>apap</td>
+                        <td>Cash</td>
+                        <td>2024-02-19 19:42</td>
+                        <td>17.70</td>
+                        <td class="actions">
+                            <button class="action-btn">View</button>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </section>
+    </main>
+
+</body>
+
+</html>
