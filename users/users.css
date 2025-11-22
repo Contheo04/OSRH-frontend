@@ -221,3 +221,88 @@ body {
     width: 60px;
     opacity: 0.85;
 }
+
+.user-info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px 40px;
+    margin-top: 15px;
+    font-size: 15px;
+}
+
+.related-list {
+    margin-left: 18px;
+    opacity: 0.85;
+}
+
+.action-panel {
+    display: flex;
+    gap: 14px;
+}
+
+.back-btn {
+    padding: 10px 16px;
+    background: #ffffff15;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.edit-form {
+    margin-top: 20px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px 40px;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-field label {
+    margin-bottom: 6px;
+    opacity: 0.8;
+    font-size: 14px;
+}
+
+.form-field input,
+.form-field select {
+    background: #ffffff0d;
+    border: 1px solid #ffffff20;
+    padding: 10px 12px;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 14px;
+}
+
+form input:disabled {
+    opacity: 0.4;
+}
+
+.edit-actions {
+    display: flex;
+    gap: 14px;
+    margin-top: 26px;
+}
+
+.back-btn {
+    padding: 10px 16px;
+    background: #ffffff15;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #fff;
+}
+
+.readonly-value {
+    background: #ffffff0d;
+    border: 1px solid #ffffff20;
+    padding: 10px 12px;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 14px;
+    opacity: 0.7;
+}

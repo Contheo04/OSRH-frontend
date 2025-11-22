@@ -78,6 +78,7 @@
                 </thead>
 
                 <tbody>
+                    <!-- USER 1 -->
                     <tr>
                         <td>1</td>
                         <td>John Doe</td>
@@ -86,12 +87,13 @@
                         <td>Driver</td>
                         <td>Active</td>
                         <td class="actions">
-                            <button class="action-btn">View</button>
-                            <button class="action-btn">Edit</button>
-                            <button class="delete-btn">GDPR Delete</button>
+                            <button class="action-btn" onclick="viewUser(1)">View</button>
+                            <button class="action-btn" onclick="editUser(1)">Edit</button>
+                            <button class="delete-btn" onclick="gdprDelete(1)">GDPR Delete</button>
                         </td>
                     </tr>
 
+                    <!-- USER 2 -->
                     <tr>
                         <td>2</td>
                         <td>Maria Georgiou</td>
@@ -100,12 +102,13 @@
                         <td>Operator</td>
                         <td>Pending</td>
                         <td class="actions">
-                            <button class="action-btn">View</button>
-                            <button class="action-btn">Edit</button>
-                            <button class="delete-btn">GDPR Delete</button>
+                            <button class="action-btn" onclick="viewUser(2)">View</button>
+                            <button class="action-btn" onclick="editUser(2)">Edit</button>
+                            <button class="delete-btn" onclick="gdprDelete(2)">GDPR Delete</button>
                         </td>
                     </tr>
 
+                    <!-- USER 3 -->
                     <tr>
                         <td>3</td>
                         <td>Alex Papadakis</td>
@@ -114,15 +117,30 @@
                         <td>Simple User</td>
                         <td>Active</td>
                         <td class="actions">
-                            <button class="action-btn">View</button>
-                            <button class="action-btn">Edit</button>
-                            <button class="delete-btn">GDPR Delete</button>
+                            <button class="action-btn" onclick="viewUser(3)">View</button>
+                            <button class="action-btn" onclick="editUser(3)">Edit</button>
+                            <button class="delete-btn" onclick="gdprDelete(3)">GDPR Delete</button>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </section>
     </main>
+
+    <script>
+        function viewUser(id) {
+            window.location.href = `user_view.html?user=${id}`;
+        }
+
+        function editUser(id) {
+            window.location.href = `user_edit.html?user=${id}`;
+        }
+
+        function gdprDelete(id) {
+            alert("This will be implemented with PHP.\nGDPR delete requested for user ID: " + id);
+        }
+    </script>
+
 </body>
 
 </html>
