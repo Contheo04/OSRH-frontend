@@ -32,3 +32,18 @@ a:focus-visible {
     outline: 2px solid #4a90e2 !important;
     outline: -webkit-focus-ring-color auto 5px !important;
 }
+
+.logout-btn {
+    padding: 8px 16px;
+    background: #ff3b3b;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.25s;
+}
+
+.logout-btn:hover {
+    background: #ff5555;
+}

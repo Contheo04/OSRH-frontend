@@ -13,6 +13,7 @@
     <div class="background-glow glow-left"></div>
     <div class="background-glow glow-right"></div>
 
+    <!-- HARD CODED SIDEBAR -->
     <aside class="sidebar">
         <div class="sidebar-header">
             <img src="img/logo.svg" class="sidebar-logo" />
@@ -21,7 +22,7 @@
         </div>
 
         <nav class="sidebar-nav">
-            <div class="nav-item active">Dashboard</div>
+            <div class="nav-item active" onclick="window.location.href='../dashboard/dashboard.html'">Dashboard</div>
             <div class="nav-item" onclick="window.location.href='../users/users.html'">Users</div>
             <div class="nav-item" onclick="window.location.href='../drivers/drivers.html'">Drivers</div>
             <div class="nav-item" onclick="window.location.href='../vehicles/vehicles.html'">Vehicles</div>
@@ -29,6 +30,10 @@
             <div class="nav-item" onclick="window.location.href='../payments/payments.html'">Payments</div>
             <div class="nav-item" onclick="window.location.href='../reports/reports.html'">Reports</div>
             <div class="nav-item" onclick="window.location.href='../gdpr/gdpr.html'">GDPR</div>
+
+            <div style="border-top:1px solid rgba(0,150,255,0.35); margin:18px 0;"></div>
+
+            <div class="nav-item" onclick="window.location.href='../simulation/simulation.html'">User Simulation</div>
         </nav>
     </aside>
 
