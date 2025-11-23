@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OSRH – Passenger Dashboard</title>
+
+    <link rel="stylesheet" href="../globals.css" />
+    <link rel="stylesheet" href="./dashboard.css" />
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="../../dashboard/img/logo.svg" class="sidebar-logo" />
+            <div class="sidebar-title">OSRH</div>
+            <div class="sidebar-sub">Passenger Portal</div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <div class="nav-item active" onclick="window.location.href='dashboard.html'">Dashboard</div>
+            <div class="nav-item" onclick="window.location.href='../profile/profile.html'">Profile</div>
+            <div class="nav-item" onclick="window.location.href='../request/request.html'">Request Trip</div>
+            <div class="nav-item" onclick="window.location.href='../history/history.html'">Trip History</div>
+            <div class="nav-item" onclick="window.location.href='../payments/payments.html'">Payments</div>
+            <div class="nav-item" onclick="window.location.href='../feedback/feedback.html'">Feedback</div>
+
+            <div style="border-top:1px solid rgba(0,150,255,0.35); margin:18px 0;"></div>
+            <div class="nav-item" onclick="window.location.href='../login/login.html'">Log Out</div>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="content">
+        <header class="topbar">
+            <h1 class="page-title">Dashboard</h1>
+
+            <div class="profile-box">
+                <div class="profile-info">
+                    <div class="profile-name">Passenger User</div>
+                    <div class="profile-email">passenger@example.com</div>
+                </div>
+                <div class="profile-circle">PU</div>
+            </div>
+        </header>
+
+        <!-- Quick Actions -->
+        <section class="panel">
+            <h2 class="section-title">Quick Actions</h2>
+
+            <div class="quick-grid">
+                <div class="quick-card" onclick="window.location.href='../request/request.html'">
+                    <h3>Request Trip</h3>
+                    <p>Start a new ride request.</p>
+                </div>
+
+                <div class="quick-card" onclick="window.location.href='../history/history.html'">
+                    <h3>Trip History</h3>
+                    <p>View all past completed rides.</p>
+                </div>
+
+                <div class="quick-card" onclick="window.location.href='../payments/payments.html'">
+                    <h3>Payments</h3>
+                    <p>Review your payments & receipts.</p>
+                </div>
+
+                <div class="quick-card" onclick="window.location.href='../feedback/feedback.html'">
+                    <h3>Feedback</h3>
+                    <p>Rate drivers and send comments.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent Trips -->
+        <section class="panel">
+            <h2 class="section-title">Recent Trips</h2>
+
+            <table class="users-table">
+                <thead>
+                    <tr>
+                        <th>Trip ID</th>
+                        <th>Date</th>
+                        <th>Driver</th>
+                        <th>Price (€)</th>
+                        <th style="text-align:right;">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>204</td>
+                        <td>2024-04-10</td>
+                        <td>Michael Ioannou</td>
+                        <td>12.50</td>
+                        <td class="actions">
+                            <button class="action-btn"
+                                onclick="window.location.href='../history/history.html'">View</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>199</td>
+                        <td>2024-04-07</td>
+                        <td>Peter Andreou</td>
+                        <td>9.80</td>
+                        <td class="actions">
+                            <button class="action-btn"
+                                onclick="window.location.href='../history/history.html'">View</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+    </main>
+</body>
+
+</html>
