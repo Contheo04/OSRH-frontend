@@ -280,3 +280,84 @@ body {
     opacity: 1;
 }
 
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.edit-btn {
+    padding: 8px 14px;
+    background: linear-gradient(90deg, #00b8db, #155dfc);
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 13px;
+    border: none;
+    transition: 0.2s;
+}
+
+.edit-btn:hover {
+    opacity: 0.85;
+}
+
+.save-btn,
+.cancel-btn {
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-right: 12px;
+    margin-top: 18px;
+}
+
+.save-btn {
+    background: linear-gradient(90deg, #00b8db, #155dfc);
+    border: none;
+    color: #fff;
+}
+
+.cancel-btn {
+    background: #ffffff15;
+    border: 1px solid #ffffff25;
+    color: #fff;
+}
+
+.cancel-btn:hover,
+.save-btn:hover {
+    opacity: 0.85;
+}
+
+.edit-mode input,
+.edit-mode select {
+    background: #ffffff0d;
+    border: 1px solid #ffffff20;
+    color: #fff;
+    padding: 10px 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    width: 100%;
+    margin-top: 6px;
+}
+
+.edit-mode select option {
+    background: #111;
+    color: #fff;
+}
+
+.info-item strong {
+    margin-right: 6px;
+}
+
+.edit-mode {
+    display: flex;
+    flex-direction: column;
+}
+
+.panel:hover {
+    background: #ffffff14;
+    border-color: #ffffff20;
+    transform: translateY(-2px);
+    transition: 0.2s ease;
+}

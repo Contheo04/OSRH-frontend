@@ -53,54 +53,202 @@
         </header>
 
         <!-- PERSONAL INFORMATION -->
-        <section class="panel">
-            <h2 class="section-title">Personal Information</h2>
-
-            <div class="profile-grid">
-                <div class="info-item"><strong>Name:</strong> Passenger User</div>
-                <div class="info-item"><strong>Email:</strong> passenger@example.com</div>
-                <div class="info-item"><strong>Phone:</strong> +357 99001122</div>
-                <div class="info-item"><strong>Gender:</strong> M</div>
-                <div class="info-item"><strong>Birth Date:</strong> 1998-05-14</div>
-                <div class="info-item"><strong>Address:</strong> Nicosia, Cyprus</div>
+        <section class="panel personal-section">
+            <div class="panel-header">
+                <h2 class="section-title">Personal Information</h2>
+                <button class="edit-btn" onclick="enableEdit('personal')">Edit</button>
             </div>
+
+            <div class="profile-grid personal">
+
+                <!-- NAME -->
+                <div class="info-item">
+                    <div class="view-mode"><strong>Name:</strong> Passenger User</div>
+                    <div class="edit-mode" style="display:none;">
+                        <strong>Name:</strong> <input type="text" value="Passenger User">
+                    </div>
+                </div>
+
+                <!-- EMAIL -->
+                <div class="info-item">
+                    <div class="view-mode"><strong>Email:</strong> passenger@example.com</div>
+                    <div class="edit-mode" style="display:none;">
+                        <strong>Email:</strong> <input type="email" value="passenger@example.com">
+                    </div>
+                </div>
+
+                <!-- PHONE -->
+                <div class="info-item">
+                    <div class="view-mode"><strong>Phone:</strong> +357 99001122</div>
+                    <div class="edit-mode" style="display:none;">
+                        <strong>Phone:</strong> <input type="text" value="+357 99001122">
+                    </div>
+                </div>
+
+                <!-- GENDER -->
+                <div class="info-item">
+                    <div class="view-mode"><strong>Gender:</strong> M</div>
+                    <div class="edit-mode" style="display:none;">
+                        <strong>Gender:</strong>
+                        <select>
+                            <option selected>M</option>
+                            <option>F</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- BIRTH DATE -->
+                <div class="info-item">
+                    <div class="view-mode"><strong>Birth Date:</strong> 1998-05-14</div>
+                    <div class="edit-mode" style="display:none;">
+                        <strong>Birth Date:</strong> <input type="date" value="1998-05-14">
+                    </div>
+                </div>
+
+                <!-- ADDRESS -->
+                <div class="info-item">
+                    <div class="view-mode"><strong>Address:</strong> Nicosia, Cyprus</div>
+                    <div class="edit-mode" style="display:none;">
+                        <strong>Address:</strong> <input type="text" value="Nicosia, Cyprus">
+                    </div>
+                </div>
+
+            </div>
+
+            <button id="save-personal" class="save-btn" style="display:none;" onclick="saveEdit('personal')">Save
+                Changes</button>
+            <button id="cancel-personal" class="cancel-btn" style="display:none;"
+                onclick="cancelEdit('personal')">Cancel</button>
+
         </section>
 
         <!-- SETTINGS / PREFERENCES -->
-        <section class="panel">
-            <h2 class="section-title">Settings & Preferences</h2>
+        <section class="panel prefs-section">
+            <div class="panel-header">
+                <h2 class="section-title">Settings & Preferences</h2>
+                <button class="edit-btn" onclick="enableEdit('prefs')">Edit</button>
+            </div>
 
-            <div class="profile-grid">
+            <div class="profile-grid prefs">
 
+                <!-- DARK MODE -->
                 <div class="info-item">
-                    <strong>Dark Mode:</strong> Enabled
+                    <div class="view-mode"><strong>Dark Mode:</strong> Enabled</div>
+                    <div class="edit-mode" style="display:none;">
+                        <strong>Dark Mode:</strong>
+                        <select>
+                            <option>Enabled</option>
+                            <option>Disabled</option>
+                        </select>
+                    </div>
                 </div>
 
+                <!-- LANGUAGE -->
                 <div class="info-item">
-                    <strong>Language:</strong> English
+                    <div class="view-mode"><strong>Language:</strong> English</div>
+                    <div class="edit-mode" style="display:none;">
+                        <strong>Language:</strong>
+                        <select>
+                            <option selected>English</option>
+                            <option>Greek</option>
+                        </select>
+                    </div>
                 </div>
 
+                <!-- FONT SIZE -->
                 <div class="info-item">
-                    <strong>Font Size:</strong> 16px
+                    <div class="view-mode"><strong>Font Size:</strong> 16px</div>
+                    <div class="edit-mode" style="display:none;">
+                        <strong>Font Size:</strong>
+                        <input type="number" min="10" max="30" value="16">
+                    </div>
                 </div>
 
+                <!-- LOCATION SERVICES -->
                 <div class="info-item">
-                    <strong>Location Services:</strong> Allowed
+                    <div class="view-mode"><strong>Location Services:</strong> Allowed</div>
+                    <div class="edit-mode" style="display:none;">
+                        <strong>Location Services:</strong>
+                        <select>
+                            <option>Allowed</option>
+                            <option>Blocked</option>
+                        </select>
+                    </div>
                 </div>
 
+                <!-- NOTIFICATIONS -->
                 <div class="info-item">
-                    <strong>Notifications:</strong> On
+                    <div class="view-mode"><strong>Notifications:</strong> On</div>
+                    <div class="edit-mode" style="display:none;">
+                        <strong>Notifications:</strong>
+                        <select>
+                            <option>On</option>
+                            <option>Off</option>
+                        </select>
+                    </div>
                 </div>
 
+                <!-- REGION -->
                 <div class="info-item">
-                    <strong>App Region:</strong> Cyprus
+                    <div class="view-mode"><strong>App Region:</strong> Cyprus</div>
+                    <div class="edit-mode" style="display:none;">
+                        <strong>App Region:</strong>
+                        <input type="text" value="Cyprus">
+                    </div>
                 </div>
 
             </div>
+
+            <button id="save-prefs" class="save-btn" style="display:none;" onclick="saveEdit('prefs')">Save
+                Changes</button>
+            <button id="cancel-prefs" class="cancel-btn" style="display:none;"
+                onclick="cancelEdit('prefs')">Cancel</button>
+
         </section>
 
     </main>
 
 </body>
+
+<script>
+
+    function enableEdit(section) {
+
+        document.querySelectorAll(`.${section} .view-mode`)
+            .forEach(el => el.style.display = "none");
+
+        document.querySelectorAll(`.${section} .edit-mode`)
+            .forEach(el => el.style.display = "flex");
+
+        document.getElementById(`save-${section}`).style.display = "inline-block";
+        document.getElementById(`cancel-${section}`).style.display = "inline-block";
+    }
+
+    function cancelEdit(section) {
+
+        document.querySelectorAll(`.${section} .edit-mode`)
+            .forEach(el => el.style.display = "none");
+
+
+        document.querySelectorAll(`.${section} .view-mode`)
+            .forEach(el => el.style.display = "flex");
+
+        document.getElementById(`save-${section}`).style.display = "none";
+        document.getElementById(`cancel-${section}`).style.display = "none";
+    }
+
+    // SAVE → (for now) behaves like cancel, later will POST to PHP
+    function saveEdit(section) {
+
+        // TODO: Add PHP integration:
+        // document.getElementById('profile-form').submit();
+
+        // For now, simply switch back to normal view
+        cancelEdit(section);
+    }
+
+</script>
+
 
 </html>
