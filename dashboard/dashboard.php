@@ -1,3 +1,27 @@
+<?php
+    session_start();
+    require_once "../db_connection.php";
+    require_once "../authorisation_check.php";
+
+    $user_id = $_SESSION["user_id"];
+
+    $tsql = "SELECT F_Name,
+                    L_Name,
+                    Email
+            FROM [dbo].[User]
+            WHERE User_ID = ?            
+    ";
+
+    $params = array($user_id);
+    $stmt = sqlsrv_query($conn, $tsql, $params);
+    $user = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
+
+    $full_name = $user["F_Name"] . " " . $user["L_Name"];
+    $email = $user["Email"];
+
+    $initials = strtoupper($user["F_Name"][0] . $user["L_Name"][0]);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,18 +46,18 @@
         </div>
 
         <nav class="sidebar-nav">
-            <div class="nav-item active" onclick="window.location.href='../dashboard/dashboard.html'">Dashboard</div>
-            <div class="nav-item" onclick="window.location.href='../users/users.html'">Users</div>
-            <div class="nav-item" onclick="window.location.href='../drivers/drivers.html'">Drivers</div>
-            <div class="nav-item" onclick="window.location.href='../vehicles/vehicles.html'">Vehicles</div>
-            <div class="nav-item" onclick="window.location.href='../trips/trips.html'">Trips</div>
-            <div class="nav-item" onclick="window.location.href='../payments/payments.html'">Payments</div>
-            <div class="nav-item" onclick="window.location.href='../reports/reports.html'">Reports</div>
-            <div class="nav-item" onclick="window.location.href='../gdpr/gdpr.html'">GDPR</div>
+            <div class="nav-item active" onclick="window.location.href='../dashboard/dashboard.php'">Dashboard</div>
+            <div class="nav-item" onclick="window.location.href='../users/users.php'">Users</div>
+            <div class="nav-item" onclick="window.location.href='../drivers/drivers.php'">Drivers</div>
+            <div class="nav-item" onclick="window.location.href='../vehicles/vehicles.php'">Vehicles</div>
+            <div class="nav-item" onclick="window.location.href='../trips/trips.php'">Trips</div>
+            <div class="nav-item" onclick="window.location.href='../payments/payments.php'">Payments</div>
+            <div class="nav-item" onclick="window.location.href='../reports/reports.php'">Reports</div>
+            <div class="nav-item" onclick="window.location.href='../gdpr/gdpr.php'">GDPR</div>
 
             <div style="border-top:1px solid rgba(0,150,255,0.35); margin:18px 0;"></div>
 
-            <div class="nav-item" onclick="window.location.href='../simulation/simulation.html'">User Simulation</div>
+            <div class="nav-item" onclick="window.location.href='../simulation/simulation.php'">User Simulation</div>
         </nav>
     </aside>
 
@@ -42,12 +66,18 @@
             <h1 class="page-title">Dashboard</h1>
 
             <div class="profile-box">
-                <button class="logout-btn" onclick="window.location.href='../login/index.html'">Logout</button>
+                <button class="logout-btn" onclick="window.location.href='../index.php'">Logout</button>
                 <div class="profile-info">
-                    <div class="profile-name">Admin User</div>
-                    <div class="profile-email">admin@osrh.com</div>
+                    <div class="profile-name">
+                        <?= htmlspecialchars($full_name); ?>
+                    </div>
+                    <div class="profile-email">
+                        <?= htmlspecialchars($email); ?>
+                    </div>
                 </div>
-                <div class="profile-circle">AU</div>
+                <div class="profile-circle">
+                    <?= htmlspecialchars($initials); ?>
+                </div>
             </div>
         </header>
 

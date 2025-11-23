@@ -1,3 +1,9 @@
+<?php
+    session_start();
+    require_once "../db_connection.php";
+    require_once "../authorisation_check.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,20 +30,20 @@
         <nav class="sidebar-nav">
 
             <!-- ADMIN SECTION -->
-            <div class="nav-item" onclick="window.location.href='../dashboard/dashboard.html'">Dashboard</div>
-            <div class="nav-item" onclick="window.location.href='../users/users.html'">Users</div>
-            <div class="nav-item" onclick="window.location.href='../drivers/drivers.html'">Drivers</div>
+            <div class="nav-item" onclick="window.location.href='../dashboard/dashboard.php'">Dashboard</div>
+            <div class="nav-item" onclick="window.location.href='../users/users.php'">Users</div>
+            <div class="nav-item" onclick="window.location.href='../drivers/drivers.php'">Drivers</div>
             <div class="nav-item active">Vehicles</div>
-            <div class="nav-item" onclick="window.location.href='../trips/trips.html'">Trips</div>
-            <div class="nav-item" onclick="window.location.href='../payments/payments.html'">Payments</div>
-            <div class="nav-item" onclick="window.location.href='../reports/reports.html'">Reports</div>
-            <div class="nav-item" onclick="window.location.href='../gdpr/gdpr.html'">GDPR</div>
+            <div class="nav-item" onclick="window.location.href='../trips/trips.php'">Trips</div>
+            <div class="nav-item" onclick="window.location.href='../payments/payments.php'">Payments</div>
+            <div class="nav-item" onclick="window.location.href='../reports/reports.php'">Reports</div>
+            <div class="nav-item" onclick="window.location.href='../gdpr/gdpr.php'">GDPR</div>
 
             <!-- BLUE LINE SEPARATOR -->
             <div style="border-top:1px solid rgba(0,150,255,0.35); margin:18px 0;"></div>
 
             <!-- USER SIMULATION SECTION -->
-            <div class="nav-item section-label" onclick="window.location.href='../simulation/simulation.html'">
+            <div class="nav-item section-label" onclick="window.location.href='../simulation/simulation.php'">
                 User Simulation
             </div>
 
@@ -49,7 +55,7 @@
             <h1 class="page-title">Vehicles</h1>
 
             <div class="profile-box">
-                <button class="logout-btn" onclick="window.location.href='../login/index.html'">Logout</button>
+                <button class="logout-btn" onclick="window.location.href='../index.php'">Logout</button>
                 <div class="profile-info">
                     <div class="profile-name">Admin User</div>
                     <div class="profile-email">admin@osrh.com</div>
@@ -103,12 +109,12 @@
                         <td>5</td>
                         <td>1</td>
                         <td class="actions">
-                            <button class="action-btn" onclick="window.location.href='vehicle_view.html'">View</button>
+                            <button class="action-btn" onclick="window.location.href='vehicle_view.php'">View</button>
                             <button class="action-btn"
-                                onclick="window.location.href='vehicle_documents.html'">Documents</button>
+                                onclick="window.location.href='vehicle_documents.php'">Documents</button>
                             <button class="action-btn"
-                                onclick="window.location.href='vehicle_inspection.html'">Inspection</button>
-                            <button class="action-btn" onclick="window.location.href='vehicle_edit.html'">Edit</button>
+                                onclick="window.location.href='vehicle_inspection.php'">Inspection</button>
+                            <button class="action-btn" onclick="window.location.href='vehicle_edit.php'">Edit</button>
                             <button class="delete-btn">Delete</button>
                         </td>
                     </tr>
@@ -122,12 +128,12 @@
                         <td>4</td>
                         <td>2</td>
                         <td class="actions">
-                            <button class="action-btn" onclick="window.location.href='vehicle_view.html'">View</button>
+                            <button class="action-btn" onclick="window.location.href='vehicle_view.php'">View</button>
                             <button class="action-btn"
-                                onclick="window.location.href='vehicle_documents.html'">Documents</button>
+                                onclick="window.location.href='vehicle_documents.php'">Documents</button>
                             <button class="action-btn"
-                                onclick="window.location.href='vehicle_inspection.html'">Inspection</button>
-                            <button class="action-btn" onclick="window.location.href='vehicle_edit.html'">Edit</button>
+                                onclick="window.location.href='vehicle_inspection.php'">Inspection</button>
+                            <button class="action-btn" onclick="window.location.href='vehicle_edit.php'">Edit</button>
                             <button class="delete-btn">Delete</button>
                         </td>
                     </tr>
