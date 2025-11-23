@@ -1,32 +1,47 @@
-/* layout grid for profile info */
-.profile-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px 40px;
-    margin-top: 15px;
-    font-size: 15px;
+/* Feedback table */
+.feedback-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
 }
 
-/* profile items */
-.info-item {
-    opacity: 0.9;
-    font-size: 15px;
-}
-
-/* action panel */
-.action-panel {
-    display: flex;
-    gap: 14px;
-    margin-top: 20px;
-}
-
-.back-btn {
-    padding: 12px 18px;
-    background: #ffffff15;
-    border-radius: 12px;
-    color: #fff;
-    cursor: pointer;
+.feedback-table th {
+    text-align: left;
+    padding: 12px 10px;
     font-size: 14px;
+    opacity: 0.7;
+    border-bottom: 1px solid #ffffff15;
+}
+
+.feedback-table td {
+    padding: 12px 10px;
+    font-size: 14px;
+    border-bottom: 1px solid #ffffff08;
+}
+
+.feedback-table tr:hover {
+    background: #ffffff05;
+}
+
+/* Rating tag */
+.rating-tag {
+    padding: 4px 10px;
+    background: #155dfc33;
+    color: #5fa8ff;
+    border: 1px solid #155dfc55;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* Logout already global */
+.logout {
+    color: #ff4d4d !important;
+    font-weight: 600;
+}
+
+.logout:hover {
+    background: #ff4d4d20 !important;
 }
 
 body {
@@ -195,6 +210,13 @@ body {
     font-weight: 600;
 }
 
+/* quick links */
+.section-title {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
 .actions-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -279,4 +301,3 @@ body {
     background: linear-gradient(90deg, #ff4f4f33, #ff000033);
     opacity: 1;
 }
-

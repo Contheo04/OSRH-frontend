@@ -4,31 +4,32 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>OSRH – Passenger Profile</title>
+    <title>OSRH – Payments</title>
 
-    <!-- Correct relative paths -->
     <link rel="stylesheet" href="../../globals.css" />
-    <link rel="stylesheet" href="profile.css" />
+    <link rel="stylesheet" href="./payments.css" />
 </head>
 
 <body>
+
+    <!-- Glows -->
     <div class="background-glow glow-left"></div>
     <div class="background-glow glow-right"></div>
 
     <!-- Sidebar -->
     <aside class="sidebar">
         <div class="sidebar-header">
-            <img src="../dashboard/img/logo.svg" class="sidebar-logo" />
+            <img src="../../dashboard/img/logo.svg" class="sidebar-logo" />
             <div class="sidebar-title">OSRH</div>
             <div class="sidebar-sub">Passenger Portal</div>
         </div>
 
         <nav class="sidebar-nav">
             <div class="nav-item" onclick="window.location.href='../dashboard/dashboard.html'">Dashboard</div>
-            <div class="nav-item active" onclick="window.location.href='profile.html'">Profile</div>
+            <div class="nav-item" onclick="window.location.href='../profile/profile.html'">Profile</div>
             <div class="nav-item" onclick="window.location.href='../request/request.html'">Request Trip</div>
             <div class="nav-item" onclick="window.location.href='../history/history.html'">Trip History</div>
-            <div class="nav-item" onclick="window.location.href='../payments/payments.html'">Payments</div>
+            <div class="nav-item active" onclick="window.location.href='payments.html'">Payments</div>
             <div class="nav-item" onclick="window.location.href='../feedback/feedback.html'">Feedback</div>
 
             <div style="border-top:1px solid rgba(0,150,255,0.35); margin:18px 0;"></div>
@@ -36,10 +37,11 @@
         </nav>
     </aside>
 
-    <!-- Main Content -->
+    <!-- Content -->
     <main class="content">
+
         <header class="topbar">
-            <h1 class="page-title">Profile</h1>
+            <h1 class="page-title">Payments</h1>
 
             <div class="profile-box">
                 <div class="profile-info">
@@ -50,21 +52,45 @@
             </div>
         </header>
 
-        <!-- Profile Panel -->
         <section class="panel">
-            <h2 class="section-title">Personal Information</h2>
+            <h2 class="section-title">Payment History</h2>
 
-            <div class="profile-grid">
-                <div class="info-item"><strong>Name:</strong> Passenger User</div>
-                <div class="info-item"><strong>Email:</strong> passenger@example.com</div>
-                <div class="info-item"><strong>Phone:</strong> +357 99001122</div>
-                <div class="info-item"><strong>Gender:</strong> M</div>
-                <div class="info-item"><strong>Birth Date:</strong> 1998-05-14</div>
-                <div class="info-item"><strong>Address:</strong> Nicosia, Cyprus</div>
-            </div>
+            <table class="payment-table">
+                <thead>
+                    <tr>
+                        <th>Trip ID</th>
+                        <th>Payment Time</th>
+                        <th>Method</th>
+                        <th>Amount (€)</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <!-- Example rows -->
+
+                    <tr>
+                        <td>204</td>
+                        <td>2024-04-10 14:22</td>
+                        <td>Card</td>
+                        <td>12.50</td>
+                        <td><span class="status-tag paid">Paid</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>199</td>
+                        <td>2024-04-07 10:41</td>
+                        <td>Cash</td>
+                        <td>9.80</td>
+                        <td><span class="status-tag paid">Paid</span></td>
+                    </tr>
+
+                </tbody>
+            </table>
         </section>
 
-        <section class="panel">
-            <h2 class="section-title">Account Information</h2>
+    </main>
 
-            <div class="profile-gri
+</body>
+
+</html>

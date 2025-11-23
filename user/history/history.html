@@ -4,15 +4,15 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>OSRH – Passenger Dashboard</title>
+    <title>OSRH – Trip History</title>
 
     <link rel="stylesheet" href="../../globals.css" />
-    <link rel="stylesheet" href="./dashboard.css" />
+    <link rel="stylesheet" href="./history.css" />
 </head>
 
 <body>
 
-    <!-- Glows -->
+    <!-- Glows --> 
     <div class="background-glow glow-left"></div>
     <div class="background-glow glow-right"></div>
 
@@ -25,10 +25,10 @@
         </div>
 
         <nav class="sidebar-nav">
-            <div class="nav-item active" onclick="window.location.href='dashboard.html'">Dashboard</div>
+            <div class="nav-item" onclick="window.location.href='../dashboard/dashboard.html'">Dashboard</div>
             <div class="nav-item" onclick="window.location.href='../profile/profile.html'">Profile</div>
             <div class="nav-item" onclick="window.location.href='../request/request.html'">Request Trip</div>
-            <div class="nav-item" onclick="window.location.href='../history/history.html'">Trip History</div>
+            <div class="nav-item active" onclick="window.location.href='history.html'">Trip History</div>
             <div class="nav-item" onclick="window.location.href='../payments/payments.html'">Payments</div>
             <div class="nav-item" onclick="window.location.href='../feedback/feedback.html'">Feedback</div>
 
@@ -40,9 +40,8 @@
     <!-- Main Content -->
     <main class="content">
 
-        <!-- Top Bar -->
         <header class="topbar">
-            <h1 class="page-title">Hi, Passenger User 👋</h1>
+            <h1 class="page-title">Trip History</h1>
 
             <div class="profile-box">
                 <div class="profile-info">
@@ -53,66 +52,47 @@
             </div>
         </header>
 
-        <!-- Stats Overview -->
+        <!-- Trip History Table -->
         <section class="panel">
-            <h2 class="section-title">Your Overview</h2>
+            <h2 class="section-title">Your Trips</h2>
 
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <h3 class="stat-label">Total Trips</h3>
-                    <div class="stat-value">32</div>
-                </div>
-
-                <div class="stat-card">
-                    <h3 class="stat-label">Average Rating</h3>
-                    <div class="stat-value">4.6 ★</div>
-                </div>
-
-                <div class="stat-card">
-                    <h3 class="stat-label">Total Spent</h3>
-                    <div class="stat-value">€241.30</div>
-                </div>
-
-                <div class="stat-card">
-                    <h3 class="stat-label">Last Trip</h3>
-                    <div class="stat-value">2024-04-10</div>
-                </div>
-
-                <div class="stat-card">
-                    <h3 class="stat-label">Frequent Driver</h3>
-                    <div class="stat-value">M. Ioannou</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Recent Trips -->
-        <section class="panel">
-            <h2 class="section-title">Recent Trips</h2>
-
-            <table class="dashboard-table">
+            <table class="trip-table">
                 <thead>
                     <tr>
                         <th>Trip ID</th>
                         <th>Date</th>
+                        <th>From</th>
+                        <th>To</th>
                         <th>Driver</th>
                         <th>Price (€)</th>
+                        <th>Status</th>
+                        <th style="text-align:right;"></th>
                     </tr>
                 </thead>
 
                 <tbody>
+
+                    <!-- Example Row -->
                     <tr>
                         <td>204</td>
                         <td>2024-04-10</td>
+                        <td>Acropolis</td>
+                        <td>Mall of Cyprus</td>
                         <td>Michael Ioannou</td>
                         <td>12.50</td>
+                        <td><span class="status-tag completed">Completed</span></td>
                     </tr>
 
                     <tr>
                         <td>199</td>
                         <td>2024-04-07</td>
+                        <td>Strovolos</td>
+                        <td>Lakatamia</td>
                         <td>Peter Andreou</td>
                         <td>9.80</td>
+                        <td><span class="status-tag cancelled">Cancelled</span></td>
                     </tr>
+
                 </tbody>
             </table>
         </section>
