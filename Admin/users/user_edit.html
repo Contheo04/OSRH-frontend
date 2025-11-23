@@ -14,125 +14,128 @@
     <div class="background-glow glow-left"></div>
     <div class="background-glow glow-right"></div>
 
-    <aside class="sidebar">
-        <div class="sidebar-header">
-            <img src="../dashboard/img/logo.svg" class="sidebar-logo" />
-            <div class="sidebar-title">OSRH</div>
-            <div class="sidebar-sub">Admin Portal</div>
-        </div>
-
-        <nav class="sidebar-nav">
-            <!-- MAIN NAV -->
-            <div class="nav-item" onclick="window.location.href='../dashboard/dashboard.html'">Dashboard</div>
-            <div class="nav-item active" onclick="window.location.href='users.html'">Users</div>
-            <div class="nav-item" onclick="window.location.href='../drivers/drivers.html'">Drivers</div>
-            <div class="nav-item" onclick="window.location.href='../vehicles/vehicles.html'">Vehicles</div>
-            <div class="nav-item" onclick="window.location.href='../trips/trips.html'">Trips</div>
-            <div class="nav-item" onclick="window.location.href='../payments/payments.html'">Payments</div>
-            <div class="nav-item" onclick="window.location.href='../reports/reports.html'">Reports</div>
-            <div class="nav-item" onclick="window.location.href='../gdpr/gdpr.html'">GDPR</div>
-
-            <!-- BLUE LINE SEPARATOR -->
-            <div style="border-top:1px solid rgba(0,150,255,0.35); margin:18px 0;"></div>
-
-        </nav>
-    </aside>
-
-    <main class="content">
-        <header class="topbar">
-            <h1 class="page-title">Edit User</h1>
-
-            <div class="profile-box">
-                <button class="logout-btn" onclick="window.location.href='../login/index.html'">Logout</button>
-                <div class="profile-info">
-                    <div class="profile-name">Admin User</div>
-                    <div class="profile-email">admin@osrh.com</div>
-                </div>
-                <div class="profile-circle">AU</div>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="../dashboard/img/logo.svg" class="sidebar-logo" />
+                <div class="sidebar-title">OSRH</div>
+                <div class="sidebar-sub">Admin Portal</div>
             </div>
-        </header>
 
-        <section class="panel">
-            <h2 class="section-title">User Information</h2>
+            <nav class="sidebar-nav">
+                <!-- MAIN NAV -->
+                <div class="nav-item" onclick="window.location.href='../dashboard/dashboard.html'">Dashboard</div>
+                <div class="nav-item active" onclick="window.location.href='users.html'">Users</div>
+                <div class="nav-item" onclick="window.location.href='../drivers/drivers.html'">Drivers</div>
+                <div class="nav-item" onclick="window.location.href='../vehicles/vehicles.html'">Vehicles</div>
+                <div class="nav-item" onclick="window.location.href='../trips/trips.html'">Trips</div>
+                <div class="nav-item" onclick="window.location.href='../payments/payments.html'">Payments</div>
+                <div class="nav-item" onclick="window.location.href='../reports/reports.html'">Reports</div>
+                <div class="nav-item" onclick="window.location.href='../gdpr/gdpr.html'">GDPR</div>
 
-            <form class="edit-form">
+                <!-- BLUE LINE SEPARATOR -->
+                <div style="border-top:1px solid rgba(0,150,255,0.35); margin:18px 0;"></div>
 
-                <div class="form-grid">
+            </nav>
+        </aside>
 
-                    <div class="form-field">
-                        <label>User ID</label>
-                        <input type="text" value="23" disabled />
+        <main class="content">
+            <header class="topbar">
+                <h1 class="page-title">Edit User</h1>
+
+                <div class="profile-box">
+                    <button class="logout-btn" onclick="window.location.href='../login/index.html'">Logout</button>
+                    <div class="profile-info">
+                        <div class="profile-name">Admin User</div>
+                        <div class="profile-email">admin@osrh.com</div>
                     </div>
-
-                    <div class="form-field">
-                        <label>First Name</label>
-                        <input type="text" placeholder="John" />
-                    </div>
-
-                    <div class="form-field">
-                        <label>Last Name</label>
-                        <input type="text" placeholder="Doe" />
-                    </div>
-
-                    <div class="form-field">
-                        <label>Username</label>
-                        <input type="text" placeholder="jdoe" />
-                    </div>
-
-                    <div class="form-field">
-                        <label>Email</label>
-                        <input type="email" placeholder="jdoe@example.com" />
-                    </div>
-
-                    <div class="form-field">
-                        <label>Phone</label>
-                        <input type="text" placeholder="+357 99887766" />
-                    </div>
-
-                    <div class="form-field">
-                        <label>Gender</label>
-                        <select>
-                            <option>M</option>
-                            <option>F</option>
-                            <option>Other</option>
-                        </select>
-                    </div>
-
-                    <div class="form-field">
-                        <label>Birth Date</label>
-                        <input type="date" value="1998-06-22" />
-                    </div>
-
-                    <div class="form-field">
-                        <label>Address</label>
-                        <input type="text" placeholder="Limassol, Cyprus" />
-                    </div>
-
-                    <div class="form-field">
-                        <label>Type</label>
-                        <div class="readonly-value">Driver</div>
-                    </div>
-
-                    <div class="form-field">
-                        <label>Status</label>
-                        <select>
-                            <option>Active</option>
-                            <option>Pending</option>
-                            <option>Disabled</option>
-                        </select>
-                    </div>
-
+                    <div class="profile-circle">AU</div>
                 </div>
+            </header>
 
-                <div class="edit-actions">
-                    <button type="submit" class="action-btn">Save Changes</button>
-                    <button type="button" class="back-btn" onclick="window.location.href='users.html'">Cancel</button>
-                </div>
+            <section class="panel">
+                <h2 class="section-title">User Information</h2>
 
-            </form>
-        </section>
+                <form class="edit-form">
 
-    </main>
+                    <div class="form-grid">
+
+                        <div class="form-field">
+                            <label>User ID</label>
+                            <input type="text" value="23" disabled />
+                        </div>
+
+                        <div class="form-field">
+                            <label>First Name</label>
+                            <input type="text" placeholder="John" />
+                        </div>
+
+                        <div class="form-field">
+                            <label>Last Name</label>
+                            <input type="text" placeholder="Doe" />
+                        </div>
+
+                        <div class="form-field">
+                            <label>Username</label>
+                            <input type="text" placeholder="jdoe" />
+                        </div>
+
+                        <div class="form-field">
+                            <label>Email</label>
+                            <input type="email" placeholder="jdoe@example.com" />
+                        </div>
+
+                        <div class="form-field">
+                            <label>Phone</label>
+                            <input type="text" placeholder="+357 99887766" />
+                        </div>
+
+                        <div class="form-field">
+                            <label>Gender</label>
+                            <select>
+                                <option>M</option>
+                                <option>F</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-field">
+                            <label>Birth Date</label>
+                            <input type="date" value="1998-06-22" />
+                        </div>
+
+                        <div class="form-field">
+                            <label>Address</label>
+                            <input type="text" placeholder="Limassol, Cyprus" />
+                        </div>
+
+                        <div class="form-field">
+                            <label>Type</label>
+                            <div class="readonly-value">Driver</div>
+                        </div>
+
+                        <div class="form-field">
+                            <label>Status</label>
+                            <select>
+                                <option>Active</option>
+                                <option>Pending</option>
+                                <option>Disabled</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="edit-actions">
+                        <button type="submit" class="action-btn">Save Changes</button>
+                        <button type="button" class="back-btn"
+                            onclick="window.location.href='users.html'">Cancel</button>
+                    </div>
+
+                </form>
+            </section>
+
+        </main>
+    </div>
 
 </body>
 

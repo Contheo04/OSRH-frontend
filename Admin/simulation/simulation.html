@@ -38,68 +38,70 @@
     <div class="background-glow glow-left"></div>
     <div class="background-glow glow-right"></div>
 
-    <aside class="sidebar">
-        <div class="sidebar-header">
-            <img src="../dashboard/img/logo.svg" class="sidebar-logo" />
-            <div class="sidebar-title">OSRH</div>
-            <div class="sidebar-sub">Admin Portal</div>
-        </div>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="../dashboard/img/logo.svg" class="sidebar-logo" />
+                <div class="sidebar-title">OSRH</div>
+                <div class="sidebar-sub">Admin Portal</div>
+            </div>
 
-        <nav class="sidebar-nav">
-            <div class="nav-item" onclick="window.location.href='../dashboard/dashboard.html'">Dashboard</div>
-            <div class="nav-item" onclick="window.location.href='../users/users.html'">Users</div>
-            <div class="nav-item" onclick="window.location.href='../drivers/drivers.html'">Drivers</div>
-            <div class="nav-item" onclick="window.location.href='../vehicles/vehicles.html'">Vehicles</div>
-            <div class="nav-item" onclick="window.location.href='../trips/trips.html'">Trips</div>
-            <div class="nav-item" onclick="window.location.href='../payments/payments.html'">Payments</div>
-            <div class="nav-item" onclick="window.location.href='../reports/reports.html'">Reports</div>
-            <div class="nav-item" onclick="window.location.href='../gdpr/gdpr.html'">GDPR</div>
+            <nav class="sidebar-nav">
+                <div class="nav-item" onclick="window.location.href='../dashboard/dashboard.html'">Dashboard</div>
+                <div class="nav-item" onclick="window.location.href='../users/users.html'">Users</div>
+                <div class="nav-item" onclick="window.location.href='../drivers/drivers.html'">Drivers</div>
+                <div class="nav-item" onclick="window.location.href='../vehicles/vehicles.html'">Vehicles</div>
+                <div class="nav-item" onclick="window.location.href='../trips/trips.html'">Trips</div>
+                <div class="nav-item" onclick="window.location.href='../payments/payments.html'">Payments</div>
+                <div class="nav-item" onclick="window.location.href='../reports/reports.html'">Reports</div>
+                <div class="nav-item" onclick="window.location.href='../gdpr/gdpr.html'">GDPR</div>
 
-            <!-- BLUE LINE -->
-            <div style="border-top:1px solid rgba(0,150,255,0.35); margin:18px 0;"></div>
+                <!-- BLUE LINE -->
+                <div style="border-top:1px solid rgba(0,150,255,0.35); margin:18px 0;"></div>
 
-        </nav>
-    </aside>
+            </nav>
+        </aside>
 
-    <main class="content sim-container">
-        <header class="topbar">
-            <h1 class="page-title">User Simulation</h1>
+        <main class="content sim-container">
+            <header class="topbar">
+                <h1 class="page-title">User Simulation</h1>
 
-            <div class="profile-box">
-                <button class="logout-btn" onclick="window.location.href='../login/index.html'">Logout</button>
-                <div class="profile-info">
-                    <div class="profile-name">Admin User</div>
-                    <div class="profile-email">admin@osrh.com</div>
+                <div class="profile-box">
+                    <button class="logout-btn" onclick="window.location.href='../login/index.html'">Logout</button>
+                    <div class="profile-info">
+                        <div class="profile-name">Admin User</div>
+                        <div class="profile-email">admin@osrh.com</div>
+                    </div>
+                    <div class="profile-circle">AU</div>
                 </div>
-                <div class="profile-circle">AU</div>
-            </div>
-        </header>
+            </header>
 
-        <section class="panel">
-            <h2 class="section-title">Passenger View</h2>
+            <section class="panel">
+                <h2 class="section-title">Passenger View</h2>
 
-            <div class="sim-option" onclick="alert('Not implemented – this is a mock option.\n(Passenger Profile)')">
-                View Profile
-            </div>
+                <div class="sim-option"
+                    onclick="alert('Not implemented – this is a mock option.\n(Passenger Profile)')">
+                    View Profile
+                </div>
 
-            <div class="sim-option" onclick="alert('Trip request UI mock – nothing implemented yet.')">
-                Request Trip (Mock)
-            </div>
+                <div class="sim-option" onclick="alert('Trip request UI mock – nothing implemented yet.')">
+                    Request Trip (Mock)
+                </div>
 
-            <div class="sim-option" onclick="alert('Opens passenger trip history (mock).')">
-                Trip History
-            </div>
+                <div class="sim-option" onclick="alert('Opens passenger trip history (mock).')">
+                    Trip History
+                </div>
 
-            <div class="sim-option" onclick="alert('Opens passenger payment history (mock).')">
-                Payments
-            </div>
+                <div class="sim-option" onclick="alert('Opens passenger payment history (mock).')">
+                    Payments
+                </div>
 
-            <div class="sim-option" onclick="alert('Opens passenger feedback (mock).')">
-                Feedback
-            </div>
-        </section>
-    </main>
-
+                <div class="sim-option" onclick="alert('Opens passenger feedback (mock).')">
+                    Feedback
+                </div>
+            </section>
+        </main>
+    </div>
 </body>
 
 </html>

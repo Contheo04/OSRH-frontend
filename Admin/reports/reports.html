@@ -14,105 +14,107 @@
     <div class="background-glow glow-left"></div>
     <div class="background-glow glow-right"></div>
 
-    <aside class="sidebar">
-        <div class="sidebar-header">
-            <img src="../dashboard/img/logo.svg" class="sidebar-logo" />
-            <div class="sidebar-title">OSRH</div>
-            <div class="sidebar-sub">Admin Portal</div>
-        </div>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="../dashboard/img/logo.svg" class="sidebar-logo" />
+                <div class="sidebar-title">OSRH</div>
+                <div class="sidebar-sub">Admin Portal</div>
+            </div>
 
-        <nav class="sidebar-nav">
-            <div class="nav-item" onclick="window.location.href='../dashboard/dashboard.html'">Dashboard</div>
-            <div class="nav-item" onclick="window.location.href='../users/users.html'">Users</div>
-            <div class="nav-item" onclick="window.location.href='../drivers/drivers.html'">Drivers</div>
-            <div class="nav-item" onclick="window.location.href='../vehicles/vehicles.html'">Vehicles</div>
-            <div class="nav-item" onclick="window.location.href='../trips/trips.html'">Trips</div>
-            <div class="nav-item" onclick="window.location.href='../payments/payments.html'">Payments</div>
-            <div class="nav-item active" onclick="window.location.href='../reports/reports.html'">Reports</div>
-            <div class="nav-item" onclick="window.location.href='../gdpr/gdpr.html'">GDPR</div>
+            <nav class="sidebar-nav">
+                <div class="nav-item" onclick="window.location.href='../dashboard/dashboard.html'">Dashboard</div>
+                <div class="nav-item" onclick="window.location.href='../users/users.html'">Users</div>
+                <div class="nav-item" onclick="window.location.href='../drivers/drivers.html'">Drivers</div>
+                <div class="nav-item" onclick="window.location.href='../vehicles/vehicles.html'">Vehicles</div>
+                <div class="nav-item" onclick="window.location.href='../trips/trips.html'">Trips</div>
+                <div class="nav-item" onclick="window.location.href='../payments/payments.html'">Payments</div>
+                <div class="nav-item active" onclick="window.location.href='../reports/reports.html'">Reports</div>
+                <div class="nav-item" onclick="window.location.href='../gdpr/gdpr.html'">GDPR</div>
 
-            <div style="border-top:1px solid rgba(0,150,255,0.35); margin:18px 0;"></div>
-        </nav>
-    </aside>
+                <div style="border-top:1px solid rgba(0,150,255,0.35); margin:18px 0;"></div>
+            </nav>
+        </aside>
 
-    <main class="content">
-        <header class="topbar">
-            <h1 class="page-title">Reports</h1>
+        <main class="content">
+            <header class="topbar">
+                <h1 class="page-title">Reports</h1>
 
-            <div class="profile-box">
-                <button class="logout-btn" onclick="window.location.href='../login/index.html'">Logout</button>
-                <div class="profile-info">
-                    <div class="profile-name">Admin User</div>
-                    <div class="profile-email">admin@osrh.com</div>
+                <div class="profile-box">
+                    <button class="logout-btn" onclick="window.location.href='../login/index.html'">Logout</button>
+                    <div class="profile-info">
+                        <div class="profile-name">Admin User</div>
+                        <div class="profile-email">admin@osrh.com</div>
+                    </div>
+                    <div class="profile-circle">AU</div>
                 </div>
-                <div class="profile-circle">AU</div>
-            </div>
-        </header>
+            </header>
 
-        <!-- Filters -->
-        <section class="panel report-panel">
-            <div class="report-filter-row">
-                <input type="date" class="report-input">
-                <input type="date" class="report-input">
+            <!-- Filters -->
+            <section class="panel report-panel">
+                <div class="report-filter-row">
+                    <input type="date" class="report-input">
+                    <input type="date" class="report-input">
 
-                <select class="report-select">
-                    <option value="">Trip Category</option>
-                    <option>Passenger</option>
-                    <option>Cargo</option>
-                    <option>Luxury</option>
-                </select>
+                    <select class="report-select">
+                        <option value="">Trip Category</option>
+                        <option>Passenger</option>
+                        <option>Cargo</option>
+                        <option>Luxury</option>
+                    </select>
 
-                <select class="report-select">
-                    <option value="">Region</option>
-                    <option>District A</option>
-                    <option>District B</option>
-                    <option>District C</option>
-                </select>
-            </div>
-        </section>
+                    <select class="report-select">
+                        <option value="">Region</option>
+                        <option>District A</option>
+                        <option>District B</option>
+                        <option>District C</option>
+                    </select>
+                </div>
+            </section>
 
-        <!-- SECTION 1 -->
-        <section class="panel report-panel">
-            <h3 class="report-section-title">Trip Statistics</h3>
+            <!-- SECTION 1 -->
+            <section class="panel report-panel">
+                <h3 class="report-section-title">Trip Statistics</h3>
 
-            <button class="report-chip">Total Number of Trips</button>
-            <button class="report-chip">Category Trend Comparison</button>
-            <button class="report-chip">High-Activity Periods</button>
-        </section>
+                <button class="report-chip">Total Number of Trips</button>
+                <button class="report-chip">Category Trend Comparison</button>
+                <button class="report-chip">High-Activity Periods</button>
+            </section>
 
-        <!-- SECTION 2 -->
-        <section class="panel report-panel">
-            <h3 class="report-section-title">Trip Costs</h3>
+            <!-- SECTION 2 -->
+            <section class="panel report-panel">
+                <h3 class="report-section-title">Trip Costs</h3>
 
-            <button class="report-chip">Average Trip Cost</button>
-            <button class="report-chip">Top 10 Most Expensive</button>
-            <button class="report-chip">Top 10 Cheapest</button>
-        </section>
+                <button class="report-chip">Average Trip Cost</button>
+                <button class="report-chip">Top 10 Most Expensive</button>
+                <button class="report-chip">Top 10 Cheapest</button>
+            </section>
 
-        <!-- SECTION 3 -->
-        <section class="panel report-panel">
-            <h3 class="report-section-title">Driver Performance</h3>
+            <!-- SECTION 3 -->
+            <section class="panel report-panel">
+                <h3 class="report-section-title">Driver Performance</h3>
 
-            <button class="report-chip">Completed Trips per Driver</button>
-            <button class="report-chip">Driver Ratings</button>
-        </section>
+                <button class="report-chip">Completed Trips per Driver</button>
+                <button class="report-chip">Driver Ratings</button>
+            </section>
 
-        <!-- SECTION 4 -->
-        <section class="panel report-panel">
-            <h3 class="report-section-title">Driver Earnings</h3>
+            <!-- SECTION 4 -->
+            <section class="panel report-panel">
+                <h3 class="report-section-title">Driver Earnings</h3>
 
-            <button class="report-chip">Revenue per Month (Current Year)</button>
-            <button class="report-chip">Total Earnings (Last 3 Years)</button>
-        </section>
+                <button class="report-chip">Revenue per Month (Current Year)</button>
+                <button class="report-chip">Total Earnings (Last 3 Years)</button>
+            </section>
 
-        <!-- Dynamic Output -->
-        <section id="report-output" class="panel" style="display:none;">
-            <h2 class="section-title">Report Output</h2>
-            <div id="report-content" class="report-content-box">
-                Select a report option above.
-            </div>
-        </section>
-    </main>
+            <!-- Dynamic Output -->
+            <section id="report-output" class="panel" style="display:none;">
+                <h2 class="section-title">Report Output</h2>
+                <div id="report-content" class="report-content-box">
+                    Select a report option above.
+                </div>
+            </section>
+        </main>
+    </div>
 
     <script>
         function loadReport(title, content) {

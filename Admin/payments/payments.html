@@ -14,119 +14,121 @@
     <div class="background-glow glow-left"></div>
     <div class="background-glow glow-right"></div>
 
-    <aside class="sidebar">
-        <div class="sidebar-header">
-            <img src="../dashboard/img/logo.svg" class="sidebar-logo">
-            <div class="sidebar-title">OSRH</div>
-            <div class="sidebar-sub">Admin Portal</div>
-        </div>
-
-        <nav class="sidebar-nav">
-
-            <!-- ADMIN NAVIGATION -->
-            <div class="nav-item" onclick="window.location.href='../dashboard/dashboard.html'">Dashboard</div>
-            <div class="nav-item" onclick="window.location.href='../users/users.html'">Users</div>
-            <div class="nav-item" onclick="window.location.href='../drivers/drivers.html'">Drivers</div>
-            <div class="nav-item" onclick="window.location.href='../vehicles/vehicles.html'">Vehicles</div>
-            <div class="nav-item" onclick="window.location.href='../trips/trips.html'">Trips</div>
-            <div class="nav-item active">Payments</div>
-            <div class="nav-item" onclick="window.location.href='../reports/reports.html'">Reports</div>
-            <div class="nav-item" onclick="window.location.href='../gdpr/gdpr.html'">GDPR</div>
-
-            <!-- BLUE LINE SEPARATOR -->
-            <div style="border-top:1px solid rgba(0,150,255,0.35); margin:18px 0;"></div>
-
-
-        </nav>
-    </aside>
-
-    <main class="content">
-        <header class="topbar">
-            <h1 class="page-title">Payments</h1>
-
-            <div class="profile-box">
-                <button class="logout-btn" onclick="window.location.href='../login/index.html'">Logout</button>
-                <div class="profile-info">
-                    <div class="profile-name">Admin User</div>
-                    <div class="profile-email">admin@osrh.com</div>
-                </div>
-                <div class="profile-circle">AU</div>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="../dashboard/img/logo.svg" class="sidebar-logo">
+                <div class="sidebar-title">OSRH</div>
+                <div class="sidebar-sub">Admin Portal</div>
             </div>
-        </header>
 
-        <section class="panel search-panel">
-            <input type="text" class="search-input" placeholder="Search by User, Trip ID, or Method…">
+            <nav class="sidebar-nav">
 
-            <select class="filter-select">
-                <option value="">Payment Method</option>
-                <option>Card</option>
-                <option>Cash</option>
-                <option>Wallet</option>
-            </select>
+                <!-- ADMIN NAVIGATION -->
+                <div class="nav-item" onclick="window.location.href='../dashboard/dashboard.html'">Dashboard</div>
+                <div class="nav-item" onclick="window.location.href='../users/users.html'">Users</div>
+                <div class="nav-item" onclick="window.location.href='../drivers/drivers.html'">Drivers</div>
+                <div class="nav-item" onclick="window.location.href='../vehicles/vehicles.html'">Vehicles</div>
+                <div class="nav-item" onclick="window.location.href='../trips/trips.html'">Trips</div>
+                <div class="nav-item active">Payments</div>
+                <div class="nav-item" onclick="window.location.href='../reports/reports.html'">Reports</div>
+                <div class="nav-item" onclick="window.location.href='../gdpr/gdpr.html'">GDPR</div>
 
-            <select class="filter-select">
-                <option value="">Status</option>
-                <option>Completed</option>
-                <option>Pending</option>
-                <option>Failed</option>
-            </select>
-        </section>
+                <!-- BLUE LINE SEPARATOR -->
+                <div style="border-top:1px solid rgba(0,150,255,0.35); margin:18px 0;"></div>
 
-        <section class="panel table-panel">
-            <table class="payments-table">
-                <thead>
-                    <tr>
-                        <th>Payment ID</th>
-                        <th>Total Trip</th>
-                        <th>User</th>
-                        <th>Method</th>
-                        <th>Timestamp</th>
-                        <th>Total Price (€)</th>
-                        <th style="text-align:right;">Actions</th>
-                    </tr>
-                </thead>
 
-                <tbody>
-                    <tr>
-                        <td>9001</td>
-                        <td>TT-102</td>
-                        <td>jdoe</td>
-                        <td>Card</td>
-                        <td>2024-02-15 14:33</td>
-                        <td>23.40</td>
-                        <td class="actions">
-                            <button class="action-btn">View</button>
-                        </td>
-                    </tr>
+            </nav>
+        </aside>
 
-                    <tr>
-                        <td>9002</td>
-                        <td>TT-106</td>
-                        <td>mgeorgiou</td>
-                        <td>Wallet</td>
-                        <td>2024-02-17 08:12</td>
-                        <td>11.90</td>
-                        <td class="actions">
-                            <button class="action-btn">View</button>
-                        </td>
-                    </tr>
+        <main class="content">
+            <header class="topbar">
+                <h1 class="page-title">Payments</h1>
 
-                    <tr>
-                        <td>9003</td>
-                        <td>TT-110</td>
-                        <td>apap</td>
-                        <td>Cash</td>
-                        <td>2024-02-19 19:42</td>
-                        <td>17.70</td>
-                        <td class="actions">
-                            <button class="action-btn">View</button>
-                        </td>
-                    </tr>
-                </tbody>
+                <div class="profile-box">
+                    <button class="logout-btn" onclick="window.location.href='../login/index.html'">Logout</button>
+                    <div class="profile-info">
+                        <div class="profile-name">Admin User</div>
+                        <div class="profile-email">admin@osrh.com</div>
+                    </div>
+                    <div class="profile-circle">AU</div>
+                </div>
+            </header>
 
-            </table>
-        </section>
-    </main>
+            <section class="panel search-panel">
+                <input type="text" class="search-input" placeholder="Search by User, Trip ID, or Method…">
+
+                <select class="filter-select">
+                    <option value="">Payment Method</option>
+                    <option>Card</option>
+                    <option>Cash</option>
+                    <option>Wallet</option>
+                </select>
+
+                <select class="filter-select">
+                    <option value="">Status</option>
+                    <option>Completed</option>
+                    <option>Pending</option>
+                    <option>Failed</option>
+                </select>
+            </section>
+
+            <section class="panel table-panel">
+                <table class="payments-table">
+                    <thead>
+                        <tr>
+                            <th>Payment ID</th>
+                            <th>Total Trip</th>
+                            <th>User</th>
+                            <th>Method</th>
+                            <th>Timestamp</th>
+                            <th>Total Price (€)</th>
+                            <th style="text-align:right;">Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>9001</td>
+                            <td>TT-102</td>
+                            <td>jdoe</td>
+                            <td>Card</td>
+                            <td>2024-02-15 14:33</td>
+                            <td>23.40</td>
+                            <td class="actions">
+                                <button class="action-btn">View</button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>9002</td>
+                            <td>TT-106</td>
+                            <td>mgeorgiou</td>
+                            <td>Wallet</td>
+                            <td>2024-02-17 08:12</td>
+                            <td>11.90</td>
+                            <td class="actions">
+                                <button class="action-btn">View</button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>9003</td>
+                            <td>TT-110</td>
+                            <td>apap</td>
+                            <td>Cash</td>
+                            <td>2024-02-19 19:42</td>
+                            <td>17.70</td>
+                            <td class="actions">
+                                <button class="action-btn">View</button>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </section>
+        </main>
+    </div>
 
 </body>
 

@@ -14,93 +14,95 @@
     <div class="background-glow glow-left"></div>
     <div class="background-glow glow-right"></div>
 
-    <aside class="sidebar">
-        <div class="sidebar-header">
-            <img src="../dashboard/img/logo.svg" class="sidebar-logo" />
-            <div class="sidebar-title">OSRH</div>
-            <div class="sidebar-sub">Admin Portal</div>
-        </div>
-
-        <nav class="sidebar-nav">
-
-            <!-- ADMIN SECTION -->
-            <div class="nav-item" onclick="window.location.href='../dashboard/dashboard.html'">Dashboard</div>
-            <div class="nav-item" onclick="window.location.href='../users/users.html'">Users</div>
-            <div class="nav-item" onclick="window.location.href='../drivers/drivers.html'">Drivers</div>
-            <div class="nav-item" onclick="window.location.href='../vehicles/vehicles.html'">Vehicles</div>
-            <div class="nav-item active">Trips</div>
-            <div class="nav-item" onclick="window.location.href='../payments/payments.html'">Payments</div>
-            <div class="nav-item" onclick="window.location.href='../reports/reports.html'">Reports</div>
-            <div class="nav-item" onclick="window.location.href='../gdpr/gdpr.html'">GDPR</div>
-
-            <!-- BLUE LINE SEPARATOR -->
-            <div style="border-top:1px solid rgba(0,150,255,0.35); margin:18px 0;"></div>
-
-
-        </nav>
-    </aside>
-
-    <main class="content">
-        <header class="topbar">
-            <h1 class="page-title">Trips</h1>
-
-            <div class="profile-box">
-                <button class="logout-btn" onclick="window.location.href='../login/index.html'">Logout</button>
-                <div class="profile-info">
-                    <div class="profile-name">Admin User</div>
-                    <div class="profile-email">admin@osrh.com</div>
-                </div>
-                <div class="profile-circle">AU</div>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="../dashboard/img/logo.svg" class="sidebar-logo" />
+                <div class="sidebar-title">OSRH</div>
+                <div class="sidebar-sub">Admin Portal</div>
             </div>
-        </header>
 
-        <section class="panel search-panel">
-            <input type="text" class="search-input" placeholder="Search trips..." />
+            <nav class="sidebar-nav">
 
-            <select class="filter-select">
-                <option value="">Method</option>
-                <option>Card</option>
-                <option>Cash</option>
-                <option>Online</option>
-            </select>
-        </section>
+                <!-- ADMIN SECTION -->
+                <div class="nav-item" onclick="window.location.href='../dashboard/dashboard.html'">Dashboard</div>
+                <div class="nav-item" onclick="window.location.href='../users/users.html'">Users</div>
+                <div class="nav-item" onclick="window.location.href='../drivers/drivers.html'">Drivers</div>
+                <div class="nav-item" onclick="window.location.href='../vehicles/vehicles.html'">Vehicles</div>
+                <div class="nav-item active">Trips</div>
+                <div class="nav-item" onclick="window.location.href='../payments/payments.html'">Payments</div>
+                <div class="nav-item" onclick="window.location.href='../reports/reports.html'">Reports</div>
+                <div class="nav-item" onclick="window.location.href='../gdpr/gdpr.html'">GDPR</div>
 
-        <section class="panel table-panel">
-            <table class="trips-table">
-                <thead>
-                    <tr>
-                        <th>Trip ID</th>
-                        <th>Payment Time</th>
-                        <th>Payment Method</th>
-                        <th style="text-align:right;">Actions</th>
-                    </tr>
-                </thead>
+                <!-- BLUE LINE SEPARATOR -->
+                <div style="border-top:1px solid rgba(0,150,255,0.35); margin:18px 0;"></div>
 
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>2024-02-15 14:22</td>
-                        <td>Card</td>
-                        <td class="actions">
-                            <button class="action-btn"
-                                onclick="window.location.href='segments.html?tt_id=1'">Segments</button>
-                        </td>
-                    </tr>
 
-                    <tr>
-                        <td>2</td>
-                        <td>2024-02-16 10:05</td>
-                        <td>Cash</td>
-                        <td class="actions">
-                            <button class="action-btn"
-                                onclick="window.location.href='segments.html?tt_id=2'">Segments</button>
-                        </td>
-                    </tr>
-                </tbody>
+            </nav>
+        </aside>
 
-            </table>
-        </section>
-    </main>
+        <main class="content">
+            <header class="topbar">
+                <h1 class="page-title">Trips</h1>
+
+                <div class="profile-box">
+                    <button class="logout-btn" onclick="window.location.href='../login/index.html'">Logout</button>
+                    <div class="profile-info">
+                        <div class="profile-name">Admin User</div>
+                        <div class="profile-email">admin@osrh.com</div>
+                    </div>
+                    <div class="profile-circle">AU</div>
+                </div>
+            </header>
+
+            <section class="panel search-panel">
+                <input type="text" class="search-input" placeholder="Search trips..." />
+
+                <select class="filter-select">
+                    <option value="">Method</option>
+                    <option>Card</option>
+                    <option>Cash</option>
+                    <option>Online</option>
+                </select>
+            </section>
+
+            <section class="panel table-panel">
+                <table class="trips-table">
+                    <thead>
+                        <tr>
+                            <th>Trip ID</th>
+                            <th>Payment Time</th>
+                            <th>Payment Method</th>
+                            <th style="text-align:right;">Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>2024-02-15 14:22</td>
+                            <td>Card</td>
+                            <td class="actions">
+                                <button class="action-btn"
+                                    onclick="window.location.href='segments.html?tt_id=1'">Segments</button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>2</td>
+                            <td>2024-02-16 10:05</td>
+                            <td>Cash</td>
+                            <td class="actions">
+                                <button class="action-btn"
+                                    onclick="window.location.href='segments.html?tt_id=2'">Segments</button>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </section>
+        </main>
+    </div>
 </body>
 
 </html>

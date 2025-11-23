@@ -47,34 +47,6 @@
     opacity: 0.85;
 }
 
-.nav-item {
-    padding: 12px 14px;
-    border-radius: 12px;
-    cursor: pointer;
-    font-size: 15px;
-    opacity: 0.8;
-    transition: 0.2s;
-}
-
-.nav-item:hover {
-    background: #ffffff12;
-}
-
-.nav-item.active {
-    background: linear-gradient(90deg, #00b8db, #155dfc);
-    opacity: 1;
-}
-
-.nav-item.logout {
-    color: #ff4f4f !important;
-    font-weight: 600;
-}
-
-.nav-item.logout:hover {
-    background: linear-gradient(90deg, #ff4f4f33, #ff000033);
-    opacity: 1;
-}
-
 /* MAIN CONTENT */
 .content {
     flex: 1;

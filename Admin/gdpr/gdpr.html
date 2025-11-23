@@ -14,105 +14,107 @@
     <div class="background-glow glow-left"></div>
     <div class="background-glow glow-right"></div>
 
-    <aside class="sidebar">
-        <div class="sidebar-header">
-            <img src="../dashboard/img/logo.svg" class="sidebar-logo" />
-            <div class="sidebar-title">OSRH</div>
-            <div class="sidebar-sub">Admin Portal</div>
-        </div>
-
-        <nav class="sidebar-nav">
-            <!-- MAIN NAV -->
-            <div class="nav-item" onclick="window.location.href='../dashboard/dashboard.html'">Dashboard</div>
-            <div class="nav-item" onclick="window.location.href='../users/users.html'">Users</div>
-            <div class="nav-item" onclick="window.location.href='../drivers/drivers.html'">Drivers</div>
-            <div class="nav-item" onclick="window.location.href='../vehicles/vehicles.html'">Vehicles</div>
-            <div class="nav-item" onclick="window.location.href='../trips/trips.html'">Trips</div>
-            <div class="nav-item" onclick="window.location.href='../payments/payments.html'">Payments</div>
-            <div class="nav-item" onclick="window.location.href='../reports/reports.html'">Reports</div>
-            <div class="nav-item active">GDPR</div>
-
-            <!-- BLUE LINE SEPARATOR -->
-            <div style="border-top:1px solid rgba(0,150,255,0.35); margin:18px 0;"></div>
-
-        </nav>
-    </aside>
-
-    <main class="content">
-        <header class="topbar">
-            <h1 class="page-title">GDPR Requests</h1>
-
-            <div class="profile-box">
-                <button class="logout-btn" onclick="window.location.href='../login/index.html'">Logout</button>
-                <div class="profile-info">
-                    <div class="profile-name">Admin User</div>
-                    <div class="profile-email">admin@osrh.com</div>
-                </div>
-                <div class="profile-circle">AU</div>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="../dashboard/img/logo.svg" class="sidebar-logo" />
+                <div class="sidebar-title">OSRH</div>
+                <div class="sidebar-sub">Admin Portal</div>
             </div>
-        </header>
 
-        <section class="panel search-panel">
-            <input type="text" class="search-input" placeholder="Search GDPR requests..." />
+            <nav class="sidebar-nav">
+                <!-- MAIN NAV -->
+                <div class="nav-item" onclick="window.location.href='../dashboard/dashboard.html'">Dashboard</div>
+                <div class="nav-item" onclick="window.location.href='../users/users.html'">Users</div>
+                <div class="nav-item" onclick="window.location.href='../drivers/drivers.html'">Drivers</div>
+                <div class="nav-item" onclick="window.location.href='../vehicles/vehicles.html'">Vehicles</div>
+                <div class="nav-item" onclick="window.location.href='../trips/trips.html'">Trips</div>
+                <div class="nav-item" onclick="window.location.href='../payments/payments.html'">Payments</div>
+                <div class="nav-item" onclick="window.location.href='../reports/reports.html'">Reports</div>
+                <div class="nav-item active">GDPR</div>
 
-            <select class="filter-select">
-                <option value="">Pending Status</option>
-                <option value="Y">Pending</option>
-                <option value="N">Completed</option>
-            </select>
+                <!-- BLUE LINE SEPARATOR -->
+                <div style="border-top:1px solid rgba(0,150,255,0.35); margin:18px 0;"></div>
 
-            <select class="filter-select">
-                <option value="">Approval Status</option>
-                <option value="Y">Approved</option>
-                <option value="N">Rejected</option>
-            </select>
-        </section>
+            </nav>
+        </aside>
 
-        <section class="panel table-panel">
-            <table class="gdpr-table">
-                <thead>
-                    <tr>
-                        <th>Request ID</th>
-                        <th>User (Requested By)</th>
-                        <th>Managed By</th>
-                        <th>Issue Date</th>
-                        <th>Pending</th>
-                        <th>Approval</th>
-                        <th style="text-align:right;">Actions</th>
-                    </tr>
-                </thead>
+        <main class="content">
+            <header class="topbar">
+                <h1 class="page-title">GDPR Requests</h1>
 
-                <tbody>
-                    <tr>
-                        <td>12</td>
-                        <td>87</td>
-                        <td>4</td>
-                        <td>2024-02-01</td>
-                        <td>Pending</td>
-                        <td>-</td>
-                        <td class="actions">
-                            <button class="action-btn">Approve</button>
-                            <button class="action-btn">Reject</button>
-                        </td>
-                    </tr>
+                <div class="profile-box">
+                    <button class="logout-btn" onclick="window.location.href='../login/index.html'">Logout</button>
+                    <div class="profile-info">
+                        <div class="profile-name">Admin User</div>
+                        <div class="profile-email">admin@osrh.com</div>
+                    </div>
+                    <div class="profile-circle">AU</div>
+                </div>
+            </header>
 
-                    <tr>
-                        <td>13</td>
-                        <td>104</td>
-                        <td>4</td>
-                        <td>2024-01-23</td>
-                        <td>Completed</td>
-                        <td>Approved</td>
-                        <td class="actions">
-                            <button class="action-btn">View</button>
-                        </td>
-                    </tr>
+            <section class="panel search-panel">
+                <input type="text" class="search-input" placeholder="Search GDPR requests..." />
 
-                </tbody>
-            </table>
-        </section>
+                <select class="filter-select">
+                    <option value="">Pending Status</option>
+                    <option value="Y">Pending</option>
+                    <option value="N">Completed</option>
+                </select>
 
-    </main>
+                <select class="filter-select">
+                    <option value="">Approval Status</option>
+                    <option value="Y">Approved</option>
+                    <option value="N">Rejected</option>
+                </select>
+            </section>
+
+            <section class="panel table-panel">
+                <table class="gdpr-table">
+                    <thead>
+                        <tr>
+                            <th>Request ID</th>
+                            <th>User (Requested By)</th>
+                            <th>Managed By</th>
+                            <th>Issue Date</th>
+                            <th>Pending</th>
+                            <th>Approval</th>
+                            <th style="text-align:right;">Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>12</td>
+                            <td>87</td>
+                            <td>4</td>
+                            <td>2024-02-01</td>
+                            <td>Pending</td>
+                            <td>-</td>
+                            <td class="actions">
+                                <button class="action-btn">Approve</button>
+                                <button class="action-btn">Reject</button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>13</td>
+                            <td>104</td>
+                            <td>4</td>
+                            <td>2024-01-23</td>
+                            <td>Completed</td>
+                            <td>Approved</td>
+                            <td class="actions">
+                                <button class="action-btn">View</button>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </section>
+
+        </main>
+    </div>
 
 </body>
 
