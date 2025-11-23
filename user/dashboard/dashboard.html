@@ -16,216 +16,111 @@
     <div class="background-glow glow-left"></div>
     <div class="background-glow glow-right"></div>
 
-    <!-- Sidebar -->
-    <aside class="sidebar">
-        <div class="sidebar-header">
-            <img src="../../dashboard/img/logo.svg" class="sidebar-logo" />
-            <div class="sidebar-title">OSRH</div>
-            <div class="sidebar-sub">Passenger Portal</div>
-        </div>
-
-        <nav class="sidebar-nav">
-            <div class="nav-item active" onclick="window.location.href='dashboard.html'">Dashboard</div>
-            <div class="nav-item" onclick="window.location.href='../profile/profile.html'">Profile</div>
-            <div class="nav-item" onclick="window.location.href='../request/request.html'">Request Trip</div>
-            <div class="nav-item" onclick="window.location.href='../history/history.html'">Trip History</div>
-            <div class="nav-item" onclick="window.location.href='../payments/payments.html'">Payments</div>
-            <div class="nav-item" onclick="window.location.href='../feedback/feedback.html'">Feedback</div>
-
-            <div style="border-top:1px solid rgba(0,150,255,0.35); margin:18px 0;"></div>
-            <div class="nav-item logout" onclick="window.location.href='../login/index.html'">Log Out</div>
-        </nav>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="content">
-
-        <!-- Top Bar -->
-        <header class="topbar">
-            <h1 class="page-title">Hi, Passenger User</h1>
-
-            <div class="profile-box">
-                <div class="profile-info">
-                    <div class="profile-name">Passenger User</div>
-                    <div class="profile-email">passenger@example.com</div>
-                </div>
-                <div class="profile-circle">PU</div>
+    <div class="layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="../../dashboard/img/logo.svg" class="sidebar-logo" />
+                <div class="sidebar-title">OSRH</div>
+                <div class="sidebar-sub">Passenger Portal</div>
             </div>
-        </header>
 
-        <!-- Stats Overview -->
-        <section class="panel">
-            <h2 class="section-title">Your Overview</h2>
+            <nav class="sidebar-nav">
+                <div class="nav-item active" onclick="window.location.href='dashboard.html'">Dashboard</div>
+                <div class="nav-item" onclick="window.location.href='../profile/profile.html'">Profile</div>
+                <div class="nav-item" onclick="window.location.href='../request/request.html'">Request Trip</div>
+                <div class="nav-item" onclick="window.location.href='../history/history.html'">Trip History</div>
+                <div class="nav-item" onclick="window.location.href='../payments/payments.html'">Payments</div>
+                <div class="nav-item" onclick="window.location.href='../feedback/feedback.html'">Feedback</div>
 
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <h3 class="stat-label">Total Trips</h3>
-                    <div class="stat-value">32</div>
+                <div style="border-top:1px solid rgba(0,150,255,0.35); margin:18px 0;"></div>
+                <div class="nav-item logout" onclick="window.location.href='../login/index.html'">Log Out</div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+
+            <!-- Top Bar -->
+            <header class="topbar">
+                <h1 class="page-title">Hi, Passenger User</h1>
+
+                <div class="profile-box">
+                    <div class="profile-info">
+                        <div class="profile-name">Passenger User</div>
+                        <div class="profile-email">passenger@example.com</div>
+                    </div>
+                    <div class="profile-circle">PU</div>
                 </div>
+            </header>
 
-                <div class="stat-card">
-                    <h3 class="stat-label">Average Rating</h3>
-                    <div class="stat-value">4.6 ★</div>
+            <!-- Stats Overview -->
+            <section class="panel">
+                <h2 class="section-title">Your Overview</h2>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3 class="stat-label">Total Trips</h3>
+                        <div class="stat-value">32</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <h3 class="stat-label">Average Rating</h3>
+                        <div class="stat-value">4.6 ★</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <h3 class="stat-label">Total Spent</h3>
+                        <div class="stat-value">€241.30</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <h3 class="stat-label">Last Trip</h3>
+                        <div class="stat-value">2024-04-10</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <h3 class="stat-label">Frequent Driver</h3>
+                        <div class="stat-value">M. Ioannou</div>
+                    </div>
                 </div>
+            </section>
 
-                <div class="stat-card">
-                    <h3 class="stat-label">Total Spent</h3>
-                    <div class="stat-value">€241.30</div>
-                </div>
+            <!-- Recent Trips -->
+            <section class="panel">
+                <h2 class="section-title">Recent Trips</h2>
 
-                <div class="stat-card">
-                    <h3 class="stat-label">Last Trip</h3>
-                    <div class="stat-value">2024-04-10</div>
-                </div>
+                <table class="dashboard-table">
+                    <thead>
+                        <tr>
+                            <th>Trip ID</th>
+                            <th>Date</th>
+                            <th>Driver</th>
+                            <th>Price (€)</th>
+                        </tr>
+                    </thead>
 
-                <div class="stat-card">
-                    <h3 class="stat-label">Frequent Driver</h3>
-                    <div class="stat-value">M. Ioannou</div>
-                </div>
-            </div>
-        </section>
+                    <tbody>
+                        <tr>
+                            <td>204</td>
+                            <td>2024-04-10</td>
+                            <td>Michael Ioannou</td>
+                            <td>12.50</td>
+                        </tr>
 
-        <!-- Recent Trips -->
-        <section class="panel">
-            <h2 class="section-title">Recent Trips</h2>
+                        <tr>
+                            <td>199</td>
+                            <td>2024-04-07</td>
+                            <td>Peter Andreou</td>
+                            <td>9.80</td>
+                        </tr>
 
-            <table class="dashboard-table">
-                <thead>
-                    <tr>
-                        <th>Trip ID</th>
-                        <th>Date</th>
-                        <th>Driver</th>
-                        <th>Price (€)</th>
-                    </tr>
-                </thead>
+                    </tbody>
+                </table>
+            </section>
 
-                <tbody>
-                    <tr>
-                        <td>204</td>
-                        <td>2024-04-10</td>
-                        <td>Michael Ioannou</td>
-                        <td>12.50</td>
-                    </tr>
-
-                    <tr>
-                        <td>199</td>
-                        <td>2024-04-07</td>
-                        <td>Peter Andreou</td>
-                        <td>9.80</td>
-                    </tr>
-                    <tr>
-                        <td>199</td>
-                        <td>2024-04-07</td>
-                        <td>Peter Andreou</td>
-                        <td>9.80</td>
-                    </tr>
-                    <tr>
-                        <td>199</td>
-                        <td>2024-04-07</td>
-                        <td>Peter Andreou</td>
-                        <td>9.80</td>
-                    </tr>
-                    <tr>
-                        <td>199</td>
-                        <td>2024-04-07</td>
-                        <td>Peter Andreou</td>
-                        <td>9.80</td>
-                    </tr>
-                    <tr>
-                        <td>199</td>
-                        <td>2024-04-07</td>
-                        <td>Peter Andreou</td>
-                        <td>9.80</td>
-                    </tr>
-                    <tr>
-                        <td>199</td>
-                        <td>2024-04-07</td>
-                        <td>Peter Andreou</td>
-                        <td>9.80</td>
-                    </tr>
-                    <tr>
-                        <td>199</td>
-                        <td>2024-04-07</td>
-                        <td>Peter Andreou</td>
-                        <td>9.80</td>
-                    </tr>
-                    <tr>
-                        <td>199</td>
-                        <td>2024-04-07</td>
-                        <td>Peter Andreou</td>
-                        <td>9.80</td>
-                    </tr>
-                    <tr>
-                        <td>199</td>
-                        <td>2024-04-07</td>
-                        <td>Peter Andreou</td>
-                        <td>9.80</td>
-                    </tr>
-                    <tr>
-                        <td>199</td>
-                        <td>2024-04-07</td>
-                        <td>Peter Andreou</td>
-                        <td>9.80</td>
-                    </tr>
-                    <tr>
-                        <td>199</td>
-                        <td>2024-04-07</td>
-                        <td>Peter Andreou</td>
-                        <td>9.80</td>
-                    </tr>
-                    <tr>
-                        <td>199</td>
-                        <td>2024-04-07</td>
-                        <td>Peter Andreou</td>
-                        <td>9.80</td>
-                    </tr>
-                    <tr>
-                        <td>199</td>
-                        <td>2024-04-07</td>
-                        <td>Peter Andreou</td>
-                        <td>9.80</td>
-                    </tr>
-                    <tr>
-                        <td>199</td>
-                        <td>2024-04-07</td>
-                        <td>Peter Andreou</td>
-                        <td>9.80</td>
-                    </tr>
-                    <tr>
-                        <td>199</td>
-                        <td>2024-04-07</td>
-                        <td>Peter Andreou</td>
-                        <td>9.80</td>
-                    </tr>
-                    <tr>
-                        <td>199</td>
-                        <td>2024-04-07</td>
-                        <td>Peter Andreou</td>
-                        <td>9.80</td>
-                    </tr>
-                    <tr>
-                        <td>199</td>
-                        <td>2024-04-07</td>
-                        <td>Peter Andreou</td>
-                        <td>9.80</td>
-                    </tr>
-                    <tr>
-                        <td>199</td>
-                        <td>2024-04-07</td>
-                        <td>Peter Andreou</td>
-                        <td>9.80</td>
-                    </tr>
-                    <tr>
-                        <td>199</td>
-                        <td>2024-04-07</td>
-                        <td>Peter Andreou</td>
-                        <td>9.80</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-    </main>
+        </main>
+    </div>
 
 </body>
 

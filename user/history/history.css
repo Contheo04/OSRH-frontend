@@ -1,69 +1,3 @@
-body {
-    background: #0d0d0d;
-    color: #fff;
-    font-family: "Arimo", sans-serif;
-    overflow-x: hidden;
-    display: flex;
-}
-
-.background-glow {
-    position: fixed;
-    width: 500px;
-    height: 500px;
-    border-radius: 50%;
-    filter: blur(140px);
-    opacity: 0.4;
-    z-index: -1;
-}
-
-.glow-left {
-    left: -200px;
-    top: 150px;
-    background: #0066ff33;
-}
-
-.glow-right {
-    right: -250px;
-    top: 300px;
-    background: #ff006633;
-}
-
-.sidebar {
-    width: 240px;
-    height: 100vh;
-    background: #ffffff0d;
-    border-right: 1px solid #ffffff15;
-    padding: 24px 20px;
-    display: flex;
-    flex-direction: column;
-}
-
-.sidebar-header {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.sidebar-logo {
-    width: 60px;
-    margin-bottom: 10px;
-}
-
-.sidebar-title {
-    font-size: 22px;
-    font-weight: 600;
-}
-
-.sidebar-sub {
-    font-size: 12px;
-    opacity: 0.6;
-}
-
-.sidebar-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
-
 .nav-item {
     padding: 12px 14px;
     border-radius: 12px;
@@ -225,7 +159,6 @@ body {
 
 /* Modal box */
 .modal-panel {
-    width: 420px;
     background: #111;
     border: 1px solid #ffffff22;
     padding: 26px;
@@ -312,4 +245,3 @@ body {
 .modal-btn.submit:hover {
     opacity: 0.85;
 }
-

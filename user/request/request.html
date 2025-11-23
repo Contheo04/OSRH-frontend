@@ -15,75 +15,77 @@
     <div class="background-glow glow-left"></div>
     <div class="background-glow glow-right"></div>
 
-    <aside class="sidebar">
-        <div class="sidebar-header">
-            <img src="../dashboard/img/logo.svg" class="sidebar-logo" />
-            <div class="sidebar-title">OSRH</div>
-            <div class="sidebar-sub">Passenger Portal</div>
-        </div>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="../dashboard/img/logo.svg" class="sidebar-logo" />
+                <div class="sidebar-title">OSRH</div>
+                <div class="sidebar-sub">Passenger Portal</div>
+            </div>
 
-        <nav class="sidebar-nav">
-            <div class="nav-item" onclick="window.location.href='../dashboard/dashboard.html'">Dashboard</div>
-            <div class="nav-item" onclick="window.location.href='../profile/profile.html'">Profile</div>
-            <div class="nav-item active" onclick="window.location.href='request.html'">Request Trip</div>
-            <div class="nav-item" onclick="window.location.href='../history/history.html'">Trip History</div>
-            <div class="nav-item" onclick="window.location.href='../payments/payments.html'">Payments</div>
-            <div class="nav-item" onclick="window.location.href='../feedback/feedback.html'">Feedback</div>
+            <nav class="sidebar-nav">
+                <div class="nav-item" onclick="window.location.href='../dashboard/dashboard.html'">Dashboard</div>
+                <div class="nav-item" onclick="window.location.href='../profile/profile.html'">Profile</div>
+                <div class="nav-item active" onclick="window.location.href='request.html'">Request Trip</div>
+                <div class="nav-item" onclick="window.location.href='../history/history.html'">Trip History</div>
+                <div class="nav-item" onclick="window.location.href='../payments/payments.html'">Payments</div>
+                <div class="nav-item" onclick="window.location.href='../feedback/feedback.html'">Feedback</div>
 
-            <div style="border-top:1px solid rgba(0,150,255,0.35); margin:18px 0;"></div>
-            <div class="nav-item logout" onclick="window.location.href='../login/index.html'">Log Out</div>
-        </nav>
-    </aside>
+                <div style="border-top:1px solid rgba(0,150,255,0.35); margin:18px 0;"></div>
+                <div class="nav-item logout" onclick="window.location.href='../login/index.html'">Log Out</div>
+            </nav>
+        </aside>
 
-    <main class="content">
+        <main class="content">
 
-        <header class="topbar">
-            <h1 class="page-title">Request Trip</h1>
-        </header>
+            <header class="topbar">
+                <h1 class="page-title">Request Trip</h1>
+            </header>
 
-        <section class="panel">
-            <h2 class="section-title">Trip Details</h2>
+            <section class="panel">
+                <h2 class="section-title">Trip Details</h2>
 
-            <form class="request-form">
+                <form class="request-form">
 
-                <div class="form-group">
-                    <label class="form-label">Pickup Location</label>
-                    <input type="text" class="form-input" placeholder="Enter your pickup point...">
-                </div>
+                    <div class="form-group">
+                        <label class="form-label">Pickup Location</label>
+                        <input type="text" class="form-input" placeholder="Enter your pickup point...">
+                    </div>
 
-                <div class="form-group">
-                    <label class="form-label">Dropoff Location</label>
-                    <input type="text" class="form-input" placeholder="Enter your destination...">
-                </div>
+                    <div class="form-group">
+                        <label class="form-label">Dropoff Location</label>
+                        <input type="text" class="form-input" placeholder="Enter your destination...">
+                    </div>
 
-                <div class="form-group">
-                    <label class="form-label">Service Type</label>
-                    <select class="form-input">
-                        <option>Standard</option>
-                        <option>Premium</option>
-                        <option>XL</option>
-                    </select>
-                </div>
+                    <div class="form-group">
+                        <label class="form-label">Service Type</label>
+                        <select class="form-input">
+                            <option>Standard</option>
+                            <option>Premium</option>
+                            <option>XL</option>
+                        </select>
+                    </div>
 
-                <div class="form-group">
-                    <label class="form-label">Pickup Time</label>
-                    <select class="form-input">
-                        <option>Now</option>
-                        <option>Schedule</option>
-                    </select>
-                </div>
+                    <div class="form-group">
+                        <label class="form-label">Pickup Time</label>
+                        <select class="form-input">
+                            <option>Now</option>
+                            <option>Schedule</option>
+                        </select>
+                    </div>
 
-                <div class="form-group schedule-group" style="display:none;">
-                    <label class="form-label">Select Date & Time</label>
-                    <input type="datetime-local" class="form-input">
-                </div>
+                    <div class="form-group schedule-group" style="display:none;">
+                        <label class="form-label">Select Date & Time</label>
+                        <input type="datetime-local" class="form-input">
+                    </div>
 
-                <button type="button" class="submit-btn">Submit Request</button>
+                    <button type="button" class="submit-btn">Submit Request</button>
 
-            </form>
-        </section>
+                </form>
+            </section>
 
-    </main>
+        </main>
+    </div>
 
     <script>
         // Show scheduler only when "Schedule" is selected
