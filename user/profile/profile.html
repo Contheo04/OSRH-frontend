@@ -238,11 +238,9 @@
         document.getElementById(`cancel-${section}`).style.display = "none";
     }
 
-    // SAVE → (for now) behaves like cancel, later will POST to PHP
     function saveEdit(section) {
 
         // TODO: Add PHP integration:
-        // document.getElementById('profile-form').submit();
 
         // For now, simply switch back to normal view
         cancelEdit(section);
