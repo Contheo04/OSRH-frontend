@@ -12,7 +12,7 @@
 
 <body>
 
-    <!-- Glows --> 
+    <!-- Glows -->
     <div class="background-glow glow-left"></div>
     <div class="background-glow glow-right"></div>
 
@@ -66,7 +66,7 @@
                         <th>Driver</th>
                         <th>Price (€)</th>
                         <th>Status</th>
-                        <th style="text-align:right;"></th>
+                        <th style="text-align:right;">Actions</th>
                     </tr>
                 </thead>
 
@@ -81,6 +81,9 @@
                         <td>Michael Ioannou</td>
                         <td>12.50</td>
                         <td><span class="status-tag completed">Completed</span></td>
+                        <td style="text-align:right;">
+                            <button class="feedback-btn" onclick="openFeedbackModal(204)">Give Feedback</button>
+                        </td>
                     </tr>
 
                     <tr>
@@ -91,13 +94,90 @@
                         <td>Peter Andreou</td>
                         <td>9.80</td>
                         <td><span class="status-tag cancelled">Cancelled</span></td>
+                        <td style="text-align:right;">
+                            <button class="feedback-btn" onclick="openFeedbackModal(199)">Give Feedback</button>
+                        </td>
                     </tr>
 
                 </tbody>
             </table>
         </section>
 
+        <!-- FEEDBACK MODAL -->
+        <div id="feedbackModal" class="modal-overlay" style="display:none;">
+            <div class="modal-panel">
+
+                <h2 class="modal-title">Give Feedback</h2>
+
+                <div class="modal-rating">
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
+                </div>
+
+                <textarea id="feedbackComment" class="modal-textarea" placeholder="Write your comments..."></textarea>
+
+                <div class="modal-buttons">
+                    <button class="modal-btn cancel" onclick="closeFeedbackModal()">Cancel</button>
+                    <button class="modal-btn submit" onclick="submitFeedback()">Submit</button>
+                </div>
+            </div>
+        </div>
+
     </main>
+
+    <!-- FEEDBACK JS -->
+    <script>
+        let selectedRating = 0;
+        let selectedTripID = null;
+
+        function openFeedbackModal(tripID) {
+            selectedTripID = tripID;
+            document.getElementById("feedbackModal").style.display = "flex";
+        }
+
+        function closeFeedbackModal() {
+            document.getElementById("feedbackModal").style.display = "none";
+            resetFeedbackForm();
+        }
+
+        function resetFeedbackForm() {
+            selectedRating = 0;
+            document.querySelectorAll(".star").forEach(s => s.classList.remove("active"));
+            document.getElementById("feedbackComment").value = "";
+        }
+
+        // star click behavior
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll(".star").forEach(star => {
+                star.addEventListener("click", function () {
+                    selectedRating = this.dataset.value;
+
+                    document.querySelectorAll(".star").forEach(s => s.classList.remove("active"));
+
+                    for (let i = 0; i < selectedRating; i++) {
+                        document.querySelectorAll(".star")[i].classList.add("active");
+                    }
+                });
+            });
+        });
+
+        function submitFeedback() {
+            const comment = document.getElementById("feedbackComment").value;
+
+            // Placeholder for now
+            alert(
+                "Feedback submitted:\n" +
+                "Trip ID: " + selectedTripID + "\n" +
+                "Rating: " + selectedRating + "\n" +
+                "Comment: " + comment
+            );
+
+            closeFeedbackModal();
+        }
+    </script>
 
 </body>
 

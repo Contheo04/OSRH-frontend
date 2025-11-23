@@ -268,3 +268,8 @@ body {
 .dashboard-table tbody tr:hover {
     background: #ffffff08;
 }
+
+.form-input option {
+    background: #111;
+    color: #fff;
+}
