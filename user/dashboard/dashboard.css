@@ -1,0 +1,116 @@
+/* MAIN CONTENT */
+.content {
+    flex: 1;
+    padding: 32px;
+}
+
+/* TOP BAR */
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.page-title {
+    font-size: 26px;
+    font-weight: 500;
+}
+
+.profile-box {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.profile-name {
+    font-size: 15px;
+}
+
+.profile-email {
+    font-size: 12px;
+    opacity: 0.6;
+}
+
+.profile-circle {
+    width: 40px;
+    height: 40px;
+    background: #1a1a1a;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* PANELS */
+.panel {
+    background: #ffffff0d;
+    border: 1px solid #ffffff14;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 32px;
+    box-shadow: 0 15px 40px #00000040;
+}
+
+.section-title {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+/* STATS GRID */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 24px;
+}
+
+.stat-card {
+    background: #ffffff0d;
+    border: 1px solid #ffffff14;
+    border-radius: 14px;
+    padding: 22px;
+    text-align: center;
+    box-shadow: 0 8px 20px #00000050;
+}
+
+.stat-label {
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+.stat-value {
+    margin-top: 10px;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+/* RECENT TRIPS TABLE */
+.dashboard-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.dashboard-table thead tr {
+    background: #ffffff10;
+}
+
+.dashboard-table th {
+    padding: 14px;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: left;
+    opacity: 0.8;
+}
+
+.dashboard-table td {
+    padding: 14px;
+    font-size: 15px;
+    border-top: 1px solid #ffffff15;
+}
+
+/* Hover row effect */
+.dashboard-table tbody tr:hover {
+    background: #ffffff08;
+}

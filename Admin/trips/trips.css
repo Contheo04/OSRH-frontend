@@ -1,0 +1,104 @@
+.content {
+    flex: 1;
+    padding: 32px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.page-title {
+    font-size: 26px;
+}
+
+.profile-box {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.profile-name {
+    font-size: 15px;
+}
+
+.profile-email {
+    font-size: 12px;
+    opacity: 0.6;
+}
+
+.profile-circle {
+    width: 40px;
+    height: 40px;
+    background: #1a1a1a;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.panel {
+    background: #ffffff0d;
+    border: 1px solid #ffffff14;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 32px;
+    box-shadow: 0 15px 40px #00000040;
+}
+
+.search-panel {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.search-input {
+    flex: 1;
+    background: #ffffff0d;
+    border: 1px solid #ffffff20;
+    padding: 12px 14px;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 14px;
+}
+
+.filter-select {
+    background: #ffffff0d;
+    border: 1px solid #ffffff20;
+    padding: 12px;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 12px;
+}
+
+.trips-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.trips-table th {
+    text-align: left;
+    padding-bottom: 14px;
+    opacity: 0.8;
+}
+
+.trips-table td {
+    padding: 14px 0;
+    border-top: 1px solid #ffffff10;
+}
+
+.actions {
+    text-align: right;
+}
+
+.action-btn {
+    padding: 6px 12px;
+    background: #ffffff15;
+    border-radius: 8px;
+    color: #fff;
+    margin-right: 8px;
+    cursor: pointer;
+}

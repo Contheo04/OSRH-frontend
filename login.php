@@ -13,7 +13,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit();
     }
 
-    $tsql = "SELECT User_ID, Username, Password, Type_ID
+    $tsql = "SELECT User_ID,
+                    Username,
+                    F_Name,
+                    L_Name,
+                    Password,
+                    Type_ID, 
+                    Email
              FROM [dbo].[User]
              WHERE Username = ?";
 
@@ -40,23 +46,32 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit();
     }
 
-    if((int)$row["Type_ID"] !== 1){
-        $_SESSION["login_error"] = "Access restricted: Only Administrators may log in.";
-        header("Location: index.php");
+    if((int)$row["Type_ID"] === 1){
+        $_SESSION["user_id"] = $row["User_ID"];
+        $_SESSION["username"] = $row["Username"];
+        $_SESSION["fname"] = $rpw["F_Name"];
+        $_SESSION["lname"] = $row["L_Name"];
+        $_SESSION["email"] = $row["Email"];
+        $_SESSION["type"] = $row["Type_ID"];            
+
+        header("Location: ./Admin/dashboard/dashboard.php");
+        exit();
+
+    }else{
+
+        $_SESSION["user_id"] = $row["User_ID"];
+        $_SESSION["username"] = $row["Username"];
+        $_SESSION["fname"] = $row["F_Name"];
+        $_SESSION["lname"] = $row["L_Name"];
+        $_SESSION["email"] = $row["Email"];
+        $_SESSION["type"] = $row["Type_ID"];            
+
+        header("Location: ./user/dashboard/dashboard.php");
         exit();
     }
-
-            
-    // Store OSRH login session
-    $_SESSION["user_id"] = $row["User_ID"];
-    $_SESSION["username"] = $row["Username"];
-    $_SESSION["role"] = $row["Type_ID"];            
-
-    header("Location: ./dashboard/dashboard.php");
-    exit();
-    
 }
 
 header("Location: index.php");
 exit();
+
 ?>
