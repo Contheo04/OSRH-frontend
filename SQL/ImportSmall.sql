@@ -874,14 +874,14 @@ VALUES
 -- Geofence 3 (Above Geofence 1)
 (0.000000, 1.000000, 1.000000, 1.000000, 1.000000, 2.000000, 0.000000, 2.000000);
 
-INSERT INTO [dbo].[Bridge] (Name, Coordinate_X, Coordinate_Y)
+INSERT INTO [dbo].[Bridge] (Name, Coordinate_X, Coordinate_Y , GeofenceA_ID, GeofenceB_ID)
 VALUES
 -- Bridge between Geofence 1 and 2 (middle of the shared vertical edge)
-('Bridge_1_2', 1.000000, 0.500000),
+('Bridge_1_2', 1.000000, 0.500000, 1, 2),
 -- Bridge between Geofence 1 and 3 (middle of the shared horizontal edge)
-('Bridge_1_3', 0.500000, 1.000000),
+('Bridge_1_3', 0.500000, 1.000000, 1, 3),
 -- Optional bridge between Geofence 2 and 3 (diagonal-ish corner)
-('Bridge_2_3', 1.000000, 1.000000);
+('Bridge_2_3', 1.000000, 1.000000, 2, 3);
 
 INSERT INTO [dbo].[GDPR_Request_Log] (Issue_Date, Pending, Approval, Managed_By, Requested_By)
 VALUES

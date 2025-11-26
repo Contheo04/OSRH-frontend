@@ -172,8 +172,12 @@ CREATE TABLE [dbo].[Trip_Segment] (
     Distance FLOAT NOT NULL,
     Drv_ID INT NOT NULL, -- Duplicates for convenience
     Psg_ID INT NOT NULL,
-    From_Location VARCHAR(50) NOT NULL,
-    To_Location VARCHAR(50) NOT NULL,
+    -- From_Location VARCHAR(50) NOT NULL,
+    -- To_Location VARCHAR(50) NOT NULL,
+    From_Location_X DECIMAL(9,6) NOT NULL,
+    From_Location_Y DECIMAL(9,6) NOT NULL,
+    To_Location_X DECIMAL(9,6) NOT NULL,
+    To_Location_Y DECIMAL(9,6) NOT NULL,
     Departure_Time DATETIME NOT NULL,
     Arrival_Time DATETIME NOT NULL,
 
@@ -208,6 +212,9 @@ CREATE TABLE [dbo].[Bridge] (
     Name VARCHAR(50) NOT NULL,
     Coordinate_X FLOAT NOT NULL,
     Coordinate_Y FLOAT NOT NULL,
+    
+    GeofenceA_ID INT NOT NULL,
+    GeofenceB_ID INT NOT NULL
 
     PRIMARY KEY (Bridge_ID)
 );
@@ -254,15 +261,19 @@ CREATE TABLE [dbo].[Payment] (
 CREATE TABLE [dbo].[Geofence] (
     Geofence_ID INT IDENTITY(1,1) NOT NULL,
 
+    --Bottom left corner
     C1_X DECIMAL(9,6) NOT NULL,
     C1_Y DECIMAL(9,6) NOT NULL,
 
+    --Bottom right corner
     C2_X DECIMAL(9,6) NOT NULL,
     C2_Y DECIMAL(9,6) NOT NULL,
 
+    --Top right corner
     C3_X DECIMAL(9,6) NOT NULL,
     C3_Y DECIMAL(9,6) NOT NULL,
 
+    --Top left corner
     C4_X DECIMAL(9,6) NOT NULL,
     C4_Y DECIMAL(9,6) NOT NULL,
 

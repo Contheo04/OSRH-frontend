@@ -105,5 +105,11 @@
 -- EXEC [dbo].[TripStatisticsReport]
 --     @GroupBy = 'service';
 
-
-SELECT * FROM [dbo].[Total_Trip]
+EXEC [dbo].[NewTrip]
+    @PassengerID = 3,
+    @Desired_Service_Type = "Luxury Cab",
+    @From_Location_X = 0.5,
+    @From_Location_Y = 0.5,
+    @To_Location_X = 0.5,
+    @To_Location_Y = 1.5,
+    @Payment_Method = "Card";

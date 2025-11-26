@@ -538,8 +538,10 @@ CREATE PROCEDURE [dbo].[InsertTripSegment]
         @Distance FLOAT,
         @Drv_ID INT,
         @Psg_ID INT,
-        @From_Location VARCHAR(50),
-        @To_Location VARCHAR(50),
+        @From_Location_X DECIMAL(9,6),
+        @From_Location_Y DECIMAL(9,6),
+        @To_Location_X DECIMAL(9,6),
+        @To_Location_Y DECIMAL(9,6),
         @Departure_Time DATETIME,
         @Arrival_Time DATETIME,
 
@@ -618,8 +620,10 @@ CREATE PROCEDURE [dbo].[InsertTripSegment]
             Distance,
             Drv_ID,
             Psg_ID,
-            From_Location,
-            To_Location,
+            From_Location_X,
+            From_Location_Y,
+            To_Location_X,
+            To_Location_Y,
             Departure_Time,
             Arrival_Time,
             TL_ID,
@@ -630,8 +634,10 @@ CREATE PROCEDURE [dbo].[InsertTripSegment]
             @Distance,
             @Drv_ID,
             @Psg_ID,
-            @From_Location,
-            @To_Location,
+            @From_Location_X,
+            @From_Location_Y,
+            @To_Location_X,
+            @To_Location_Y,
             @Departure_Time,
             @Arrival_Time,
             @TL_ID,
@@ -753,11 +759,129 @@ END;
 GO
 
 
+-- ORDERING A NEW TRIP
+CREATE PROCEDURE [dbo].[NewTrip]
+    @PassengerID INT,
+    @Desired_Service_Type VARCHAR(50),
+    @From_Location_X DECIMAL(9,6),
+    @From_Location_Y DECIMAL(9,6),
+    @To_Location_X DECIMAL(9,6),
+    @To_Location_Y DECIMAL(9,6),
+    @Payment_Method VARCHAR(20)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+-- First we validate all of the info
+    -- If the passenger doesn't exists, or has the wrong TypeID
+    IF NOT EXISTS (
+        SELECT 1 FROM [dbo].[User]
+        WHERE @PassengerID = User_ID AND Type_ID = 4
+    )
+    BEGIN
+        RAISERROR('ERROR IN NewTrip: Invalid User (Passenger)', 16, 1)
+        RETURN;
+    END
+
+    IF @Payment_Method NOT IN ('Card', 'Cash', 'Apple Pay', 'PayPal', 'Google Pay', 'CashApp')
+    BEGIN
+        RAISERROR('ERROR IN NewTrip: Payment Method not supported', 16, 1)
+        RETURN;
+    END
+
+    IF (@From_Location_X IS NULL) OR (@From_Location_Y IS NULL)
+    BEGIN
+        RAISERROR('ERROR IN NewTrip: From_Location can not be NULL', 16, 1)
+        RETURN;
+    END
+
+    --------- Find the IDs of the Geofences FromLocation and ToLocation are in ---------
+    DECLARE @From_GeofenceID INT
+    DECLARE @To_GeofenceID INT
+
+    SET @From_GeofenceID = (
+            SELECT Geofence_ID -- Geofences will not overlap, no need to TOP
+            FROM [dbo].[Geofence] G
+            WHERE @From_Location_X BETWEEN G.C1_X AND G.C3_X
+            AND @From_Location_Y BETWEEN G.C1_Y AND G.C3_Y
+            )
+    -- Validate the result of the above subquery
+    IF @From_GeofenceID IS NULL
+    BEGIN
+        RAISERROR('ERROR IN NewTrip: From_Location is not on the map (Outside of all Geofences)', 16, 1)
+        RETURN;
+    END
+    
+    -- If we have a destination, find in which geofence it belongs to
+    IF (@To_Location_X IS NULL) OR (@To_Location_Y IS NULL)
+    BEGIN
+        SET @To_GeofenceID = NULL
+    END
+    ELSE
+    BEGIN
+        SET @To_GeofenceID = (
+            SELECT Geofence_ID
+            FROM [dbo].[Geofence] G
+            WHERE @To_Location_X BETWEEN G.C1_X AND G.C3_X
+            AND @To_Location_Y BETWEEN G.C1_Y AND G.C3_Y
+            )
+    END
+
+    -- DFS to find the path (bridges) to the destination
+    -- Start a CTE 
+    ;WITH DFS AS(
+        -- ANCHOR STEP
+        -- We start from the GeofenceID of the Starting coordinates
+        -- Create a Path Variable to record our route
+        SELECT @From_GeofenceID AS GID, CAST(@From_GeofenceID AS VARCHAR(MAX)) AS Path
+        
+        UNION ALL -- Expands the recursive rows to our anchor table
+        -- RECURSIVE STEP
+
+        SELECT
+            -- If we find a bridge that connects our current location
+            -- to a new geofence, expand the path
+            CASE WHEN B.GeofenceA_ID = D.GID 
+                    THEN B.GeofenceB_ID     
+                    ELSE B.GeofenceA_ID END,
+                D.Path + ',' 
+                    + CAST(CASE WHEN B.GeofenceA_ID = D.GID 
+                        THEN B.GeofenceB_ID 
+                        ELSE B.GeofenceA_ID 
+                        END AS VARCHAR(10))
+        FROM DFS D
+            JOIN [dbo].[Bridge] B
+            ON B.GeofenceA_ID = D.GID OR B.GeofenceB_ID = D.GID
+
+        -- Ensure we don't visit a geofence we've already been to
+        WHERE D.Path NOT LIKE '%' + 
+                            CAST(CASE WHEN B.GeofenceA_ID = D.GID   
+                                THEN B.GeofenceB_ID 
+                                ELSE B.GeofenceA_ID 
+                                END AS VARCHAR(10))
+                            + '%'
+    )   
+    -- Select the top path that ends at our destination
+    -- Save it to a temporary table
+    SELECT TOP 1 Path 
+    INTO #PathTemp
+    FROM DFS
+    WHERE GID = @To_GeofenceID; 
+
+    -- And move the path to its own variable
+    DECLARE @Path VARCHAR(MAX);
+    SELECT @Path = Path
+    FROM #PathTemp 
+    PRINT @Path;
+
+END;
+GO
+
 -------------------------
 -------- REPORTS --------
 -------------------------
 
--- Trip Statistics Report
+-- Trip Statistics Report (UNFINISHED)
 CREATE PROCEDURE [dbo].[TripStatisticsReport]
     @FromDate DATETIME          = NULL,
     @ToDate DATETIME            = NULL,
