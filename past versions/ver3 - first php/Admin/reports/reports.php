@@ -1,0 +1,157 @@
+<?php
+    session_start();
+    require_once "../../db_connection.php";
+    require_once "../../authorisation_check.php";
+
+    $user_id = $_SESSION["user_id"];
+    $full_name = $_SESSION["fname"] . " " . $_SESSION["lname"];
+    $email = $_SESSION["email"];
+    $initials = strtoupper($_SESSION["fname"][0] . $_SESSION["lname"][0]);
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OSRH – Reports</title>
+
+    <link rel="stylesheet" href="../globals.css" />
+    <link rel="stylesheet" href="reports.css" />
+</head>
+
+<body>
+    <div class="background-glow glow-left"></div>
+    <div class="background-glow glow-right"></div>
+
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="../dashboard/img/logo.svg" class="sidebar-logo" />
+                <div class="sidebar-title">OSRH</div>
+                <div class="sidebar-sub">Admin Portal</div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-item" onclick="window.location.href='../dashboard/dashboard.php'">Dashboard</div>
+                <div class="nav-item" onclick="window.location.href='../users/users.php'">Users</div>
+                <div class="nav-item" onclick="window.location.href='../drivers/drivers.php'">Drivers</div>
+                <div class="nav-item" onclick="window.location.href='../vehicles/vehicles.php'">Vehicles</div>
+                <div class="nav-item" onclick="window.location.href='../trips/trips.php'">Trips</div>
+                <div class="nav-item" onclick="window.location.href='../payments/payments.php'">Payments</div>
+                <div class="nav-item active" onclick="window.location.href='../reports/reports.php'">Reports</div>
+                <div class="nav-item" onclick="window.location.href='../gdpr/gdpr.php'">GDPR</div>
+
+                <div style="border-top:1px solid rgba(0,150,255,0.35); margin:18px 0;"></div>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <header class="topbar">
+                <h1 class="page-title">Reports</h1>
+
+                <div class="profile-box">
+                    <button class="logout-btn" onclick="window.location.href='../../index.php'">Logout</button>
+                    <div class="profile-info">
+                        <div class="profile-name">
+                            <?= htmlspecialchars($full_name); ?>
+                        </div>
+                        <div class="profile-email">
+                            <?= htmlspecialchars($email); ?>
+                        </div>
+                    </div>
+                    <div class="profile-circle">
+                        <?= htmlspecialchars($initials); ?>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Filters -->
+            <section class="panel report-panel">
+                <div class="report-filter-row">
+                    <input type="date" class="report-input">
+                    <input type="date" class="report-input">
+
+                    <select class="report-select">
+                        <option value="">Trip Category</option>
+                        <option>Passenger</option>
+                        <option>Cargo</option>
+                        <option>Luxury</option>
+                    </select>
+
+                    <select class="report-select">
+                        <option value="">Region</option>
+                        <option>District A</option>
+                        <option>District B</option>
+                        <option>District C</option>
+                    </select>
+                </div>
+            </section>
+
+            <!-- SECTION 1 -->
+            <section class="panel report-panel">
+                <h3 class="report-section-title">Trip Statistics</h3>
+
+                <button class="report-chip">Total Number of Trips</button>
+                <button class="report-chip">Category Trend Comparison</button>
+                <button class="report-chip">High-Activity Periods</button>
+            </section>
+
+            <!-- SECTION 2 -->
+            <section class="panel report-panel">
+                <h3 class="report-section-title">Trip Costs</h3>
+
+                <button class="report-chip">Average Trip Cost</button>
+                <button class="report-chip">Top 10 Most Expensive</button>
+                <button class="report-chip">Top 10 Cheapest</button>
+            </section>
+
+            <!-- SECTION 3 -->
+            <section class="panel report-panel">
+                <h3 class="report-section-title">Driver Performance</h3>
+
+                <button class="report-chip">Completed Trips per Driver</button>
+                <button class="report-chip">Driver Ratings</button>
+            </section>
+
+            <!-- SECTION 4 -->
+            <section class="panel report-panel">
+                <h3 class="report-section-title">Driver Earnings</h3>
+
+                <button class="report-chip">Revenue per Month (Current Year)</button>
+                <button class="report-chip">Total Earnings (Last 3 Years)</button>
+            </section>
+
+            <!-- Dynamic Output -->
+            <section id="report-output" class="panel" style="display:none;">
+                <h2 class="section-title">Report Output</h2>
+                <div id="report-content" class="report-content-box">
+                    Select a report option above.
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        function loadReport(title, content) {
+            const output = document.getElementById("report-output");
+            const contentBox = document.getElementById("report-content");
+
+            output.style.display = "block";
+            contentBox.innerHTML = `
+                <h3 style="margin-bottom:12px;">${title}</h3>
+                <p>${content}</p>
+            `;
+        }
+
+        document.querySelectorAll(".report-chip").forEach(btn => {
+            btn.addEventListener("click", () => {
+                loadReport(btn.innerText, "Demo data will be shown here.");
+            });
+        });
+    </script>
+
+</body>
+
+</html>

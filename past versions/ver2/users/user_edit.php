@@ -1,0 +1,149 @@
+<?php
+    session_start();
+    require_once "../db_connection.php";
+    require_once "../authorisation_check.php";
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OSRH – Edit User</title>
+
+    <link rel="stylesheet" href="../globals.css" />
+    <link rel="stylesheet" href="users.css" />
+</head>
+
+<body>
+    <div class="background-glow glow-left"></div>
+    <div class="background-glow glow-right"></div>
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="../dashboard/img/logo.svg" class="sidebar-logo" />
+            <div class="sidebar-title">OSRH</div>
+            <div class="sidebar-sub">Admin Portal</div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <!-- MAIN NAV -->
+            <div class="nav-item" onclick="window.location.href='../dashboard/dashboard.php'">Dashboard</div>
+            <div class="nav-item active" onclick="window.location.href='users.php'">Users</div>
+            <div class="nav-item" onclick="window.location.href='../drivers/drivers.php'">Drivers</div>
+            <div class="nav-item" onclick="window.location.href='../vehicles/vehicles.php'">Vehicles</div>
+            <div class="nav-item" onclick="window.location.href='../trips/trips.php'">Trips</div>
+            <div class="nav-item" onclick="window.location.href='../payments/payments.php'">Payments</div>
+            <div class="nav-item" onclick="window.location.href='../reports/reports.php'">Reports</div>
+            <div class="nav-item" onclick="window.location.href='../gdpr/gdpr.php'">GDPR</div>
+
+            <!-- BLUE LINE SEPARATOR -->
+            <div style="border-top:1px solid rgba(0,150,255,0.35); margin:18px 0;"></div>
+
+            <!-- USER SIMULATION SECTION -->
+            <div class="nav-item section-label" onclick="window.location.href='../simulation/simulation.php'">
+                User Simulation
+            </div>
+        </nav>
+    </aside>
+
+    <main class="content">
+        <header class="topbar">
+            <h1 class="page-title">Edit User</h1>
+
+            <div class="profile-box">
+                <button class="logout-btn" onclick="window.location.href='../index.php'">Logout</button>
+                <div class="profile-info">
+                    <div class="profile-name">Admin User</div>
+                    <div class="profile-email">admin@osrh.com</div>
+                </div>
+                <div class="profile-circle">AU</div>
+            </div>
+        </header>
+
+        <section class="panel">
+            <h2 class="section-title">User Information</h2>
+
+            <form class="edit-form">
+
+                <div class="form-grid">
+
+                    <div class="form-field">
+                        <label>User ID</label>
+                        <input type="text" value="23" disabled />
+                    </div>
+
+                    <div class="form-field">
+                        <label>First Name</label>
+                        <input type="text" placeholder="John" />
+                    </div>
+
+                    <div class="form-field">
+                        <label>Last Name</label>
+                        <input type="text" placeholder="Doe" />
+                    </div>
+
+                    <div class="form-field">
+                        <label>Username</label>
+                        <input type="text" placeholder="jdoe" />
+                    </div>
+
+                    <div class="form-field">
+                        <label>Email</label>
+                        <input type="email" placeholder="jdoe@example.com" />
+                    </div>
+
+                    <div class="form-field">
+                        <label>Phone</label>
+                        <input type="text" placeholder="+357 99887766" />
+                    </div>
+
+                    <div class="form-field">
+                        <label>Gender</label>
+                        <select>
+                            <option>M</option>
+                            <option>F</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-field">
+                        <label>Birth Date</label>
+                        <input type="date" value="1998-06-22" />
+                    </div>
+
+                    <div class="form-field">
+                        <label>Address</label>
+                        <input type="text" placeholder="Limassol, Cyprus" />
+                    </div>
+
+                    <div class="form-field">
+                        <label>Type</label>
+                        <div class="readonly-value">Driver</div>
+                    </div>
+
+                    <div class="form-field">
+                        <label>Status</label>
+                        <select>
+                            <option>Active</option>
+                            <option>Pending</option>
+                            <option>Disabled</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="edit-actions">
+                    <button type="submit" class="action-btn">Save Changes</button>
+                    <button type="button" class="back-btn" onclick="window.location.href='users.php'">Cancel</button>
+                </div>
+
+            </form>
+        </section>
+
+    </main>
+
+</body>
+
+</html>

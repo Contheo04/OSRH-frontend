@@ -1,0 +1,101 @@
+<?php
+    session_start();
+    require_once "../../db_connection.php";
+    require_once "../../authorisation_check.php";
+
+    $user_id = $_SESSION["user_id"];
+    $full_name = $_SESSION["fname"] . " " . $_SESSION["lname"];
+    $email = $_SESSION["email"];
+    $initials = strtoupper($_SESSION["fname"][0] . $_SESSION["lname"][0]);
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OSRH – Segment Messages</title>
+
+    <link rel="stylesheet" href="../globals.css" />
+    <link rel="stylesheet" href="messages.css" />
+</head>
+
+<body>
+    <div class="background-glow glow-left"></div>
+    <div class="background-glow glow-right"></div>
+
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="../dashboard/img/logo.svg" class="sidebar-logo" />
+                <div class="sidebar-title">OSRH</div>
+                <div class="sidebar-sub">Admin Portal</div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-item" onclick="window.location.href='../dashboard/dashboard.php'">Dashboard</div>
+                <div class="nav-item" onclick="window.location.href='../users/users.php'">Users</div>
+                <div class="nav-item" onclick="window.location.href='../drivers/drivers.php'">Drivers</div>
+                <div class="nav-item" onclick="window.location.href='../vehicles/vehicles.php'">Vehicles</div>
+                <div class="nav-item active" onclick="window.location.href='../trips/trips.php'">Trips</div>
+                <div class="nav-item" onclick="window.location.href='../payments/payments.php'">Payments</div>
+                <div class="nav-item" onclick="window.location.href='../reports/reports.php'">Reports</div>
+                <div class="nav-item" onclick="window.location.href='../gdpr/gdpr.php'">GDPR</div>
+
+                <!-- BLUE LINE SEPARATOR -->
+                <div style="border-top:1px solid rgba(0,150,255,0.35); margin:18px 0;"></div>
+
+            </nav>
+        </aside>
+
+        <main class="content">
+            <header class="topbar">
+                <h1 class="page-title">Messages for Segment</h1>
+
+                <div class="profile-box">
+                    <button class="logout-btn" onclick="window.location.href='../../index.php'">Logout</button>
+                    <div class="profile-info">
+                        <div class="profile-name">
+                            <?= htmlspecialchars($full_name); ?>
+                        </div>
+                        <div class="profile-email">
+                            <?= htmlspecialchars($email); ?>
+                        </div>
+                    </div>
+                    <div class="profile-circle">
+                        <?= htmlspecialchars($initials); ?>
+                    </div>
+                </div>
+            </header>
+
+            <section class="panel search-panel">
+                <button class="back-btn" onclick="window.location.href='segments.php'">← Back to Segments</button>
+                <div class="trip-info">Segment ID: <strong>101</strong></div>
+            </section>
+
+            <section class="panel messages-panel">
+                <div class="messages-box">
+                    <div class="message driver">
+                        Driver: I'm at the pickup location.
+                        <span class="timestamp">13:11</span>
+                    </div>
+
+                    <div class="message user">
+                        User: I'm walking towards the car now.
+                        <span class="timestamp">13:12</span>
+                    </div>
+
+                    <div class="message admin">
+                        Admin: Acknowledged.
+                        <span class="timestamp">13:13</span>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+</body>
+
+</html>

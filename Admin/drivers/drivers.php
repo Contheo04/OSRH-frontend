@@ -7,6 +7,17 @@
     $full_name = $_SESSION["fname"] . " " . $_SESSION["lname"];
     $email = $_SESSION["email"];
     $initials = strtoupper($_SESSION["fname"][0] . $_SESSION["lname"][0]);
+
+    $tsql = "SELECT *
+             FROM [dbo].[User]
+             WHERE Type_ID = 3;";
+
+    $stmt = sqlsrv_query($conn, $tsql);
+    
+    $drivers = [];
+    while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+        $drivers[] = $row;
+    }   
 ?>
 
 <!DOCTYPE html>
@@ -101,56 +112,41 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Name</th>
-                            <th>Username</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
                             <th>Email</th>
-                            <th>Status</th>
+                            <th>Rating</th>
                             <th style="text-align:right;">Actions</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <tr>
-                            <td>23</td>
-                            <td>Michael Ioannou</td>
-                            <td>mioannou</td>
-                            <td>michael@example.com</td>
-                            <td>Approved</td>
-                            <td class="actions">
-                                <button class="action-btn">View</button>
-                                <button class="action-btn"
-                                    onclick="window.location.href='documents.php'">Documents</button>
-                                <button class="delete-btn">Disable</button>
-                            </td>
-                        </tr>
+                        <?php foreach ($drivers as $d): ?>
+                            <tr>
+                                <td><?= htmlspecialchars($d["User_ID"]); ?></td>
+                                <td><?= htmlspecialchars($d["F_Name"]); ?></td>
+                                <td><?= htmlspecialchars($d["L_Name"]); ?></td>
+                                <td><?= htmlspecialchars($d["Email"]); ?></td>
+                                <td><?= htmlspecialchars($d["Rating"]); ?></td>
 
-                        <tr>
-                            <td>34</td>
-                            <td>Peter Andreou</td>
-                            <td>pandreou</td>
-                            <td>peter@example.com</td>
-                            <td>Pending</td>
-                            <td class="actions">
-                                <button class="action-btn">View</button>
-                                <button class="action-btn"
-                                    onclick="window.location.href='documents.php'">Documents</button>
-                                <button class="delete-btn">Disable</button>
-                            </td>
-                        </tr>
+                                <td class="actions">
+                                    <button class="action-btn"
+                                            onclick="window.location.href='view.php?id=<?= $d['User_ID'] ?>'">
+                                        View
+                                    </button>
 
-                        <tr>
-                            <td>41</td>
-                            <td>Jimmy Nikolaou</td>
-                            <td>jniko</td>
-                            <td>jimmy@example.com</td>
-                            <td>Blocked</td>
-                            <td class="actions">
-                                <button class="action-btn">View</button>
-                                <button class="action-btn"
-                                    onclick="window.location.href='documents.php'">Documents</button>
-                                <button class="delete-btn">Disable</button>
-                            </td>
-                        </tr>
+                                    <button class="action-btn"
+                                            onclick="window.location.href='documents.php?id=<?= urlencode($d['User_ID']) ?>&fn=<?= urlencode($d['F_Name']) ?>'">
+                                        Documents
+                                    </button>
+
+                                    <button class="delete-btn"
+                                            onclick="window.location.href='disable.php?id=<?= $d['User_ID'] ?>'">
+                                        Disable
+                                    </button>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
                     </tbody>
 
                 </table>

@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if((int)$row["Type_ID"] === 1){
         $_SESSION["user_id"] = $row["User_ID"];
         $_SESSION["username"] = $row["Username"];
-        $_SESSION["fname"] = $rpw["F_Name"];
+        $_SESSION["fname"] = $row["F_Name"];
         $_SESSION["lname"] = $row["L_Name"];
         $_SESSION["email"] = $row["Email"];
         $_SESSION["type"] = $row["Type_ID"];            

@@ -1,5 +1,5 @@
 <?php
-	session_start();
+  session_start();
   require_once "db_connection.php";
 
   $error = $_SESSION["login_error"] ?? "";

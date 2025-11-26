@@ -1,12 +1,12 @@
 <?php
     session_start();
-
     $serverName = "mssql.cs.ucy.ac.cy";
 
     $connectionOptions = array(
         "Uid" => "dkalli02",
         "PWD" => "LDA8Duev",
-        "CharacterSet" => "UTF-8"
+        "CharacterSet" => "UTF-8",
+        "ReturnDatesAsStrings" => true
     );
 
     $conn = sqlsrv_connect($serverName, $connectionOptions);

@@ -7,6 +7,16 @@
     $full_name = $_SESSION["fname"] . " " . $_SESSION["lname"];
     $email = $_SESSION["email"];
     $initials = strtoupper($_SESSION["fname"][0] . $_SESSION["lname"][0]);
+
+    $tsql = "{CALL [dbo].[GetDashboardStats]}";
+    $stmt = sqlsrv_query($conn, $tsql);
+    $stats = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
+
+    $usersCnt       = $stats['TotalUsers'];
+    $driversCnt     = $stats['ActiveDrivers'];
+    $vehiclesCnt    = $stats['VehiclesInService'];
+    $tripsCnt       = $stats['TotalTrips'];
+    $reqsCnt        = $stats['GdprRequests'];
 ?>
 
 <!DOCTYPE html>
@@ -71,27 +81,38 @@
             <section class="panel stats-panel">
                 <div class="stat-card">
                     <div class="stat-title">Total Users</div>
-                    <div class="stat-value">12,483</div>
+                    <div class="stat-value">
+                        <?= htmlspecialchars($usersCnt); ?>
+                    </div>
                 </div>
 
                 <div class="stat-card">
                     <div class="stat-title">Active Drivers</div>
-                    <div class="stat-value">3,247</div>
+                    <div class="stat-value">
+                        <?= htmlspecialchars($driversCnt); ?>
+                    </div>
                 </div>
 
                 <div class="stat-card">
                     <div class="stat-title">Vehicles in Service</div>
-                    <div class="stat-value">2,891</div>
+                    <div class="stat-value">
+                        <?= htmlspecialchars($vehiclesCnt); ?>
+                    </div>
                 </div>
 
                 <div class="stat-card">
                     <div class="stat-title">Total Trips</div>
-                    <div class="stat-value">47,892</div>
+                    <div class="stat-value">
+                        <?= htmlspecialchars($tripsCnt); ?>
+                    </div>
                 </div>
 
                 <div class="stat-card">
                     <div class="stat-title">GDPR Requests</div>
-                    <div class="stat-value">14</div>
+                    <div class="stat-value">
+                        <?= htmlspecialchars($reqsCnt
+                        ); ?>
+                    </div>
                 </div>
             </section>
 

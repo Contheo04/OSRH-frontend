@@ -7,6 +7,21 @@
     $full_name = $_SESSION["fname"] . " " . $_SESSION["lname"];
     $email = $_SESSION["email"];
     $initials = strtoupper($_SESSION["fname"][0] . $_SESSION["lname"][0]);
+
+    $driver_id = (int) $_GET['id'];
+    $fname     = (string) $_GET['fn'];
+
+    $tsql = "SELECT *
+             FROM [dbo].[Driver_Doc]
+             WHERE Driver_ID = ?";
+
+    $params = array($driver_id);
+    $stmt = sqlsrv_query($conn, $tsql, $params);
+
+    $driverDocs = [];
+    while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+        $driverDocs[] = $row;
+    }   
 ?>
 
 <!DOCTYPE html>
@@ -55,7 +70,7 @@
 
     <main class="content">
         <header class="topbar">
-            <h1 class="page-title">Driver Documents</h1>
+            <h1 class="page-title"><?= htmlspecialchars($fname); ?>'s documents</h1>
             <div class="profile-box">
                 <button class="logout-btn" onclick="window.location.href='../../index.php'">Logout</button>
                 <div class="profile-info">
@@ -72,46 +87,42 @@
             </div>
         </header>
 
-        <section class="panel">
-            <h2 class="section-title">Documents for Driver #1</h2>
+        <section class="panel table-panel">
+            <table class="drivers-table">
+                <thead>
+                    <tr>
+                        <th>Doc ID</th>
+                        <th>Type</th>
+                        <th>Issue Date</th>
+                    <th style="text-align:right;">Actions</th>
+                    </tr>
+                </thead>
 
-            <div class="documents-grid">
-                <div class="doc-card">
-                    <p class="doc-title">ID / Passport</p>
-                    <div class="doc-preview">No file uploaded</div>
-                    <span class="badge missing">Missing</span>
-                </div>
+                <tbody>
+                    <?php foreach ($driverDocs as $dd): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($dd["Doc_ID"]); ?></td>
+                            <td><?= htmlspecialchars($dd["Doc_Type"]); ?></td>
+                            <td><?= htmlspecialchars($dd["Issue_Date"]); ?></td>
 
-                <div class="doc-card">
-                    <p class="doc-title">Driver License</p>
-                    <div class="doc-preview">No file uploaded</div>
-                    <span class="badge missing">Missing</span>
-                </div>
+                            <td class="actions">
+                                <button class="action-btn" onclick="">
+                                    View
+                                </button>
 
-                <div class="doc-card">
-                    <p class="doc-title">Criminal Record</p>
-                    <div class="doc-preview">No file uploaded</div>
-                    <span class="badge missing">Missing</span>
-                </div>
+                                <button class="action-btn" onclick="">
+                                    Approve
+                                </button>
 
-                <div class="doc-card">
-                    <p class="doc-title">Medical Certificate</p>
-                    <div class="doc-preview">No file uploaded</div>
-                    <span class="badge missing">Missing</span>
-                </div>
+                                <button class="delete-btn" onclick="">
+                                    Reject
+                                </button>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
 
-                <div class="doc-card">
-                    <p class="doc-title">Psychological Certificate</p>
-                    <div class="doc-preview">No file uploaded</div>
-                    <span class="badge missing">Missing</span>
-                </div>
-
-                <div class="doc-card">
-                    <p class="doc-title">Vehicle MOT</p>
-                    <div class="doc-preview">No file uploaded</div>
-                    <span class="badge missing">Missing</span>
-                </div>
-            </div>
+            </table>
         </section>
     </main>
     </div>

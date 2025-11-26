@@ -1,0 +1,10 @@
+1,admin,$2y$10$adminhash,admin@mail.com,Admin,User,99000001,M,1985-01-01,Nicosia,0,no-pfp,1
+2,operator1,$2y$10$operhash,operator1@mail.com,Maria,Georgiou,99000002,F,1988-03-12,Larnaca,0,no-pfp,2
+3,driver1,$2y$10$driverhash1,driver1@mail.com,Andreas,Charalambous,99000003,M,1990-09-30,Limassol,0,no-pfp,3
+4,pass1,$2y$10$passhash1,pass1@mail.com,Elena,Kyriakou,99000004,F,2000-06-20,Nicosia,0,no-pfp,4
+5,driver2,$2y$10$driverhash2,driver2@mail.com,Nikos,Papadopoulos,99000005,M,1987-12-05,Paphos,0,no-pfp,3
+6,pass2,$2y$10$passhash2,pass2@mail.com,Christina,Andreou,99000006,F,2001-03-15,Larnaca,0,no-pfp,4
+7,operator2,$2y$10$operhash2,operator2@mail.com,George,Ioannou,99000007,M,1984-11-22,Limassol,0,no-pfp,2
+8,driver3,$2y$10$driverhash3,driver3@mail.com,Petros,Kleanthous,99000008,M,1993-07-18,Nicosia,0,no-pfp,3
+9,pass3,$2y$10$passhash3,pass3@mail.com,Anna,Michael,99000009,F,1999-10-10,Paphos,0,no-pfp,4
+10,admin2,$2y$10$adminhash2,admin2@mail.com,Stelios,Markou,99000010,M,1983-04-25,Limassol,0,no-pfp,1
