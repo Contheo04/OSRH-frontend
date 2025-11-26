@@ -883,3 +883,39 @@ VALUES
 -- Optional bridge between Geofence 2 and 3 (diagonal-ish corner)
 ('Bridge_2_3', 1.000000, 1.000000);
 
+INSERT INTO [dbo].[GDPR_Request_Log] (Issue_Date, Pending, Approval, Managed_By, Requested_By)
+VALUES
+('2025-05-05', 'Y', 'N', 1, 2);
+
+
+INSERT INTO [dbo].[Vehicle] 
+(License_Plate, Frame_Number, Engine_Number, Car_Type,
+ Load_Space, Number_Of_Seats, Driver_ID, Company_Rep_ID, Op_Audits, Geofence_ID)
+VALUES
+('ABC123', 'FR123', 'EN123', 'Sedan', 450.0, 4, 3, NULL, NULL, 1),
+('XYZ999', 'FR999', 'EN999', 'SUV',   700.0, 6, 3, NULL, NULL, 2),
+('JKL555', 'FR555', 'EN555', 'Hatchback', 300.0, 4, 4, NULL, NULL, 1),
+('CMP001', 'FR800', 'EN800', 'Van',  1200.0, 8, NULL, 5, NULL, 3);
+
+
+INSERT INTO [dbo].[Service_Type] (S_Type_Name, Tariff, License_Plate, Frame_Number, Engine_Number)
+VALUES
+('Standard', 10.00, 'ABC123', 'FR123', 'EN123'),
+('Premium',  15.00, 'XYZ999', 'FR999', 'EN999'),
+('Economy',   8.00, 'JKL555', 'FR555', 'EN555'),
+('Cargo', 20.00, 'CMP001', 'FR800', 'EN800');
+
+INSERT INTO [dbo].[Payment] (Price, ST_ID)
+VALUES
+(25.50, 1),
+(40.00, 2),
+(15.75, 3),
+(60.00, 4);
+
+INSERT INTO [dbo].[Total_Trip] (Payment_Time, Payment_Method, User_ID, Payment_ID)
+VALUES
+(GETDATE(), 'Card',   7, 1),
+(GETDATE(), 'Cash',   8, 2),
+(GETDATE(), 'Wallet', 7, 3),
+(GETDATE(), 'Card',   4, 4);
+

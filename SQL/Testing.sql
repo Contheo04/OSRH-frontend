@@ -102,5 +102,8 @@
 
 -- SELECT * FROM Trip_Segment
 
-EXEC [dbo].[TripStatisticsReport]
-    @GroupBy = 'service';
+-- EXEC [dbo].[TripStatisticsReport]
+--     @GroupBy = 'service';
+
+
+SELECT * FROM [dbo].[Total_Trip]

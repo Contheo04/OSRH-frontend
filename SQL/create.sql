@@ -58,7 +58,7 @@ CREATE TABLE [dbo].[GDPR_Request_Log] (
     Approval CHAR(1) NOT NULL CHECK (Approval IN ('Y', 'N')), 
 
     -- Foreign Keys
-    Managed_By INT NOT NULL,
+    Managed_By INT,
     Requested_By INT NOT NULL,
 
     PRIMARY KEY (Request_ID)

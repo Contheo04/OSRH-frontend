@@ -191,6 +191,10 @@ IF OBJECT_ID('[dbo].[TripStatisticsReport]', 'P') IS NOT NULL
     DROP PROCEDURE [dbo].[TripStatisticsReport];
 GO
 
+IF OBJECT_ID('[dbo].[GetDashboardStats]', 'P') IS NOT NULL
+    DROP PROCEDURE [dbo].[GetDashboardStats];
+GO
+
 
 
 

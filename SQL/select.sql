@@ -3,6 +3,10 @@ SELECT *
 FROM [dbo].[User];
 GO
 
+SELECT COUNT(*)
+FROM [dbo].[User]
+GO
+
 SELECT *
 FROM [dbo].[User]
 WHERE Type_ID = 1;
@@ -732,6 +736,22 @@ CREATE PROCEDURE [dbo].[CreatePayment]
     GO
 
 
+-------- Front-end QOL Misc ------------------------------------------------------------------
+-- Get All Dashboard Stats -------------------------------------------------------------------
+CREATE PROCEDURE [dbo].[GetDashboardStats]
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT
+        (SELECT COUNT(*) FROM [dbo].[User]) AS TotalUsers,
+        (SELECT COUNT(*) FROM [dbo].[User] WHERE Type_ID = 2) AS ActiveDrivers,
+        (SELECT COUNT(*) FROM [dbo].[Vehicle]) AS VehiclesInService,
+        (SELECT COUNT(*) FROM [dbo].[Total_Trip]) AS TotalTrips,
+        (SELECT COUNT(*) FROM [dbo].[GDPR_Request_Log]) AS GdprRequests;
+END;
+GO
+
 
 -------------------------
 -------- REPORTS --------
@@ -766,3 +786,4 @@ BEGIN
     END
     
 END;
+GO

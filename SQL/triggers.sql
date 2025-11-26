@@ -106,7 +106,7 @@ BEGIN
             )
         
         -- as well as the 2nd vehicles service type
-        JOIN Service_Stype ST
+        JOIN Service_Type ST
             ON V2.License_Plate = ST.License_Plate
             AND V2.Frame_Number = ST.Frame_Number
             AND V2.Engine_Number = ST.Engine_Number
@@ -121,3 +121,4 @@ BEGIN
     END
 END;
 GO
+
