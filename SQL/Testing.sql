@@ -110,6 +110,15 @@ EXEC [dbo].[NewTrip]
     @Desired_Service_Type = "Luxury Cab",
     @From_Location_X = 0.5,
     @From_Location_Y = 0.5,
-    @To_Location_X = 0.5,
-    @To_Location_Y = 1.5,
+    @To_Location_X = 2.5,
+    @To_Location_Y = 2.5,
     @Payment_Method = "Card";
+
+
+    -------------------------
+    -- |   7  |  8   |  9   |
+    -------------------------
+    -- |   4  |  5   |  6   |
+    -------------------------
+    -- |  1   |  2   |   3  |
+    -------------------------

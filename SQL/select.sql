@@ -751,7 +751,7 @@ BEGIN
 
     SELECT
         (SELECT COUNT(*) FROM [dbo].[User]) AS TotalUsers,
-        (SELECT COUNT(*) FROM [dbo].[User] WHERE Type_ID = 2) AS ActiveDrivers,
+        (SELECT COUNT(*) FROM [dbo].[User] WHERE Type_ID = 3) AS ActiveDrivers,
         (SELECT COUNT(*) FROM [dbo].[Vehicle]) AS VehiclesInService,
         (SELECT COUNT(*) FROM [dbo].[Total_Trip]) AS TotalTrips,
         (SELECT COUNT(*) FROM [dbo].[GDPR_Request_Log]) AS GdprRequests;
@@ -783,7 +783,7 @@ BEGIN
         RETURN;
     END
 
-    IF @Payment_Method NOT IN ('Card', 'Cash', 'Apple Pay', 'PayPal', 'Google Pay', 'CashApp')
+    IF @Payment_Method NOT IN ('Card', 'Cash', 'Apple Pay', 'PayPal', 'Google Pay', 'CashApp', 'Crypto')
     BEGIN
         RAISERROR('ERROR IN NewTrip: Payment Method not supported', 16, 1)
         RETURN;
@@ -836,8 +836,8 @@ BEGIN
         SELECT @From_GeofenceID AS GID, CAST(@From_GeofenceID AS VARCHAR(MAX)) AS Path
         
         UNION ALL -- Expands the recursive rows to our anchor table
-        -- RECURSIVE STEP
 
+        -- RECURSIVE STEP
         SELECT
             -- If we find a bridge that connects our current location
             -- to a new geofence, expand the path
