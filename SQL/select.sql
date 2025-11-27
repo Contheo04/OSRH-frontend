@@ -827,6 +827,7 @@ BEGIN
             )
     END
 
+    DROP TABLE IF EXISTS #PathTemp;
     -- DFS to find the path (bridges) to the destination
     -- Start a CTE 
     ;WITH DFS AS(
@@ -875,9 +876,10 @@ BEGIN
 
     -- Into a new temporary table, we split up the info for each Trip Segment
     -- Actual Trip Segment entires will be created with these later
+   DROP TABLE IF EXISTS #Segments;
     CREATE TABLE #Segments (
         Segment_ID INT IDENTITY(1,1) NOT NULL,
-        Geofence_ID INT NOT NULL
+        Geofence_ID INT NOT NULL,
         PRIMARY KEY (Segment_ID)
     );
 
@@ -928,6 +930,9 @@ BEGIN
         RETURN;
     END;
 
+    DECLARE @iterator INT = 2;
+    DECLARE @Count INT = (SELECT COUNT(*) FROM #Segments);
+
     -- If the entire trip is within 1 geofence, calculate the distance between From and To Locations
     IF (SELECT COUNT(*) FROM #Segments) = 1
     BEGIN
@@ -967,9 +972,6 @@ BEGIN
         VALUES (SQRT(POWER(@gx2 - @From_Location_X, 2) + POWER(@gy2 - @From_Location_Y, 2)));
 
 
-        DECLARE @iterator INT = 2;
-        DECLARE @Count INT = (SELECT COUNT(*) FROM #Segments);
-
         -- For the in-between distances [2 - (n-1)]
         WHILE @iterator < @Count-1
         BEGIN
@@ -999,12 +1001,104 @@ BEGIN
         INSERT INTO #Distances (Distance)
         VALUES (SQRT(POWER(@gx2 - @To_Location_X, 2) + POWER(@gy2 - @To_Location_Y, 2)));
 
-        SELECT * FROM #Distances
+        -- Now we enter the distances per-geofence
+        -- First Geofence
+        UPDATE S
+        SET S.Distance = D.Distance/2
+        FROM #Segments S, #Distances D
+        WHERE S.Segment_ID = 1 AND D.Step = 1;
+        
+        -- The inbetween Geofences
+        UPDATE S
+        SET S.Distance = D1.Distance/2 + D2.Distance/2
+        FROM #Segments S, #Distances D1, #Distances D2
+        WHERE (S.Segment_ID BETWEEN 2 AND @Count-1)
+        AND D1.Step = S.Segment_ID 
+        AND D2.Step = S.Segment_ID - 1;
+
+        -- Last Geofence
+        UPDATE S
+        SET S.Distance = D.Distance/2
+        FROM #Segments S, #Distances D
+        WHERE S.Segment_ID = @Count AND D.Step = @Count-1;
+        
+        
         DROP TABLE #Distances
     END
 
-    SELECT * FROM #Segments
+    -- Add the price of each Segment
+    ALTER TABLE #Segments
+        ADD Price FLOAT;
+    
+    UPDATE S
+    SET S.Price = ST.Tariff * S.Distance
+    FROM #Segments S, [dbo].[Service_Type] ST
+    WHERE S.ST_ID = ST.ST_ID;
 
+    DECLARE @Payment_ID INT;
+    DECLARE @TT_ID INT;
+    DECLARE @TotalPrice FLOAT = (SELECT SUM(S.Price) FROM #Segments S);
+
+    -- Create the Payment of the Total Trip, the one the user will actually pay
+    INSERT INTO [dbo].[Payment] (Price, ST_ID)
+    VALUES (@TotalPrice, NULL);
+
+    SET @Payment_ID = SCOPE_IDENTITY();
+    
+    -- And Create the Total Trip which the Segments will compose
+    INSERT INTO [dbo].[Total_Trip] (Payment_Time, Payment_Method, User_ID, Payment_ID)
+    VALUES
+    (GETDATE(), @Payment_Method, @PassengerID, @Payment_ID);
+    SET @TT_ID = SCOPE_IDENTITY();
+
+    -- Using #Segments we can now create all the necessary Trip Segments and their respective payments
+    SET @iterator = 1;
+    WHILE @iterator <= @Count
+    BEGIN
+
+        DECLARE @Price FLOAT;
+        DECLARE @ST_ID INT;
+
+        SELECT @Price = S.Price FROM #Segments S WHERE @iterator = S.Segment_ID;
+        SELECT @ST_ID = S.ST_ID FROM #Segments S WHERE @iterator = S.Segment_ID;
+
+        -- Create the Payments for each Segment
+        INSERT INTO [dbo].[Payment] (Price, ST_ID)
+        VALUES (@Price,@ST_ID);
+        SET @Payment_ID = SCOPE_IDENTITY();
+
+        DECLARE @Distance FLOAT;
+        DECLARE @Drv_ID INT;
+        
+        SELECT @Distance = S.Distance
+        FROM #Segments S 
+        WHERE @iterator = S.Segment_ID;
+
+        SELECT @Drv_ID = V.Driver_ID
+        FROM #Segments S, [dbo].[Service_Type] ST, [dbo].[Vehicle] V 
+        WHERE @iterator = S.Segment_ID
+        AND ST.ST_ID = S.ST_ID
+        AND ST.License_Plate = V.License_Plate
+        AND ST.Frame_Number = V.Frame_Number
+        AND ST.Engine_Number = V.Engine_Number;
+
+        DECLARE @Now DATETIME = GETDATE();
+        -- Insert the Trip Segment through the procedure
+        EXEC [dbo].[InsertTripSegment]
+            @Distance = @Distance,
+            @Drv_ID = @Drv_ID,
+            @Psg_ID = @PassengerID,
+            @From_Location_X = @From_Location_X,
+            @From_Location_Y = @From_Location_Y,
+            @To_Location_X = @To_Location_X,
+            @To_Location_Y = @To_Location_Y,
+            @Departure_Time = @Now,
+            @Arrival_Time = NULL,
+            @TT_ID = @TT_ID,
+            @Payment_ID = @Payment_ID;
+
+        SET @iterator = @iterator + 1;
+    END    
 
 
 DROP TABLE #Segments;

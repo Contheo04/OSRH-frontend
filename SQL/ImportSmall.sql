@@ -146,17 +146,17 @@ VALUES
 ('Premium', 15.00, 'PRM009', 'FR009', 'EN009');
 
 
-INSERT INTO [dbo].[Payment] (Price, ST_ID)
-VALUES
-(25.50, 1),
-(40.00, 2),
-(15.75, 3),
-(60.00, 4);
+-- INSERT INTO [dbo].[Payment] (Price, ST_ID)
+-- VALUES
+-- (25.50, 1),
+-- (40.00, 2),
+-- (15.75, 3),
+-- (60.00, 4);
 
-INSERT INTO [dbo].[Total_Trip] (Payment_Time, Payment_Method, User_ID, Payment_ID)
-VALUES
-(GETDATE(), 'Card',   7, 1),
-(GETDATE(), 'Cash',   8, 2),
-(GETDATE(), 'Wallet', 7, 3),
-(GETDATE(), 'Card',   4, 4);
+-- INSERT INTO [dbo].[Total_Trip] (Payment_Time, Payment_Method, User_ID, Payment_ID)
+-- VALUES
+-- (GETDATE(), 'Card',   7, 1),
+-- (GETDATE(), 'Cash',   8, 2),
+-- (GETDATE(), 'Wallet', 7, 3),
+-- (GETDATE(), 'Card',   4, 4);
 

@@ -105,16 +105,32 @@
 -- EXEC [dbo].[TripStatisticsReport]
 --     @GroupBy = 'service';
 
+SELECT * FROM [dbo].[Total_Trip]
+SELECT * FROM [dbo].[Payment]
+SELECT * FROM [dbo].[Trip_Segment]
+
+
+-- EXEC [dbo].[NewTrip]
+--     @PassengerID = 19,
+--     @Desired_Service_Type = "Premium",
+--     @From_Location_X = 2.8,
+--     @From_Location_Y = 2.9,
+--     @To_Location_X = 0.1,
+--     @To_Location_Y = 1.1,
+--     @Payment_Method = "Card";
+
 EXEC [dbo].[NewTrip]
     @PassengerID = 19,
     @Desired_Service_Type = "Premium",
-    @From_Location_X = 2.9,
-    @From_Location_Y = 2.9,
+    @From_Location_X = 0.0,
+    @From_Location_Y = 0.0,
     @To_Location_X = 0.1,
-    @To_Location_Y = 1.1,
+    @To_Location_Y = 0.1,
     @Payment_Method = "Card";
 
-
+SELECT * FROM [dbo].[Total_Trip]
+SELECT * FROM [dbo].[Payment]
+SELECT * FROM [dbo].[Trip_Segment]
     -------------------------
     -- |   7  |  8   |  9   |
     -------------------------

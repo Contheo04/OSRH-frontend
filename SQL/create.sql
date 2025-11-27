@@ -179,7 +179,7 @@ CREATE TABLE [dbo].[Trip_Segment] (
     To_Location_X DECIMAL(9,6) NOT NULL,
     To_Location_Y DECIMAL(9,6) NOT NULL,
     Departure_Time DATETIME NOT NULL,
-    Arrival_Time DATETIME NOT NULL,
+    Arrival_Time DATETIME,
 
     -- Foreign Keys
     TL_ID INT NOT NULL,
@@ -252,7 +252,7 @@ CREATE TABLE [dbo].[Payment] (
     Price FLOAT NOT NULL CHECK (Price >= 0),
 
     -- Foreign Keys
-    ST_ID INT NOT NULL,
+    ST_ID INT,
 
     PRIMARY KEY (Payment_ID)
 );
