@@ -108,10 +108,10 @@
 EXEC [dbo].[NewTrip]
     @PassengerID = 19,
     @Desired_Service_Type = "Premium",
-    @From_Location_X = 2.5,
-    @From_Location_Y = 2.5,
-    @To_Location_X = 0.5,
-    @To_Location_Y = 1.5,
+    @From_Location_X = 2.9,
+    @From_Location_Y = 2.9,
+    @To_Location_X = 0.1,
+    @To_Location_Y = 1.1,
     @Payment_Method = "Card";
 
 

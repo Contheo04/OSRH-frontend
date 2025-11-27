@@ -875,8 +875,14 @@ BEGIN
 
     -- Into a new temporary table, we split up the info for each Trip Segment
     -- Actual Trip Segment entires will be created with these later
-    SELECT CAST(VALUE AS INT) AS GeofenceID
-    INTO #Segments
+    CREATE TABLE #Segments (
+        Segment_ID INT IDENTITY(1,1) NOT NULL,
+        Geofence_ID INT NOT NULL
+        PRIMARY KEY (Segment_ID)
+    );
+
+    INSERT INTO #Segments (Geofence_ID)
+    SELECT CAST(VALUE AS INT)
     FROM STRING_SPLIT(@Path, ',')
 
     -- For each Geofence, we find the ST_ID of the desired Service Type in each Geofence, if it exists
@@ -887,7 +893,7 @@ BEGIN
     UPDATE S
     SET S.ST_ID = ST.ST_ID --save the ST_ID
     FROM #Segments S
-        JOIN [dbo].[Vehicle] V ON V.Geofence_ID = S.GeofenceID
+        JOIN [dbo].[Vehicle] V ON V.Geofence_ID = S.Geofence_ID
         JOIN [dbo].[Service_Type] ST ON ST.License_Plate = V.License_Plate 
                                     AND ST.Engine_Number = V.Engine_Number
                                     AND ST.Frame_Number = V.Frame_Number
@@ -905,7 +911,101 @@ BEGIN
         RETURN;
     END;
 
+
+    -- We need to compute the distance for each Trip Segment (Geofence)
+    -- We do that by using the Geofence centers for Semi-Accurate Estimations
+    -- Prices will obviously differ depending on things like traffic, closed roads 
+    -- and other things that are out of scope
+    ALTER TABLE #Segments
+    ADD Distance FLOAT NULL;
+
+    -- Validate that at least 1 geofence is used in Total Trip
+    IF (SELECT COUNT(*) FROM #Segments) < 1
+    BEGIN
+        RAISERROR('ERROR IN NewTrip: Toral Trip must have at least one Trip Segment', 16, 1)
+        DROP TABLE #Segments;
+        DROP TABLE #PathTemp;
+        RETURN;
+    END;
+
+    -- If the entire trip is within 1 geofence, calculate the distance between From and To Locations
+    IF (SELECT COUNT(*) FROM #Segments) = 1
+    BEGIN
+        UPDATE #Segments
+        SET Distance = SQRT(POWER(@To_Location_X - @From_Location_X, 2) + POWER(@To_Location_Y - @From_Location_Y, 2));
+    END
+
+    -- If the Total Trip spans multiple Geofences, calculate the Distance Traveled with each one 
+    IF (SELECT COUNT(*) FROM #Segments) > 1
+    BEGIN
+        -- Find the centers of each Geofence
+        ALTER TABLE #Segments
+        ADD Center_X FLOAT NULL, Center_Y FLOAT NULL;
+        UPDATE S
+        SET Center_X = (G.C1_X + G.C2_X + G.C3_X + G.C4_X)/4,
+            Center_Y = (G.C1_Y + G.C2_Y + G.C3_Y + G.C4_Y)/4
+        FROM #Segments S JOIN [dbo].[Geofence] G ON S.Geofence_ID = G.Geofence_ID
+
+
+        CREATE TABLE #Distances (
+            Step INT IDENTITY(1,1),
+            Distance FLOAT
+        );
+        DECLARE @gx1 DECIMAL(9,6);
+        DECLARE @gy1 DECIMAL(9,6);
+        DECLARE @gx2 DECIMAL(9,6);
+        DECLARE @gy2 DECIMAL(9,6);
+        
+        SELECT @gx2 = Center_X, @gy2 = Center_Y
+        FROM #Segments
+        ORDER BY (Segment_ID) --Required for OFFSET, but we want to keep the insert order
+        OFFSET 1 ROWS FETCH NEXT 1 ROWS ONLY; -- Fetch the 2nd row 
+
+
+        -- First Distance (Distane between start location and center of 2nd geofence)
+        INSERT INTO #Distances (Distance)
+        VALUES (SQRT(POWER(@gx2 - @From_Location_X, 2) + POWER(@gy2 - @From_Location_Y, 2)));
+
+
+        DECLARE @iterator INT = 2;
+        DECLARE @Count INT = (SELECT COUNT(*) FROM #Segments);
+
+        -- For the in-between distances [2 - (n-1)]
+        WHILE @iterator < @Count-1
+        BEGIN
+
+            SELECT @gx1 = Center_X, @gy1 = Center_Y
+            FROM #Segments
+            ORDER BY (Segment_ID)
+            OFFSET (@iterator - 1) ROWS FETCH NEXT 1 ROWS ONLY;
+
+            SELECT @gx2 = Center_X, @gy2 = Center_Y
+            FROM #Segments
+            ORDER BY (Segment_ID)
+            OFFSET @iterator ROWS FETCH NEXT 1 ROWS ONLY;
+
+            INSERT INTO #Distances (Distance)
+            VALUES (SQRT(POWER(@gx2 - @gx1, 2) + POWER(@gy2 - @gy1, 2)));
+
+            SET @iterator = @iterator +1;
+        END;
+
+        -- Last Distance (Distane between n-1 Geofence and the Destination)
+        SELECT @gx2 = Center_X, @gy2 = Center_Y
+        FROM #Segments
+        ORDER BY (Segment_ID) --Required for OFFSET, but we want to keep the insert order
+        OFFSET (@Count - 2) ROWS FETCH NEXT 1 ROWS ONLY; -- Fetch the Second to last row
+
+        INSERT INTO #Distances (Distance)
+        VALUES (SQRT(POWER(@gx2 - @To_Location_X, 2) + POWER(@gy2 - @To_Location_Y, 2)));
+
+        SELECT * FROM #Distances
+        DROP TABLE #Distances
+    END
+
     SELECT * FROM #Segments
+
+
 
 DROP TABLE #Segments;
 DROP TABLE #PathTemp;
