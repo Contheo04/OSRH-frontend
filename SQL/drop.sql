@@ -21,7 +21,7 @@ ALTER TABLE [dbo].[Preferences] DROP CONSTRAINT IF EXISTS FK_Preferences_User
 
 -- 6. Driver Document
 ALTER TABLE [dbo].[Driver_Doc] DROP CONSTRAINT IF EXISTS FK_Driver_Doc_User_Driver
-ALTER TABLE [dbo].[Driver_Doc] DROP CONSTRAINT IF EXISTS FK_Driver_Doc_User_Operator
+ALTER TABLE [dbo].[Driver_Doc] DROP CONSTRAINT IF EXISTS FK_Driver_Doc_User_Approver
 
 -- 7. Vehicle Document
 ALTER TABLE [dbo].[Vehicle_Doc] DROP CONSTRAINT IF EXISTS FK_Vehicle_Doc_User_Operator

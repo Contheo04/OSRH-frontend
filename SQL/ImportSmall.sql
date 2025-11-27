@@ -919,18 +919,30 @@ INSERT INTO [dbo].[Vehicle]
 (License_Plate, Frame_Number, Engine_Number, Car_Type,
  Load_Space, Number_Of_Seats, Driver_ID, Company_Rep_ID, Op_Audits, Geofence_ID)
 VALUES
-('ABC123', 'FR123', 'EN123', 'Sedan', 450.0, 4, 3, NULL, NULL, 1),
-('XYZ999', 'FR999', 'EN999', 'SUV',   700.0, 6, 3, NULL, NULL, 2),
-('JKL555', 'FR555', 'EN555', 'Hatchback', 300.0, 4, 4, NULL, NULL, 1),
-('CMP001', 'FR800', 'EN800', 'Van',  1200.0, 8, NULL, 5, NULL, 3);
+('PRM001', 'FR001', 'EN001', 'Sedan',     450.0, 4, 1, NULL, NULL, 4),
+('PRM002', 'FR002', 'EN002', 'SUV',       600.0, 5, 2, NULL, NULL, 3),
+('PRM003', 'FR003', 'EN003', 'Hatchback', 350.0, 4, 3, NULL, NULL, 2),
+('PRM004', 'FR004', 'EN004', 'Sedan',     450.0, 4, 4, NULL, NULL, 7),
+('PRM005', 'FR005', 'EN005', 'SUV',       650.0, 6, 5, NULL, NULL, 1),
+('PRM006', 'FR006', 'EN006', 'Sedan',     450.0, 4, 6, NULL, NULL, 9),
+('PRM007', 'FR007', 'EN007', 'Mini',      300.0, 4, 7, NULL, NULL, 5),
+('PRM008', 'FR008', 'EN008', 'Sedan',     450.0, 4, 8, NULL, NULL, 8),
+('PRM009', 'FR009', 'EN009', 'Van',       700.0, 6, 9, NULL, NULL, 6);
 
 
-INSERT INTO [dbo].[Service_Type] (S_Type_Name, Tariff, License_Plate, Frame_Number, Engine_Number)
+INSERT INTO [dbo].[Service_Type] 
+(S_Type_Name, Tariff, License_Plate, Frame_Number, Engine_Number)
 VALUES
-('Standard', 10.00, 'ABC123', 'FR123', 'EN123'),
-('Premium',  15.00, 'XYZ999', 'FR999', 'EN999'),
-('Economy',   8.00, 'JKL555', 'FR555', 'EN555'),
-('Cargo', 20.00, 'CMP001', 'FR800', 'EN800');
+('Premium', 15.00, 'PRM001', 'FR001', 'EN001'),
+('Premium', 15.00, 'PRM002', 'FR002', 'EN002'),
+('Premium', 15.00, 'PRM003', 'FR003', 'EN003'),
+('Premium', 15.00, 'PRM004', 'FR004', 'EN004'),
+('Premium', 15.00, 'PRM005', 'FR005', 'EN005'),
+('Premium', 15.00, 'PRM006', 'FR006', 'EN006'),
+('Premium', 15.00, 'PRM007', 'FR007', 'EN007'),
+('Premium', 15.00, 'PRM008', 'FR008', 'EN008'),
+('Premium', 15.00, 'PRM009', 'FR009', 'EN009');
+
 
 INSERT INTO [dbo].[Payment] (Price, ST_ID)
 VALUES

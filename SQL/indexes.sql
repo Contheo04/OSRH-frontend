@@ -25,14 +25,14 @@ CREATE INDEX IDX_Preferences_UserID ON [dbo].[Preferences](User_ID);
 
 -- 6. Driver Doc
 CREATE INDEX IDX_DriverDoc_DriverID ON [dbo].[Driver_Doc](Driver_ID);
-CREATE INDEX IDX_DriverDoc_OperatorID ON [dbo].[Driver_Doc](Operator_ID);
+CREATE INDEX IDX_DriverDoc_ApproverID ON [dbo].[Driver_Doc](Approver_ID);
 
 
 -- 7. Vehicle Doc
 CREATE INDEX IDX_VehicleDoc_VehicleID
     ON [dbo].[Vehicle_Doc](License_Plate, Frame_Number, Engine_Number);
 
-CREATE INDEX IDX_VehicleDoc_Operator_ID ON [dbo].[Vehicle_Doc](Operator_ID);
+CREATE INDEX IDX_VehicleDoc_Operator_ID ON [dbo].[Vehicle_Doc](Approver_ID);
 
 -- 8. Vehicle Inspection
 CREATE INDEX IDX_VehicleInspection_VehicleID 

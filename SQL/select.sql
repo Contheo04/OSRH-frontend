@@ -240,7 +240,7 @@ CREATE PROCEDURE [dbo].[AddDriverDoc]
         Doc_Type,
         Issue_Date,
         Driver_ID,
-        Operator_ID
+        Approver_ID
     )
     VALUES(
         @Doc_Type,
@@ -329,7 +329,7 @@ CREATE PROCEDURE [dbo].[AddVehicleDoc]
         License_Plate,
         Frame_Number,
         Engine_Number,
-        Operator_ID
+        Approver_ID
         )
         VALUES (
             @Doc_Type,
@@ -872,8 +872,43 @@ BEGIN
     DECLARE @Path VARCHAR(MAX);
     SELECT @Path = Path
     FROM #PathTemp 
-    PRINT @Path;
 
+    -- Into a new temporary table, we split up the info for each Trip Segment
+    -- Actual Trip Segment entires will be created with these later
+    SELECT CAST(VALUE AS INT) AS GeofenceID
+    INTO #Segments
+    FROM STRING_SPLIT(@Path, ',')
+
+    -- For each Geofence, we find the ST_ID of the desired Service Type in each Geofence, if it exists
+    -- That also includes specific vehicles tied to the Service type
+    ALTER TABLE #Segments
+    ADD ST_ID INT NULL; --Default value is Null
+
+    UPDATE S
+    SET S.ST_ID = ST.ST_ID --save the ST_ID
+    FROM #Segments S
+        JOIN [dbo].[Vehicle] V ON V.Geofence_ID = S.GeofenceID
+        JOIN [dbo].[Service_Type] ST ON ST.License_Plate = V.License_Plate 
+                                    AND ST.Engine_Number = V.Engine_Number
+                                    AND ST.Frame_Number = V.Frame_Number
+    WHERE ST.S_Type_Name = @Desired_Service_Type;
+
+    IF EXISTS (
+        SELECT 1 
+        FROM #Segments S
+        WHERE S.ST_ID IS NULL 
+    )
+    BEGIN
+        RAISERROR('ERROR IN NewTrip: Cannot complete Trip, Service type does not exist for one of the required Geofecnes', 16, 1)
+        DROP TABLE #Segments;
+        DROP TABLE #PathTemp;
+        RETURN;
+    END;
+
+    SELECT * FROM #Segments
+
+DROP TABLE #Segments;
+DROP TABLE #PathTemp;
 END;
 GO
 

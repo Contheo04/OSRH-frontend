@@ -110,7 +110,7 @@ CREATE TABLE [dbo].[Driver_Doc] (
 
     --Foreign Keys
     Driver_ID INT NOT NULL,
-    Operator_ID INT,
+    Approver_ID INT,
 
     PRIMARY KEY (Doc_ID)
 );
@@ -126,7 +126,7 @@ CREATE TABLE [dbo].[Vehicle_Doc] (
     License_Plate VARCHAR(20) NOT NULL,
     Frame_Number VARCHAR(50) NOT NULL,
     Engine_Number VARCHAR(50) NOT NULL,
-    Operator_ID INT,
+    Approver_ID INT,
 
     PRIMARY KEY (Doc_ID)
 );
@@ -365,10 +365,10 @@ ALTER TABLE [dbo].[Driver_Doc]
 ADD CONSTRAINT FK_Driver_Doc_User_Driver
     FOREIGN KEY (Driver_ID) REFERENCES [dbo].[User](User_ID) ON DELETE CASCADE;
 
--- Driver Doc <- Checks <- User (Operator)
+-- Driver Doc <- Checks <- User (Approver)
 ALTER TABLE [dbo].[Driver_Doc]
-ADD CONSTRAINT FK_Driver_Doc_User_Operator
-    FOREIGN KEY (Operator_ID) REFERENCES [dbo].[User](User_ID);
+ADD CONSTRAINT FK_Driver_Doc_User_Approver
+    FOREIGN KEY (Approver_ID) REFERENCES [dbo].[User](User_ID);
 
 ---- 7. Vehicle Doc Foreign Keys
 -- Vehicle Doc <- Provides <- Vehicle
@@ -377,10 +377,10 @@ ADD CONSTRAINT FK_Doc_Vehicle_ID
     FOREIGN KEY (License_Plate, Frame_Number, Engine_Number)
     REFERENCES [dbo].[Vehicle](License_Plate, Frame_Number, Engine_Number) ON DELETE CASCADE; 
 
--- Vehicle Doc <- Checks <- User (Operator)
+-- Vehicle Doc <- Checks <- User (Approver)
 ALTER TABLE [dbo].[Vehicle_Doc]
-ADD CONSTRAINT FK_Vehicle_Doc_User_Operator
-    FOREIGN KEY (Operator_ID) REFERENCES [dbo].[User](USER_ID);
+ADD CONSTRAINT FK_Vehicle_Doc_User_Approver
+    FOREIGN KEY (Approver_ID) REFERENCES [dbo].[User](User_ID);
 
 ---- 8. Vehicle Inspection Foreign Keys
 --Vehicle Inspection <- Operator Performs <- User
