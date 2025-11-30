@@ -7,6 +7,24 @@
     $full_name = $_SESSION["fname"] . " " . $_SESSION["lname"];
     $email = $_SESSION["email"];
     $initials = strtoupper($_SESSION["fname"][0] . $_SESSION["lname"][0]);
+
+    $tsql = "SELECT *
+            FROM [dbo].[User]";
+
+    $stmt = sqlsrv_query($conn, $tsql);
+    
+    $users = [];
+    while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+        $users[] = $row;
+    }
+
+    $userTypes = [
+        1 => "Admin",
+        2 => "Operator",
+        3 => "Driver",
+        4 => "Basic User",
+        5 => "Representative",
+    ];
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +54,7 @@
 
                 <!-- ADMIN SECTION -->
                 <div class="nav-item" onclick="window.location.href='../dashboard/dashboard.php'">Dashboard</div>
-                <div class="nav-item active">Users</div>
+                <div class="nav-item active" onclick="window.location.href='users.php'">Users</div>
                 <div class="nav-item" onclick="window.location.href='../drivers/drivers.php'">Drivers</div>
                 <div class="nav-item" onclick="window.location.href='../vehicles/vehicles.php'">Vehicles</div>
                 <div class="nav-item" onclick="window.location.href='../trips/trips.php'">Trips</div>
@@ -96,73 +114,38 @@
                             <th>Name</th>
                             <th>Username</th>
                             <th>Email</th>
-                            <th>Type</th>
-                            <th>Status</th>
+                            <th>User Type</th>
                             <th style="text-align:right;">Actions</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>John Doe</td>
-                            <td>jdoe</td>
-                            <td>jdoe@example.com</td>
-                            <td>Driver</td>
-                            <td>Active</td>
-                            <td class="actions">
-                                <button class="action-btn" onclick="viewUser(1)">View</button>
-                                <button class="action-btn" onclick="editUser(1)">Edit</button>
-                                <button class="delete-btn" onclick="gdprDelete(1)">GDPR Delete</button>
-                            </td>
-                        </tr>
+                        <?php foreach ($users as $u): ?>
+                            <tr>
+                                <td><?= htmlspecialchars($u["User_ID"]); ?></td>
+                                <td><?= htmlspecialchars($u["F_Name"]); ?></td>
+                                <td><?= htmlspecialchars($u["L_Name"]); ?></td>
+                                <td><?= htmlspecialchars($u["Email"]); ?></td>
+                                <td><?= htmlspecialchars($userTypes[$u["Type_ID"]]); ?></td>
 
-                        <tr>
-                            <td>2</td>
-                            <td>Maria Georgiou</td>
-                            <td>mgeorgiou</td>
-                            <td>maria@example.com</td>
-                            <td>Operator</td>
-                            <td>Pending</td>
-                            <td class="actions">
-                                <button class="action-btn" onclick="viewUser(2)">View</button>
-                                <button class="action-btn" onclick="editUser(2)">Edit</button>
-                                <button class="delete-btn" onclick="gdprDelete(2)">GDPR Delete</button>
-                            </td>
-                        </tr>
+                                <td class="actions">
+                                    <button class="action-btn"
+                                            onclick="window.location.href='user_view.php?id=<?= urlencode($u['User_ID']) ?>'">
+                                        View
+                                    </button>
 
-                        <tr>
-                            <td>3</td>
-                            <td>Alex Papadakis</td>
-                            <td>apap</td>
-                            <td>alex@example.com</td>
-                            <td>Simple User</td>
-                            <td>Active</td>
-                            <td class="actions">
-                                <button class="action-btn" onclick="viewUser(3)">View</button>
-                                <button class="action-btn" onclick="editUser(3)">Edit</button>
-                                <button class="delete-btn" onclick="gdprDelete(3)">GDPR Delete</button>
-                            </td>
-                        </tr>
+                                    <button class="action-btn"
+                                            onclick="window.location.href='user_edit.php?id=<?= urlencode($u['User_ID']) ?>'">
+                                        Edit
+                                    </button>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </section>
         </main>
     </div>
-
-    <script>
-        function viewUser(id) {
-            window.location.href = `user_view.php?user=${id}`;
-        }
-
-        function editUser(id) {
-            window.location.href = `user_edit.php?user=${id}`;
-        }
-
-        function gdprDelete(id) {
-            alert("This will be implemented with PHP.\nGDPR delete requested for user ID: " + id);
-        }
-    </script>
 
 </body>
 

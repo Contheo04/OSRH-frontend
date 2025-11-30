@@ -61,10 +61,6 @@
             <!-- BLUE LINE SEPARATOR -->
             <div style="border-top:1px solid rgba(0,150,255,0.35); margin:18px 0;"></div>
 
-            <!-- USER SIMULATION SECTION -->
-            <div class="nav-item section-label" onclick="window.location.href='../simulation/simulation.php'">
-                User Simulation
-            </div>
         </nav>
     </aside>
 
@@ -104,12 +100,8 @@
                             <td><?= htmlspecialchars($dd["Doc_ID"]); ?></td>
                             <td><?= htmlspecialchars($dd["Doc_Type"]); ?></td>
                             <td><?= htmlspecialchars($dd["Issue_Date"]); ?></td>
-
+                            
                             <td class="actions">
-                                <button class="action-btn" onclick="">
-                                    View
-                                </button>
-
                                 <button class="action-btn" onclick="">
                                     Approve
                                 </button>
@@ -121,7 +113,6 @@
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
-
             </table>
         </section>
     </main>

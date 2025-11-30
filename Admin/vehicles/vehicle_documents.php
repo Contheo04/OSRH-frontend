@@ -7,6 +7,24 @@
     $full_name = $_SESSION["fname"] . " " . $_SESSION["lname"];
     $email = $_SESSION["email"];
     $initials = strtoupper($_SESSION["fname"][0] . $_SESSION["lname"][0]);
+
+    $vid1   = $_GET['lp'];
+    $vid2   = $_GET['fn'];
+    $vid3   = $_GET['en'];
+
+    $tsql = "SELECT *
+             FROM [dbo].[Vehicle_Doc]
+             WHERE License_Plate = ?
+                AND Frame_Number = ?
+                AND Engine_Number = ?";
+
+    $params = array($vid1, $vid2, $vid3);
+    $stmt = sqlsrv_query($conn, $tsql, $params);
+
+    $vDocs = [];
+    while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+        $vDocs[] = $row;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -51,7 +69,7 @@
 
         <main class="content">
             <header class="topbar">
-                <h1 class="page-title">Vehicle Documents</h1>
+                <h1 class="page-title">Documents for Vehicle: <?= htmlspecialchars($vid1); ?></h1>
 
                 <div class="profile-box">
                     <button class="logout-btn" onclick="window.location.href='../../index.php'">Logout</button>
@@ -69,40 +87,33 @@
                 </div>
             </header>
 
-            <section class="panel">
-                <h2 class="section-title">Documents for Vehicle: KYZ-2043</h2>
+            <section class="panel table-panel">
+                <table class="vehicles-table">
+                    <thead>
+                        <tr>
+                            <th>Doc ID</th>
+                            <th>Type</th>
+                            <th>Issue Date</th>
+                            <th style="text-align:right;">Actions</th>
+                        </tr>
+                    </thead>
 
-                <div class="documents-grid">
-                    <div class="doc-card">
-                        <p class="doc-title">Insurance Certificate</p>
-                        <div class="doc-preview">No file uploaded</div>
-                        <span class="badge missing">Missing</span>
-                    </div>
-
-                    <div class="doc-card">
-                        <p class="doc-title">Road Tax</p>
-                        <div class="doc-preview">No file uploaded</div>
-                        <span class="badge missing">Missing</span>
-                    </div>
-
-                    <div class="doc-card">
-                        <p class="doc-title">Vehicle Registration</p>
-                        <div class="doc-preview">No file uploaded</div>
-                        <span class="badge missing">Missing</span>
-                    </div>
-
-                    <div class="doc-card">
-                        <p class="doc-title">Company Documents</p>
-                        <div class="doc-preview">No file uploaded</div>
-                        <span class="badge missing">Missing</span>
-                    </div>
-
-                    <div class="doc-card">
-                        <p class="doc-title">Inspection Report</p>
-                        <div class="doc-preview">No inspection</div>
-                        <span class="badge missing">Missing</span>
-                    </div>
-                </div>
+                    <tbody>
+                        <?php foreach ($vDocs as $vd): ?>
+                            <tr>
+                                <td><?= htmlspecialchars($vd["Doc_ID"]); ?></td>
+                                <td><?= htmlspecialchars($vd["Doc_Type"]); ?></td>
+                                <td><?= htmlspecialchars($vd["Issue_Date"]); ?></td>
+                        
+                                <td class="actions">
+                                    <button class="action-btn" onclick="">
+                                        Approve
+                                    </button>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
             </section>
         </main>
     </div>

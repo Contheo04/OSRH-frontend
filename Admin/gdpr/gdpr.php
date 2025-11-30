@@ -42,7 +42,7 @@
                 <div class="nav-item" onclick="window.location.href='../trips/trips.php'">Trips</div>
                 <div class="nav-item" onclick="window.location.href='../payments/payments.php'">Payments</div>
                 <div class="nav-item" onclick="window.location.href='../reports/reports.php'">Reports</div>
-                <div class="nav-item active">GDPR</div>
+                <div class="nav-item active" onclick="window.location.href='../gdpr/gdpr.php'">GDPR</div>
 
                 <!-- BLUE LINE SEPARATOR -->
                 <div style="border-top:1px solid rgba(0,150,255,0.35); margin:18px 0;"></div>

@@ -210,7 +210,8 @@ form input:disabled {
     color: #fff;
 }
 
-.readonly-value {
+.readonly-value input,
+.readonly-value select {
     background: #ffffff0d;
     border: 1px solid #ffffff20;
     padding: 10px 12px;

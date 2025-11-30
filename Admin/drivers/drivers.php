@@ -10,7 +10,7 @@
 
     $tsql = "SELECT *
              FROM [dbo].[User]
-             WHERE Type_ID = 3;";
+             WHERE Type_ID = 3 OR Type_ID = 5";
 
     $stmt = sqlsrv_query($conn, $tsql);
     
@@ -49,7 +49,7 @@
                 <!-- ADMIN SECTION -->
                 <div class="nav-item" onclick="window.location.href='../dashboard/dashboard.php'">Dashboard</div>
                 <div class="nav-item" onclick="window.location.href='../users/users.php'">Users</div>
-                <div class="nav-item active">Drivers</div>
+                <div class="nav-item active onclick="window.location.href='../drivers/drivers.php'">Drivers</div>
                 <div class="nav-item" onclick="window.location.href='../vehicles/vehicles.php'">Vehicles</div>
                 <div class="nav-item" onclick="window.location.href='../trips/trips.php'">Trips</div>
                 <div class="nav-item" onclick="window.location.href='../payments/payments.php'">Payments</div>
@@ -131,7 +131,7 @@
 
                                 <td class="actions">
                                     <button class="action-btn"
-                                            onclick="window.location.href='view.php?id=<?= $d['User_ID'] ?>'">
+                                            onclick="window.location.href='../users/user_view.php?id=<?= urlencode($d['User_ID']) ?>'">
                                         View
                                     </button>
 
@@ -140,10 +140,10 @@
                                         Documents
                                     </button>
 
-                                    <button class="delete-btn"
+                                    <!-- <button class="delete-btn"
                                             onclick="window.location.href='disable.php?id=<?= $d['User_ID'] ?>'">
                                         Disable
-                                    </button>
+                                    </button> -->
                                 </td>
                             </tr>
                         <?php endforeach; ?>

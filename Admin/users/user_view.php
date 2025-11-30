@@ -7,6 +7,40 @@
     $full_name = $_SESSION["fname"] . " " . $_SESSION["lname"];
     $email = $_SESSION["email"];
     $initials = strtoupper($_SESSION["fname"][0] . $_SESSION["lname"][0]);
+
+    $uid = (int) $_GET['id'];
+
+    $tsql = 'SELECT *
+             FROM [dbo].[User]
+             WHERE User_ID = ?';  
+
+    $params = array($uid);
+    $stmt = sqlsrv_query($conn, $tsql, $params);
+    $info = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
+
+    $uusername  = $info['Username'];
+    $uemail     = $info['Email'];
+    $ufname     = $info['F_Name'];
+    $ulname     = $info['L_Name'];
+    $uphone     = $info['Phone'];
+    $ugender    = $info['Gender'];
+    $ubdate     = $info['B_Date'];
+    $uaddress   = $info['Address'];
+    $urating    = $info['Rating'];
+    $utype      = $info['Type_ID'];
+
+    $userTypes = [
+        1 => "Admin",
+        2 => "Operator",
+        3 => "Driver",
+        4 => "Basic User",
+        5 => "Representative",
+    ];
+
+    $genders = [
+        "M" => "Male",
+        "F" => "Female",
+    ]
 ?>
 
 <!DOCTYPE html>
@@ -51,7 +85,7 @@
 
         <main class="content">
             <header class="topbar">
-                <h1 class="page-title">User Profile</h1>
+                <h1 class="page-title"><?= htmlspecialchars($ufname); ?>'s Profile</h1>
 
                 <div class="profile-box">
                     <button class="logout-btn" onclick="window.location.href='../../index.php'">Logout</button>
@@ -74,14 +108,33 @@
                 <h2 class="section-title">Basic Information</h2>
 
                 <div class="user-info-grid">
-                    <div class="info-item"><strong>User ID:</strong> 23</div>
-                    <div class="info-item"><strong>Name:</strong> John Doe</div>
-                    <div class="info-item"><strong>Username:</strong> jdoe</div>
-                    <div class="info-item"><strong>Email:</strong> jdoe@example.com</div>
-                    <div class="info-item"><strong>Phone:</strong> +357 99887766</div>
-                    <div class="info-item"><strong>Gender:</strong> M</div>
-                    <div class="info-item"><strong>Birth Date:</strong> 1998-06-22</div>
-                    <div class="info-item"><strong>Address:</strong> Limassol, Cyprus</div>
+                    <div class="info-item"><strong>User ID:</strong>
+                        <?= htmlspecialchars( $uid); ?>
+                    </div>
+                    <div class="info-item"><strong>Username:</strong>
+                        <?= htmlspecialchars( $uusername); ?>
+                    </div>
+                    <div class="info-item"><strong>First Name:</strong>
+                        <?= htmlspecialchars( $ufname); ?>
+                    </div>
+                    <div class="info-item"><strong>Last Name:</strong>
+                        <?= htmlspecialchars( $ulname); ?>
+                    </div>
+                    <div class="info-item"><strong>Email:</strong>
+                        <?= htmlspecialchars( $uemail); ?>
+                    </div>
+                    <div class="info-item"><strong>Phone:</strong>
+                        <?= htmlspecialchars( $uphone); ?>
+                    </div>
+                    <div class="info-item"><strong>Gender:</strong>
+                        <?= htmlspecialchars( $genders[$ugender] ?? "Other"); ?>
+                    </div>
+                    <div class="info-item"><strong>Birth Date:</strong>
+                        <?= htmlspecialchars( $ubdate); ?>
+                    </div>
+                    <div class="info-item"><strong>Address:</strong>
+                        <?= htmlspecialchars( $uaddress); ?>
+                    </div>
                 </div>
             </section>
 
@@ -90,13 +143,16 @@
                 <h2 class="section-title">Account Details</h2>
 
                 <div class="user-info-grid">
-                    <div class="info-item"><strong>Type:</strong> Driver</div>
-                    <div class="info-item"><strong>Status:</strong> Active</div>
-                    <div class="info-item"><strong>Rating:</strong> 4.8</div>
+                    <div class="info-item"><strong>Type:</strong>
+                        <?= htmlspecialchars( $userTypes[$utype]); ?>
+                    </div>
+                    <div class="info-item"><strong>Rating:</strong>
+                        <?= htmlspecialchars( $urating); ?>
+                    </div>
                 </div>
             </section>
 
-            <!-- Related Data (Dynamic Placeholder for PHP) -->
+            <!-- Related Data (Dynamic Placeholder for PHP)
             <section class="panel">
                 <h2 class="section-title">Related User Data</h2>
 
@@ -108,13 +164,16 @@
                     <li>If user is a <strong>Simple User</strong>: show Trip History, Feedback Written.</li>
                     <li>If user is an <strong>Operator</strong>: show Reviewed Docs, Inspections Performed.</li>
                 </ul>
-            </section>
+            </section> -->
 
             <!-- Action Buttons -->
             <section class="panel action-panel">
-                <button class="action-btn" onclick="window.location.href='user_edit.php'">Edit User</button>
+                <button class="action-btn" 
+                    onclick="window.location.href='user_edit.php?id=<?= urlencode($uid) ?>'">
+                    Edit
+                </button>
+                
                 <button class="delete-btn">GDPR Delete</button>
-                <button class="back-btn" onclick="window.location.href='users.php'">Back to Users</button>
             </section>
 
         </main>

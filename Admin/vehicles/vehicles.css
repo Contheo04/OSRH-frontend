@@ -111,6 +111,15 @@
     cursor: pointer;
 }
 
+.back-btn {
+    padding: 10px 16px;
+    background: #ffffff15;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
 .vehicles-table td:nth-child(7),
 .vehicles-table th:nth-child(7) {
     width: 80px;

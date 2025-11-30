@@ -1,16 +1,17 @@
 <?php
-session_start();
-require_once "db_connection.php";
+    session_start();
+    require_once "db_connection.php";
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
     
-    $username = $_POST["username"];
-    $password = $_POST["password"];
+        $username = $_POST["username"];
+        $password = $_POST["password"];
 
-    if($username === "" || $password === ""){
-        $_SESSION["login_error"] = "Please enter both username and password.";
-        header("Location: index.php");
-        exit();
+        if($username === "" || $password === ""){
+            $_SESSION["login_error"] = "Please enter both username and password.";
+            header("Location: index.php");
+            exit();
+        }
     }
 
     $tsql = "SELECT User_ID,
@@ -69,9 +70,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         header("Location: ./user/dashboard/dashboard.php");
         exit();
     }
-}
-
-header("Location: index.php");
-exit();
-
 ?>

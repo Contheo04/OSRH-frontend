@@ -7,6 +7,24 @@
     $full_name = $_SESSION["fname"] . " " . $_SESSION["lname"];
     $email = $_SESSION["email"];
     $initials = strtoupper($_SESSION["fname"][0] . $_SESSION["lname"][0]);
+
+    $tsql = "SELECT V.*,
+            U1.User_ID AS DriverUserID,
+            U1.F_Name AS DriverFName,
+            U1.L_Name AS DriverLName,
+            U2.User_ID AS RepUserID,
+            U2.F_Name AS RepFName,
+            U2.L_Name AS RepLName
+            FROM [dbo].[Vehicle] V
+            LEFT JOIN [dbo].[User] U1 ON V.Driver_ID = U1.User_ID
+            LEFT JOIN [dbo].[User] U2 ON V.Company_Rep_ID = U2.User_ID;";
+
+    $stmt = sqlsrv_query($conn, $tsql);
+    
+    $vehicles = [];
+    while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+        $vehicles[] = $row;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +57,7 @@
                 <div class="nav-item" onclick="window.location.href='../dashboard/dashboard.php'">Dashboard</div>
                 <div class="nav-item" onclick="window.location.href='../users/users.php'">Users</div>
                 <div class="nav-item" onclick="window.location.href='../drivers/drivers.php'">Drivers</div>
-                <div class="nav-item active">Vehicles</div>
+                <div class="nav-item active" onclick="window.location.href='../vehicles/vehicles.php'">Vehicles</div>
                 <div class="nav-item" onclick="window.location.href='../trips/trips.php'">Trips</div>
                 <div class="nav-item" onclick="window.location.href='../payments/payments.php'">Payments</div>
                 <div class="nav-item" onclick="window.location.href='../reports/reports.php'">Reports</div>
@@ -97,59 +115,64 @@
                     <thead>
                         <tr>
                             <th>License Plate</th>
-                            <th>Frame Number</th>
-                            <th>Engine Number</th>
                             <th>Car Type</th>
-                            <th>Load Space</th>
-                            <th>Seats</th>
                             <th>Owner ID</th>
+                            <th>Owner Name</th>
+                            <th>Owner Type</th>
                             <th style="text-align:right;">Actions</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <tr>
-                            <td>KYZ-2043</td>
-                            <td>FRM9034234</td>
-                            <td>ENGR234982</td>
-                            <td>Sedan</td>
-                            <td>0.68 m³</td>
-                            <td>5</td>
-                            <td>1</td>
-                            <td class="actions">
-                                <button class="action-btn"
-                                    onclick="window.location.href='vehicle_view.php'">View</button>
-                                <button class="action-btn"
-                                    onclick="window.location.href='vehicle_documents.php'">Documents</button>
-                                <button class="action-btn"
-                                    onclick="window.location.href='vehicle_inspection.php'">Inspection</button>
-                                <button class="action-btn"
-                                    onclick="window.location.href='vehicle_edit.php'">Edit</button>
-                                <button class="delete-btn">Delete</button>
-                            </td>
-                        </tr>
+                        <?php foreach ($vehicles as $v): ?>
 
-                        <tr>
-                            <td>TAX-1120</td>
-                            <td>FRM1289371</td>
-                            <td>ENG4438291</td>
-                            <td>Taxi</td>
-                            <td>0.75 m³</td>
-                            <td>4</td>
-                            <td>2</td>
-                            <td class="actions">
-                                <button class="action-btn"
-                                    onclick="window.location.href='vehicle_view.php'">View</button>
-                                <button class="action-btn"
-                                    onclick="window.location.href='vehicle_documents.php'">Documents</button>
-                                <button class="action-btn"
-                                    onclick="window.location.href='vehicle_inspection.php'">Inspection</button>
-                                <button class="action-btn"
-                                    onclick="window.location.href='vehicle_edit.php'">Edit</button>
-                                <button class="delete-btn">Delete</button>
-                            </td>
-                        </tr>
+                            <?php
+                                if ($v["DriverUserID"] !== null) {
+                                    $ownerName = $v["DriverFName"] . " " . $v["DriverLName"];
+                                    $ownerID = $v["DriverUserID"];
+                                    $ownerType = "Driver";
+                                } elseif ($v["RepUserID"] !== null) {
+                                    $ownerName = $v["RepFName"] . " " . $v["RepLName"];
+                                    $ownerID = $v["RepUserID"];
+                                    $ownerType = "Representative";
+                                }
+                            ?>
+
+                            <tr>
+                                <td><?= htmlspecialchars($v["License_Plate"]); ?></td>
+                                <td><?= htmlspecialchars($v["Car_Type"]); ?></td>
+                                <td><?= htmlspecialchars($ownerID); ?></td>
+                                <td><?= htmlspecialchars($ownerName); ?></td>
+                                <td><?= htmlspecialchars($ownerType); ?></td>
+
+                                <td class="actions">
+                                    <button class="action-btn"
+                                            onclick="window.location.href=
+                                            'vehicle_view.php?lp=<?= urlencode($v["License_Plate"]); ?>&utype=<?= urlencode($ownerType); ?>'">
+                                        View
+                                    </button>
+
+                                    <button class="action-btn"
+                                            onclick="window.location.href=
+                                            'vehicle_documents.php?lp=<?= urlencode($v["License_Plate"]); ?>
+                                            &fn=<?= urlencode($v["Frame_Number"]); ?>
+                                            &en=<?= urlencode($v["Engine_Number"]); ?>'">
+                                        Documents
+                                    </button>
+
+                                    <button class="action-btn"
+                                            onclick="window.location.href=
+                                            'vehicle_inspection.php?lp=<?= urlencode($v["License_Plate"]); ?>
+                                            &fn=<?= urlencode($v["Frame_Number"]); ?>
+                                            &en=<?= urlencode($v["Engine_Number"]); ?>'">
+                                        Inspection
+                                    </button>
+                                </td>
+                            </tr>
+
+                        <?php endforeach; ?>
                     </tbody>
+
 
                 </table>
             </section>

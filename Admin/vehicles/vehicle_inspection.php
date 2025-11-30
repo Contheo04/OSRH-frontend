@@ -7,6 +7,24 @@
     $full_name = $_SESSION["fname"] . " " . $_SESSION["lname"];
     $email = $_SESSION["email"];
     $initials = strtoupper($_SESSION["fname"][0] . $_SESSION["lname"][0]);
+
+    $vid1   = $_GET['lp'];
+    $vid2   = $_GET['fn'];
+    $vid3   = $_GET['en'];
+
+    $tsql = "SELECT *
+             FROM [dbo].[Vehicle_Inspection]
+             WHERE License_Plate = ?
+                AND Frame_Number = ? 
+                AND Engine_Number = ?;";
+
+    $params = array($vid1, $vid2, $vid3);
+    $stmt = sqlsrv_query($conn, $tsql, $params);
+
+    $inspections = [];
+    while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+        $inspections[] = $row;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -84,27 +102,23 @@
                             <th>Operator ID</th>
                         </tr>
                     </thead>
-
+                        
                     <tbody>
-                        <tr>
-                            <td>12</td>
-                            <td><span class="badge pass">Pass</span></td>
-                            <td>2024-02-10</td>
-                            <td>Routine check passed successfully.</td>
-                            <td>55</td>
-                        </tr>
-
-                        <tr>
-                            <td>13</td>
-                            <td><span class="badge fail">Fail</span></td>
-                            <td>2024-03-01</td>
-                            <td>Brake issue detected during inspection.</td>
-                            <td>55</td>
-                        </tr>
+                        <?php foreach ($inspections as $i): ?>
+                            <tr>
+                                <td><?= htmlspecialchars($i["Insp_ID"]); ?></td>
+                                <td>
+                                    <span class="badge <?= htmlspecialchars(strtolower($i["Result"])); ?>">
+                                    <?= htmlspecialchars($i["Result"]); ?></span>
+                                </td>
+                                <td><?= htmlspecialchars($i["Insp_Date"]); ?></td>
+                                <td><?= htmlspecialchars($i["Description"]); ?></td>
+                                <td><?= htmlspecialchars($i["Operator_ID"]); ?></td>
+                            </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </section>
-
         </main>
     </div>
 </body>

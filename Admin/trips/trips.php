@@ -40,7 +40,7 @@
                 <div class="nav-item" onclick="window.location.href='../users/users.php'">Users</div>
                 <div class="nav-item" onclick="window.location.href='../drivers/drivers.php'">Drivers</div>
                 <div class="nav-item" onclick="window.location.href='../vehicles/vehicles.php'">Vehicles</div>
-                <div class="nav-item active">Trips</div>
+                <div class="nav-item active" onclick="window.location.href='../trips/trips.php'">Trips</div>
                 <div class="nav-item" onclick="window.location.href='../payments/payments.php'">Payments</div>
                 <div class="nav-item" onclick="window.location.href='../reports/reports.php'">Reports</div>
                 <div class="nav-item" onclick="window.location.href='../gdpr/gdpr.php'">GDPR</div>
