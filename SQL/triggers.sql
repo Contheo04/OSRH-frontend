@@ -1,6 +1,7 @@
 
 -- Prevent a driver from having Rating > 5
 CREATE TRIGGER [dbo].[TRG_Check_Rating]
+ON [dbo].[User]
 FOR INSERT, UPDATE
 AS
 BEGIN
@@ -15,6 +16,7 @@ BEGIN
     END
 END;
 GO
+
 
 -- Prevent Expired Drivers Documents
 CREATE TRIGGER [dbo].[TRG_DriverDoc_NoExpiredDocs]
