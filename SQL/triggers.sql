@@ -1,7 +1,6 @@
 
 -- Prevent a driver from having Rating > 5
-CREATE TRIGGER TRG_Check_Rating
-ON [dbo].[User]
+CREATE TRIGGER [dbo].[TRG_Check_Rating]
 FOR INSERT, UPDATE
 AS
 BEGIN
@@ -18,7 +17,7 @@ END;
 GO
 
 -- Prevent Expired Drivers Documents
-CREATE TRIGGER TRG_DriverDoc_NoExpiredDocs
+CREATE TRIGGER [dbo].[TRG_DriverDoc_NoExpiredDocs]
 ON [dbo].[Driver_Doc]
 FOR INSERT, UPDATE
 AS
@@ -39,7 +38,7 @@ END;
 Go
 
 -- Prevent Drivers Aged under 18
-CREATE TRIGGER TRG_User_MinDriverAge
+CREATE TRIGGER [dbo].[TRG_User_MinDriverAge]
 ON [dbo].[User]
 FOR INSERT, UPDATE
 AS
@@ -61,7 +60,7 @@ END;
 GO
 
 -- Prevent Impossible Trip Times
-CREATE TRIGGER TRG_TripSegment_IllegalTime
+CREATE TRIGGER [dbo].[TRG_TripSegment_IllegalTime]
 ON [dbo].[Trip_Segment]
 FOR INSERT, UPDATE
 AS
@@ -81,7 +80,7 @@ GO
 
 
 -- Checks if a the a single driver has multiple vehicles of the same service type
-CREATE TRIGGER TRG_OneVehiclePerServiceType
+CREATE TRIGGER [dbo].[TRG_OneVehiclePerServiceType]
 ON [dbo].[Service_Type]
 FOR INSERT
 AS

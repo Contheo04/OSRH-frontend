@@ -741,24 +741,6 @@ CREATE PROCEDURE [dbo].[CreatePayment]
     END;
     GO
 
-
--------- Front-end QOL Misc ------------------------------------------------------------------
--- Get All Dashboard Stats -------------------------------------------------------------------
-CREATE PROCEDURE [dbo].[GetDashboardStats]
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    SELECT
-        (SELECT COUNT(*) FROM [dbo].[User]) AS TotalUsers,
-        (SELECT COUNT(*) FROM [dbo].[User] WHERE Type_ID = 3) AS ActiveDrivers,
-        (SELECT COUNT(*) FROM [dbo].[Vehicle]) AS VehiclesInService,
-        (SELECT COUNT(*) FROM [dbo].[Total_Trip]) AS TotalTrips,
-        (SELECT COUNT(*) FROM [dbo].[GDPR_Request_Log]) AS GdprRequests;
-END;
-GO
-
-
 -- ORDERING A NEW TRIP
 CREATE PROCEDURE [dbo].[NewTrip]
     @PassengerID INT,
@@ -802,9 +784,9 @@ BEGIN
     SET @From_GeofenceID = (
             SELECT Geofence_ID -- Geofences will not overlap, no need to TOP
             FROM [dbo].[Geofence] G
-            WHERE @From_Location_X BETWEEN G.C1_X AND G.C3_X
-            AND @From_Location_Y BETWEEN G.C1_Y AND G.C3_Y
-            )
+            WHERE @From_GeofenceID > G.C1_X AND @From_Location_X < G.C3_X
+            AND @From_Location_Y > G.C1_Y AND @From_Location_Y < G.C3_Y
+            )    
     -- Validate the result of the above subquery
     IF @From_GeofenceID IS NULL
     BEGIN
@@ -822,9 +804,9 @@ BEGIN
         SET @To_GeofenceID = (
             SELECT Geofence_ID
             FROM [dbo].[Geofence] G
-            WHERE @To_Location_X BETWEEN G.C1_X AND G.C3_X
-            AND @To_Location_Y BETWEEN G.C1_Y AND G.C3_Y
-            )
+            WHERE @To_Location_X > G.C1_X AND @To_Location_X < G.C3_X
+            AND @To_Location_Y > G.C1_Y AND @To_Location_Y < G.C3_Y
+            )       
     END
 
     DROP TABLE IF EXISTS #PathTemp;
@@ -1106,37 +1088,222 @@ DROP TABLE #PathTemp;
 END;
 GO
 
+
+
+
+-------- Front-end QOL Misc ------------------------------------------------------------------
+-- Get All Dashboard Stats -------------------------------------------------------------------
+CREATE PROCEDURE [dbo].[GetDashboardStats]
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT
+        (SELECT COUNT(*) FROM [dbo].[User]) AS TotalUsers,
+        (SELECT COUNT(*) FROM [dbo].[User] WHERE Type_ID = 3) AS ActiveDrivers,
+        (SELECT COUNT(*) FROM [dbo].[Vehicle]) AS VehiclesInService,
+        (SELECT COUNT(*) FROM [dbo].[Total_Trip]) AS TotalTrips,
+        (SELECT COUNT(*) FROM [dbo].[GDPR_Request_Log]) AS GdprRequests;
+END;
+GO
+
+
+
 -------------------------
 -------- REPORTS --------
 -------------------------
 
 -- Trip Statistics Report (UNFINISHED)
-CREATE PROCEDURE [dbo].[TripStatisticsReport]
-    @FromDate DATETIME          = NULL,
-    @ToDate DATETIME            = NULL,
-    @ServiceType VARCHAR(50)    = NULL,
-    @Location VARCHAR(50)       = NULL,
-    @GroupBy VARCHAR(200)       = NULL
+-- CREATE PROCEDURE [dbo].[TripStatisticsReport]
+--     @FromDate DATETIME          = NULL,
+--     @ToDate DATETIME            = NULL,
+--     @ServiceType VARCHAR(50)    = NULL,
+--     @Location VARCHAR(50)       = NULL,
+--     @GroupBy VARCHAR(200)       = NULL
+-- AS
+-- BEGIN
+--     SET NOCOUNT ON;
+
+--     IF @ServiceType IS NOT NULL
+--     BEGIN
+--         SET @ServiceType = LOWER(@ServiceType)
+--     END
+
+--     IF @GroupBy = 'service'
+--     BEGIN
+--         SELECT ST.S_Type_Name, COUNT(*) AS TripCount
+--         FROM [dbo].[Trip_Segment] TS, [dbo].[Payment] P, [dbo].[Service_Type] ST
+--         WHERE TS.Payment_ID = P.Payment_ID AND P.ST_ID = ST.ST_ID 
+--             AND (@FromDate IS NULL OR @FromDate <= TS.Departure_Time) --FromDate Filter
+--             AND (@ToDate IS NULL OR @ToDate >= TS.Departure_Time)   --ToDate Filter
+--             AND (@ServiceType IS NULL OR @ServiceType = LOWER(ST.S_Type_Name))
+--         GROUP BY ST.S_Type_Name;
+--         RETURN;
+--     END
+    
+-- END;
+-- GO
+
+-- Returns the total trips per day
+CREATE PROCEDURE [dbo].[RP_TotalTripsPerDay]
 AS
 BEGIN
     SET NOCOUNT ON;
 
-    IF @ServiceType IS NOT NULL
-    BEGIN
-        SET @ServiceType = LOWER(@ServiceType)
-    END
+    SELECT
+        CAST(TT.Payment_Time AS DATE) AS TripDate,
+        COUNT(*) AS TotalTrips
+    FROM [dbo].[Total_Trip] TT
+    GROUP BY CAST(TT.Payment_Time AS DATE)
+    ORDER BY TripDate ASC;    
+END;
+GO
 
-    IF @GroupBy = 'service'
-    BEGIN
-        SELECT ST.S_Type_Name, COUNT(*) AS TripCount
-        FROM [dbo].[Trip_Segment] TS, [dbo].[Payment] P, [dbo].[Service_Type] ST
-        WHERE TS.Payment_ID = P.Payment_ID AND P.ST_ID = ST.ST_ID 
-            AND (@FromDate IS NULL OR @FromDate <= TS.Departure_Time) --FromDate Filter
-            AND (@ToDate IS NULL OR @ToDate >= TS.Departure_Time)   --ToDate Filter
-            AND (@ServiceType IS NULL OR @ServiceType = LOWER(ST.S_Type_Name))
-        GROUP BY ST.S_Type_Name;
-        RETURN;
-    END
-    
+-- Counts and returns the total types that have been done for each service type
+CREATE PROCEDURE [dbo].[RP_TripsPerServiceType]
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT
+        ST.ST_ID,
+        ST.S_Type_Name,
+        COUNT(*) AS TripCount,
+        100.0 * COUNT(*) / SUM(COUNT(*)) OVER() AS TripPercentage --Additionally, calculate the precentage of trips of different STs
+    FROM [dbo].[Total_Trip] TT
+    JOIN [dbo].[Payment] P ON TT.Payment_ID = P.Payment_ID
+    JOIN [dbo].[Service_Type] ST ON P.ST_ID = ST.ST_ID
+    GROUP BY ST.ST_ID, ST.S_Type_Name
+    ORDER BY TripCount DESC;  -- most popular service types appear first
+END;
+GO
+
+-- Counts the total trips (all time) of and sorts them by payment hour
+-- Returns a list of the most high activity hours
+CREATE PROCEDURE [dbo].[RP_HighActivityPeriods]
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT
+        DATEPART(HOUR, TT.Payment_Time) AS ActiveHour,
+        COUNT(*) AS TotalTrips
+    FROM [dbo].[Total_Trip] TT
+    GROUP BY DATEPART(HOUR,TT.Payment_Time)
+    ORDER BY TotalTrips DESC;  -- high activity first 
+END;
+GO
+
+-- Calculates and returns price statistic for all service types
+-- This only needs to take Trip Segments into account
+CREATE PROCEDURE [dbo].[RP_AvgCostPerServiceType]
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT
+        ST.S_Type_Name,
+        AVG(P.Price) AS AvgPrice,
+        MIN(P.Price) AS MinPrice,
+        MAX(P.Price) AS MaxPrice,
+        COUNT(*)     AS TripCount
+    FROM [dbo].[Trip_Segment]  AS TS
+    JOIN [dbo].[Payment] P ON TS.Payment_ID = P.Payment_ID
+    LEFT JOIN [dbo].[Service_Type] ST ON P.ST_ID = ST.ST_ID
+    GROUP BY ST.S_Type_Name
+    ORDER BY AvgPrice DESC;   -- most expensive categories first
+END;
+GO
+
+
+
+-- Finds the 10 HIGHEST and 10 LOWERS cost Total Trips
+CREATE PROCEDURE [dbo].[RP_HighLowCostTrips]
+    @TopN INT = 10 
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Create a temporary table 
+    ;WITH TripCost AS (
+        SELECT
+            TT.TT_ID,
+            TT.Payment_Time,
+            P.Price,
+            P.Payment_ID
+        FROM [dbo].[Total_Trip] TT
+        JOIN [dbo].[Payment] P ON TT.Payment_ID = P.Payment_ID
+    )
+
+-- Select the highest 
+SELECT 'HIGH' AS CostRank, T.TT_ID, T.Payment_Time, T.Price
+    FROM (
+    SELECT TOP (@TopN) TC.TT_ID, TC.Payment_Time, TC.Price
+    FROM TripCost AS TC
+    ORDER BY TC.Price DESC
+    ) AS T
+
+    UNION ALL
+
+-- Select the lowest
+SELECT 'LOW' AS CostRank, T.TT_ID, T.Payment_Time, T.Price
+    FROM (
+    SELECT TOP (@TopN) TC.TT_ID, TC.Payment_Time, TC.Price
+    FROM TripCost AS TC
+    ORDER BY TC.Price ASC
+    ) AS T;
+END;
+GO
+
+-- Creates a list of Drivers and sorts them by the highest average performance
+CREATE PROCEDURE [dbo].[RP_DriverPerformance]
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT
+    D.User_ID AS Driver_ID,
+    D.F_Name,
+    D.L_Name,
+    COUNT(DISTINCT TS.TT_ID) AS TripsCompleted,
+    AVG(CAST(F.Rating AS DECIMAL(3,2))) AS AvgRating
+    FROM [dbo].[User] D
+    LEFT JOIN [dbo].[Trip_Segment] TS ON TS.Drv_ID = D.User_ID
+    LEFT JOIN [dbo].[Feedback] F ON F.About_User = D.User_ID
+    GROUP BY
+    D.User_ID,
+    D.F_Name,
+    D.L_Name
+    HAVING COUNT(DISTINCT TS.TT_ID) > 0   -- only drivers with trips
+    ORDER BY TripsCompleted DESC, AvgRating DESC;  -- best performers first
+END;
+GO
+
+
+-- Returns all dirvers earnings for the past years
+CREATE PROCEDURE [dbo].[RP_DriverEarningsLast3Years]
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- start date is 3 years before the current date
+    DECLARE @FromDate DATE = DATEADD(YEAR, -3, CAST(GETDATE() AS DATE));
+
+    SELECT
+    D.User_ID AS Driver_ID,
+    D.F_Name,
+    D.L_Name,
+    COUNT(DISTINCT TT.TT_ID) AS TripsCompleted,
+    SUM(P.Price) AS TotalEarnings
+    FROM [User] D
+    JOIN Trip_Segment TS ON TS.Drv_ID = D.User_ID
+    JOIN Total_Trip TT ON TT.TT_ID = TS.TT_ID
+    JOIN Payment P  ON TT.Payment_ID = P.Payment_ID
+    WHERE TT.Payment_Time >= @FromDate
+    GROUP BY
+    D.User_ID,
+    D.F_Name,
+    D.L_Name
+    ORDER BY TotalEarnings DESC;  -- top earning drivers first
 END;
 GO

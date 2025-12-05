@@ -84,11 +84,6 @@
 -- SELECT * FROM [dbo].[Trip_Log]
 
 
-
-
-
-
-
 ------- What even is this
 -- Sample Trip_Segment data
 -- Example: Insert Trip Segments via stored procedure
@@ -105,9 +100,9 @@
 -- EXEC [dbo].[TripStatisticsReport]
 --     @GroupBy = 'service';
 
-SELECT * FROM [dbo].[Total_Trip]
-SELECT * FROM [dbo].[Payment]
-SELECT * FROM [dbo].[Trip_Segment]
+-- SELECT * FROM [dbo].[Total_Trip]
+-- SELECT * FROM [dbo].[Payment]
+-- SELECT * FROM [dbo].[Trip_Segment]
 
 
 -- EXEC [dbo].[NewTrip]
@@ -120,17 +115,17 @@ SELECT * FROM [dbo].[Trip_Segment]
 --     @Payment_Method = "Card";
 
 EXEC [dbo].[NewTrip]
-    @PassengerID = 19,
+    @PassengerID = 21,
     @Desired_Service_Type = "Premium",
     @From_Location_X = 0.0,
     @From_Location_Y = 0.0,
-    @To_Location_X = 0.1,
-    @To_Location_Y = 0.1,
+    @To_Location_X = .1,
+    @To_Location_Y = .1,
     @Payment_Method = "Card";
 
-SELECT * FROM [dbo].[Total_Trip]
-SELECT * FROM [dbo].[Payment]
-SELECT * FROM [dbo].[Trip_Segment]
+-- SELECT * FROM [dbo].[Total_Trip]
+-- SELECT * FROM [dbo].[Payment]
+-- SELECT * FROM [dbo].[Trip_Segment]
     -------------------------
     -- |   7  |  8   |  9   |
     -------------------------
@@ -138,3 +133,9 @@ SELECT * FROM [dbo].[Trip_Segment]
     -------------------------
     -- |  1   |  2   |   3  |
     -------------------------
+
+
+
+select * from Payment where ST_ID IS NULL
+
+EXEC [dbo].[RP_HighLowCostTrips] 

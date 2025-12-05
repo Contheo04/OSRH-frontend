@@ -199,8 +199,33 @@ IF OBJECT_ID('[dbo].[NewTrip]', 'P') IS NOT NULL
     DROP PROCEDURE [dbo].[NewTrip];
 GO
 
+IF OBJECT_ID('[dbo].[RP_TotalTripsPerDay]', 'P') IS NOT NULL
+    DROP PROCEDURE [dbo].[RP_TotalTripsPerDay];
+GO
 
+IF OBJECT_ID('[dbo].[RP_TripsPerServiceType]', 'P') IS NOT NULL
+    DROP PROCEDURE [dbo].[RP_TripsPerServiceType];
+GO
 
+IF OBJECT_ID('[dbo].[RP_HighActivityPeriods]', 'P') IS NOT NULL
+    DROP PROCEDURE [dbo].[RP_HighActivityPeriods];
+GO
+
+IF OBJECT_ID('[dbo].[RP_AvgCostPerServiceType]', 'P') IS NOT NULL
+    DROP PROCEDURE [dbo].[RP_AvgCostPerServiceType];
+GO
+
+IF OBJECT_ID('[dbo].[RP_HighLowCostTrips]', 'P') IS NOT NULL
+    DROP PROCEDURE [dbo].[RP_HighLowCostTrips];
+GO
+
+IF OBJECT_ID('[dbo].[RP_DriverPerformance]', 'P') IS NOT NULL
+    DROP PROCEDURE [dbo].[RP_DriverPerformance];
+GO
+
+IF OBJECT_ID('[dbo].[RP_DriverEarningsLast3Years]', 'P') IS NOT NULL
+    DROP PROCEDURE [dbo].[RP_DriverEarningsLast3Years];
+GO
 
 
 
